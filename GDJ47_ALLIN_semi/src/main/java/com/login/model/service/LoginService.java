@@ -80,15 +80,19 @@ public class LoginService {
 		close(conn);
 		return result;
 	}
-
-	public int DeleteMember(Member m) {
+	
+	public int updatePay(Member m) {
 		Connection conn=getConnection();
-		int result=dao.deleteMember(conn, m);
+		int result=dao.updatePay(conn, m);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
+
+
+
+
 
 
 	
