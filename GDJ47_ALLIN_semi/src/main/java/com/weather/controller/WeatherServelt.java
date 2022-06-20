@@ -23,13 +23,13 @@ import com.google.gson.Gson;
  * Servlet implementation class DataRetrievalServelt
  */
 @WebServlet("/publicdata.do")
-public class DataRetrievalServelt extends HttpServlet {
+public class WeatherServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DataRetrievalServelt() {
+    public WeatherServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class DataRetrievalServelt extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		  
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
         Calendar calendar = Calendar.getInstance();
@@ -75,7 +75,7 @@ public class DataRetrievalServelt extends HttpServlet {
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-        urlBuilder.append("&" + URLEncoder.encode("regId","UTF-8") + "=" + URLEncoder.encode(regId, "UTF-8")); /*11B0000 서울, 인천, 경기도 11D10000 등 (활용가이드 하단 참고자료 참조)*/
+        urlBuilder.append("&" + URLEncoder.encode("regId","UTF-8") + "=" + URLEncoder.encode(regId, "UTF-8"));/*11B0000 서울, 인천, 경기도 11D10000 등 (활용가이드 하단 참고자료 참조)*/
         urlBuilder.append("&" + URLEncoder.encode("tmFc","UTF-8") + "=" + URLEncoder.encode(finalDate, "UTF-8")); /*-일 2회(06:00,18:00)회 생성 되며 발표시각을 입력 YYYYMMDD0600(1800)-최근 24시간 자료만 제공*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -97,9 +97,11 @@ public class DataRetrievalServelt extends HttpServlet {
         conn.disconnect();
         System.out.println(sb.toString());
 
-	   
+        
        response.setContentType("application/json;charset=utf-8");
+       
        new Gson().toJson(sb,response.getWriter());
+       //request.getRequestDispatcher("/views/weather/weatherstart.jsp").forward(request, response);
 	}
 
 	/**

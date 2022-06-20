@@ -35,7 +35,7 @@
 				<nav role="navigation">
 					<ul id="main-menu">
 
-						<li><a href="<%=request.getContextPath()%>/search/SearchPage.do" >관광지</a></li>
+						<li><a href="<%=request.getContextPath()%>/search/SearchPage.do">관광지</a></li>
 						<li><a href="">플랜 크리에이터</a></li>
 						<li><a href="">플랜</a> 
 						<!-- <ul id="sub-menu">
@@ -43,8 +43,10 @@
                                
                             </ul> --></li>
 						<li><a href="">게시판</a></li>
+						<li><a href="javascript:openWeather()" >날씨예보</a></li>
 						<li><a href="">공지사항</a></li>
 						<li><a href="">관리자</a></li>
+						
 					</ul>
 				</nav>
 			</div>
@@ -58,6 +60,10 @@
 	</header>
 	
 	  <script>
+	  	const openWeather=()=>{
+	  		window.open("<%=request.getContextPath()%>/weatherstart.do","","_blank");
+	  	}
+	  
         const toggleBtn = document.querySelector('.material-symbols-outlined');
         const menu = document.querySelector('.navbar_menu');
         toggleBtn.addEventListener('click', () => {
