@@ -1,5 +1,4 @@
 package com.weather.controller;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import com.google.Gson;
+
+
 
 /**
  * Servlet implementation class DataRetrievalServelt
