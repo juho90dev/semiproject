@@ -1,0 +1,110 @@
+@charset "UTF-8";
+/* header css */
+header{
+		margin: 0;
+	    padding: 0;
+    }
+header div.login-container{
+	width: 250px; 
+	position:absolute; 
+	right: 80px; 
+	top: 10px;
+}
+fieldset{
+	border: none;
+}
+fieldset{
+	width: 600px;
+	margin: 50px auto;
+	padding: 50px;
+	box-sizing: border-box;        
+}
+fieldset h1{
+	text-align: center;
+	margin-bottom: 10px;
+}
+legend{
+	display: none;
+}
+div label{
+	font-size: 14px;
+	margin: 5px;
+}
+.navbar{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 20%;
+	background : skyblue;
+	/* overflow-x:hidden; 줄내려가기 2번페이지에서 쓰기 */
+}
+body{
+	margin : 0;
+}
+a{
+	text-decoration: none;
+}
+.title{
+	text-align: center;
+	margin-left: 250px;
+	width: 350px;
+	height:120px;
+	margin-top: 50px;
+} 
+.title>a{
+	font-size: 30px;
+	font-weight: bolder;
+	text-align: center;
+	color: black;
+	text-decoration: none;
+	/* 458px */
+}
+.img{
+	width: 150px;
+	height: 150px;
+	border-radius: 30px;
+	margin-top: 10px;
+}
+.navbar_menu{
+	padding-left: 0px;
+}
+.navbar_menu ul li{
+	display: inline-block;
+	justify-content: space-between;
+	float: left;
+	list-style : none;
+	padding : 20px 20px; 
+	margin-left: 150px;
+	margin-top: 10px;
+	font-weight: bolder;
+}
+.navbar_menu li:hover{
+	background-color: bisque;
+	border-radius: 12px;
+}
+.material-symbols-outlined {
+	font-variation-settings:FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48
+}
+.material-symbols-outlined{
+	position: absolute;
+	right: 15px;
+	top: 110px;
+	font-size: 40px;
+	font-weight: bolder;
+	color: greenyellow;
+}
+@media screen {
+	.navbar_menu{
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+@media screen {
+	.navbar_menu.active{
+	display: flex;
+}
+                }
+
+
+            }
