@@ -273,12 +273,14 @@ public class LoginDao {
 
 
 
-		public int deleteMember(Connection conn, Member m) {
+
+		public int updatePay(Connection conn, Member m) {
 			PreparedStatement pstmt=null;
 			int result=0;
 			try {
-				pstmt=conn.prepareStatement(prop.getProperty("deleteMember"));
-				pstmt.setString(1, m.getUserId());
+				pstmt=conn.prepareStatement(prop.getProperty("updatePay"));
+				pstmt.setString(1, m.getPay());
+				pstmt.setString(2, m.getUserId());
 				result=pstmt.executeUpdate();
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -286,6 +288,12 @@ public class LoginDao {
 				close(pstmt);
 			}return result;
 		}
+
+
+
+
+
+
 
 
 

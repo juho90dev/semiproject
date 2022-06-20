@@ -1,7 +1,5 @@
 package com.admin.model.service;
 
-import static com.common.JDBCTemplate.close;
-import static com.common.JDBCTemplate.getConnection;
 import com.login.model.vo.Member;
 import static com.common.JDBCTemplate.*;
 import java.sql.Connection;
@@ -21,6 +19,14 @@ public class adminService {
 		return result;
 	}
 	
+	public int DeleteMember(Member m) {
+		Connection conn=getConnection();
+		int result=dao.deleteMember(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 	
 	
