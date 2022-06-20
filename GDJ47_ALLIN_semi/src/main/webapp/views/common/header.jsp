@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.login.model.vo.Member" %>
+<%
+Member login=(Member)session.getAttribute("login");
+%>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +17,7 @@
 	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
 	
 	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
+	<title>ALL IN</title>
 </head>
 
 <body>
@@ -24,13 +29,43 @@
 				<img class=imgs1 src="<%=request.getContextPath()%>/images/logo.png" alt="">
 			</div>
 			<div class="title">
-				<a href=""> <img class=imgs2 src="<%=request.getContextPath()%>/images/logo1.png" alt=""></a>
+				<a href="<%=request.getContextPath()%>"> <img class=imgs2 src="<%=request.getContextPath()%>/images/logo1.png" alt=""></a>
 			</div>
-
+			<%if(login==null) {%>
 			<div class="btn">
-				<button type="button" class="btn btn-outline-secondary">로그인</button>
-				<button type="button" class="btn btn-outline-warning">회원가입</button>
+            	<button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
+                <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button>
+                <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
 			</div>
+           <%} else{%>
+           	<div>
+           				<tr>
+							<td colspan="2">
+								<%=login.getUserId() %>님
+							</td>
+						</tr>
+						<tr>
+						
+						
+				<div class="dropdown">
+				<td class="dropbtn" >
+				<img src="http://weldingsystemmall.co.kr/theme/hmon/img/icon/if_user-ciecle-round-account-person_3209203.png" width="30" height="30">
+				</td>
+				  <div class="dropdown-content">
+				  	<%if(login!=null&&login.getGrade().equals("일반")) {%>
+	                	<a onclick="mypagee();" style="cursor:pointer;">마이페이지</a>
+	                <%}else{%>
+	                	<a onclick="mypage();" style="cursor:pointer;">마이페이지</a>
+	                <%}%>
+				    <a onclick="logout();" style="cursor:pointer;">로그아웃</a>
+				    
+				  </div>
+				</div>
+				
+			  </div>
+						</tr>
+			</div>
+			<%}%>
 			<div class="navbar_menu">
 				<nav role="navigation">
 					<ul id="main-menu">
@@ -45,8 +80,14 @@
 						<li><a href="">게시판</a></li>
 						<li><a href="javascript:openWeather()" >날씨예보</a></li>
 						<li><a href="">공지사항</a></li>
+<<<<<<< HEAD
 						<li><a href="">관리자</a></li>
 						
+=======
+	                <%if(login!=null&&login.getUserId().equals("admin")) {%>
+	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자모드</a></li>
+	                <%}%>
+>>>>>>> branch 'master' of https://github.com/juho90dev/semiproject.git
 					</ul>
 				</nav>
 			</div>
@@ -70,9 +111,73 @@
             menu.classList.toggle('active');
             icons.classList.toggle('active');
         })
+        
+        
+                const logout=()=>{
+				location.replace("<%=request.getContextPath()%>/logout.do");
+				alert("로그아웃 되었습니다.");
+			}
+        
+        
+        
+            const mypage=()=>{
+            	
+			location.replace("<%=request.getContextPath()%>/views/mypage/mypage.jsp");
+			}
+            
+            const mypagee=()=>{
+            	
+			location.replace("<%=request.getContextPath()%>/views/mypage/mypagee.jsp");
+			}
+        
+        
+        
+        const openPay=()=>{
+        	window.open("<%=request.getContextPath()%>/views/pay/pay.jsp");
+        }
+        
+        
+        
+        
+        
     </script>
     
     <style>
+    
+    	.dropdown {
+		  position: relative;
+		  display: inline-block;
+		}
+		
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #f1f1f1;
+		  min-width: 160px;
+		  z-index: 1;
+		}
+		
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+		
+		.dropdown-content a:hover {background-color: #ddd;}
+		
+		.dropdown:hover .dropdown-content {display: block;}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     	header {
 	margin: 0;
 	padding: 0;

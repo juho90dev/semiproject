@@ -12,7 +12,7 @@
          .mainvideo{ 
          	width: 100%; height: auto; overflow: hidden;margin: 0px auto; position: relative; 
          }
-         video {
+         video { 
          	width: 100%; 
          }
     </style>
