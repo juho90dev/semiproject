@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.footer{
+	margin-left: 0;
+	font-size: 15px;
+	font-weight: bolder;
+	z-index : 1px;
+	text-align : center;
+}
+.footer1{
+	margin-left: 0%;
+	font-size: 25px;
+	font-weight: bolder;
+	color: skyblue;
+	text-align : center;
+}
