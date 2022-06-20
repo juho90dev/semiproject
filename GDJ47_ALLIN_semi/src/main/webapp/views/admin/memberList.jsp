@@ -7,17 +7,11 @@
 //header에 member는 있는데 List라는 자료형은 임포트 한 적이 없다... 그래서 list도 import해줘야 한다.
 %>
 <%@ include file="/views/common/header.jsp" %>
-    <div id= mainvideo>
-        <video autoplay loop muted>
-             
-            <source src="<%=request.getContextPath()%>/videos/mainvideo.mp4" type="video/mp4" >
-        </video>
-    </div>
+
  <body>
   <div class="outer">
 		<div id="joinInfoArea">
 			<form id="joinForm" action="" method="post" onsubmit="return validate();">
-				<h1>관리자 명단</h1>
 				
 				<!-- <h4>아이디</h4>
 				<span class="input_area"><input type="text" maxlength="13" name="userId" value="" readonly></span> -->
