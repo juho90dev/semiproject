@@ -56,7 +56,7 @@
 				<td><%=m.getGrade() %></td>
 				<td><%=m.getEnrollDate() %></td>
 				<td><%=m.getPay()%></td>
-				<td><a href="<%=request.getContextPath()%>/deleteMember.do">탈퇴</a></td>
+				<td><a href="<%=request.getContextPath()%>/deleteMember.do?userId=<%=m.getUserId() %>">탈퇴</a></td>
 				</tr>
        		<%	} 
        		 }%>

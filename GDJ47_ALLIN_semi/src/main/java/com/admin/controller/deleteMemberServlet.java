@@ -18,13 +18,13 @@ import com.login.model.vo.Member;
  * Servlet implementation class memberOutServlet
  */
 @WebServlet("/deleteMember.do")
-public class deleteMember extends HttpServlet {
+public class deleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public deleteMember() {
+    public deleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,7 +53,7 @@ public class deleteMember extends HttpServlet {
 			//session에 저장된 로인정보도변경
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember", m);
-			loc="/";
+			loc="/memberList.do";
 		}else {
 			msg="회원정보 삭제 실패!";
 			loc="/memberList.do";
