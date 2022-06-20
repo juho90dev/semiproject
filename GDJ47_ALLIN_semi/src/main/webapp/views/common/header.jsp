@@ -35,6 +35,7 @@ Member login=(Member)session.getAttribute("login");
 			<div class="btn">
             	<button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
                 <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button>
+                <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
 			</div>
            <%} else{%>
            	<div>
@@ -121,7 +122,9 @@ Member login=(Member)session.getAttribute("login");
         
         
         
-        
+        const openPay=()=>{
+        	window.open("<%=request.getContextPath()%>/views/pay/pay.jsp");
+        }
         
         
         
