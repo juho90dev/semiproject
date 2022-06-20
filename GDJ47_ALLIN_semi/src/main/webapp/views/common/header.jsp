@@ -35,7 +35,7 @@ Member login=(Member)session.getAttribute("login");
 			<div class="btn">
             	<button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
                 <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button>
-                <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
+               
 			</div>
            <%} else{%>
            	<div>
@@ -51,6 +51,11 @@ Member login=(Member)session.getAttribute("login");
 				<td class="dropbtn" >
 				<img src="http://weldingsystemmall.co.kr/theme/hmon/img/icon/if_user-ciecle-round-account-person_3209203.png" width="30" height="30">
 				</td>
+				<tr>
+							<td>
+							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
+							</td>
+						</tr>
 				  <div class="dropdown-content">
 				  	<%if(login!=null&&login.getGrade().equals("일반")) {%>
 	                	<a onclick="mypagee();" style="cursor:pointer;">마이페이지</a>
