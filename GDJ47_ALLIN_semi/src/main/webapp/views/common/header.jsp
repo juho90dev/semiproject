@@ -1,0 +1,221 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
+	
+	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+	<header>
+
+		<nav class="navbar">
+			<div class="logo">
+				<img class=imgs1 src="<%=request.getContextPath()%>/images/logo.png" alt="">
+			</div>
+			<div class="title">
+				<a href=""> <img class=imgs2 src="<%=request.getContextPath()%>/images/logo1.png" alt=""></a>
+			</div>
+
+			<div class="btn">
+				<button type="button" class="btn btn-outline-secondary">로그인</button>
+				<button type="button" class="btn btn-outline-warning">회원가입</button>
+			</div>
+			<div class="navbar_menu">
+				<nav role="navigation">
+					<ul id="main-menu">
+
+						<li><a href="<%=request.getContextPath()%>/search/SearchPage.do" >관광지</a></li>
+						<li><a href="">플랜 크리에이터</a></li>
+						<li><a href="">플랜</a> 
+						<!-- <ul id="sub-menu">
+                                <li><a href="#" aria-label="subemnu">submenu</a></li>
+                               
+                            </ul> --></li>
+						<li><a href="">게시판</a></li>
+						<li><a href="">공지사항</a></li>
+						<li><a href="">관리자</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			
+			<a href="#" class="navbar_toogleBtn"> <span
+				class="material-symbols-outlined"> density_medium</span>
+			</a>
+		</nav>
+
+	</header>
+	
+	  <script>
+        const toggleBtn = document.querySelector('.material-symbols-outlined');
+        const menu = document.querySelector('.navbar_menu');
+        toggleBtn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            icons.classList.toggle('active');
+        })
+    </script>
+    
+    <style>
+    	header {
+	margin: 0;
+	padding: 0;
+}
+
+.logo {
+	display: inline-block;
+	border: 1px solid red;
+	max-width: 150px;
+	max-height: 150px;
+	margin-top: 10px;
+	margin-right: 300px;
+	margin-bottom: 10px;
+}
+
+.navbar {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 20%;
+	background: linear-gradient(90deg, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+
+	/* overflow-x:hidden; 줄내려가기 2번페이지에서 쓰기 */
+}
+
+body {
+	margin: 0;
+}
+
+.title {
+	display: flex;
+	text-align: center;
+	margin-right: 300px;
+	width: 300px;
+	height: 70px;
+	border: 1px solid red;
+}
+
+.title>a {
+	font-size: 30px;
+	font-weight: bolder;
+	text-align: center;
+	color: black;
+	text-decoration: none;
+	/* 458px */
+}
+
+.imgs1 {
+	display: inline-block;
+	max-width: 140px;
+	max-height: 150px;
+	border-radius: 30px;
+}
+
+.imgs2 {
+	display: inline-block;
+	width: 300px;
+	height: 70px;
+	border: 1px solid black;
+}
+
+nav {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	background: linear-gradient(90deg, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+}
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#main-menu>li {
+	float: left;
+	position: relative;
+}
+
+#main-menu>li>a {
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.85);
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0.05em;
+	display: flex;
+	padding: 14px 36px;
+	border-right: 1px solid rgba(0, 0, 0, 0.15);
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#main-menu>li:nth-child(1)>a {
+	border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#sub-menu {
+	position: relative;
+	background: #182952;
+	opacity: 4;
+	visibility: hidden;
+	transition: all 0.15s ease-in;
+}
+
+#sub-menu>li {
+	padding: 16px 28px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#sub-menu>li>a {
+	color: black;
+	text-decoration: none;
+}
+
+#main-menu>li:hover #sub-menu {
+	opacity: 1;
+	visibility: visible;
+	background-color: aquamarine;
+}
+
+#sub-menu>li>a:hover {
+	text-decoration: underline;
+}
+
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48
+}
+
+.material-symbols-outlined {
+	position: absolute;
+	right: 15px;
+	top: 60px;
+	font-size: 40px;
+	font-weight: bolder;
+	color: greenyellow;
+}
+
+@media screen {
+	.navbar_menu {
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 50px;
+	}
+	@media screen {
+		.navbar_menu.active {
+			display: inline-block;
+		}
+	}
+}
+    </style>
