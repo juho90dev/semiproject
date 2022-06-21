@@ -111,7 +111,7 @@
 	
 	  <script>
 	  	//미결제회원 접근 제한
-	  	const openPlanCreator()=()=>{
+	  	const openPlanCreator=()=>{
 	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
 	  		location.href=("<%=request.getContextPath()%>/plannerMember.do");
 	  		<%}else {%> 
