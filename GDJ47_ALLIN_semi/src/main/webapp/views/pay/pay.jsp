@@ -17,11 +17,14 @@ Member m=(Member)session.getAttribute("login");
 <div>
         본 사이트의 모든 서비스를 이용하기 위해서는 10원의 이용료를 지불해야합니다.<br>
         저희 사이트는 영리사이트가 아니며 모든 이용료는 공익 재단에 기부될 예정입니다.<br>
-<button onclick="iamport();">기부금 결제</button>
+<button onclick="iamport();"><%=m.getUserId()%>이용료 결제</button>
 </div>
 <body>
     <script>
-    
+    let id = "<%=m.getUserId()%>";
+    let email="<%=m.getEmail()%>";
+    console.log(id);
+    console.log(email);
     
     function iamport(){
     	    	
@@ -31,8 +34,9 @@ Member m=(Member)session.getAttribute("login");
 		    pg : 'html5_inicis',
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : "기부금",
-		    amount : 10, //실제 결제되는 가격
+		    name : "이용료",
+		    amount : 100, //실제 결제되는 가격
+		    buyer_email : email
 		    
 		}, function(rsp) {
 			console.log(rsp);
@@ -45,6 +49,7 @@ Member m=(Member)session.getAttribute("login");
 		       	
 		        $.ajax({
 		        	url: "<%=request.getContextPath()%>/pay.do",
+		        	data:{"id":id},
 		        	success: data=()=>{
 		        		
 		        		

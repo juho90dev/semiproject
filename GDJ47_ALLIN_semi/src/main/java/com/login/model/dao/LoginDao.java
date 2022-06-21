@@ -277,8 +277,7 @@ public class LoginDao {
 			int result=0;
 			try {
 				pstmt=conn.prepareStatement(prop.getProperty("updatePay"));
-				pstmt.setString(1, m.getPay());
-				pstmt.setString(2, m.getUserId());
+				pstmt.setString(1, m.getUserId());
 				result=pstmt.executeUpdate();
 			}catch(SQLException e) {
 				e.printStackTrace();
