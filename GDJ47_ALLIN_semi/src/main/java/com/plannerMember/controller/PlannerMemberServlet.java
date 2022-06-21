@@ -32,8 +32,8 @@ public class PlannerMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		List<Member> list = new PlannerMemberService().plannerMember();
+		String grade = "planner";
+		List<Member> list = new PlannerMemberService().plannerMember(grade);
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/plannerMember/plannerMember.jsp").forward(request, response);

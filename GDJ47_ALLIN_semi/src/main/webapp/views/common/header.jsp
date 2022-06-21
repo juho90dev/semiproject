@@ -74,8 +74,6 @@
 				<nav role="navigation">
 					<ul id="main-menu">
 
-
-
 						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanCreator();">플랜 크리에이터</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanner();">플랜</a> 
@@ -107,7 +105,7 @@
 	
 	  <script>
 	  	//미결제회원 접근 제한
-	  	const openPlanCreator()=()=>{
+	  	const openPlanCreator=()=>{
 	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
 	  		location.href=("<%=request.getContextPath()%>/plannerMember.do");
 	  		<%}else {%> 
