@@ -63,12 +63,13 @@
 				    <a onclick="logout();" style="cursor:pointer;">로그아웃</a>
 				  </div>
 				</div>
-							<tr>
+						<%if(login!=null&&login.getPay().equals("N")) {%>
+						<tr>
 							<td>
 							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">이용료결제</button>
 							</td>
 						</tr>
-				
+						<%}%>
 			  </div>
 						</tr>
 			</div>
@@ -94,7 +95,7 @@
 
 	                <%if(login!=null&&login.getUserId().equals("admin")) {%>
 	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
-	                <li id="memberManage"><a href="<%=request.getContextPath()%>/paid.do">결제</a></li>
+	                <li id="orderList"><a href="<%=request.getContextPath()%>/paid.do">서비스오더내역</a></li>
 	                <%}%>
 	             
 					</ul>
