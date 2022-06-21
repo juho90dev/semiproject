@@ -458,12 +458,10 @@
 	            			}
 	            			
 	            			const saveSchedule = ()=> { //TODO 0619) AJAX로 객체배열 전송하기
+	            			
 	            				alert("저장하시겠습니까?"); 
 	            			
-	            				
-	            				
-
-	            				
+				
 <%-- 	            			tempArr = JSON.parse(localStorage.getItem(1));
 	            				console.log(tempArr); //첫 번째 날
 	            				
@@ -489,51 +487,38 @@
  	            				
  	            				
  	            				//localStorage 반복문!
+ 	            				//fetch사용함!
 	            				
 	            				let jsonData = "";
 	            				let tempArr = [];
  	            				
  	            				for(let i=0;i<localStorage.length;i++){
-	            					
-	            					tempArr = JSON.parse(localStorage.getItem(i+1)); //일자 별로 저장된 데이터 가져오기
-	            					
-	            					console.log("객체배열 확인", (i+1)+"일자의 일정 : ", tempArr);
-									let cnt = 0;
-	            					
-	            					for(let a=0;a<tempArr.length;a++){
-	            						
-	            						//일자별 객체배열, Servlet에 전송하기 > Ajax 활용
-	            						console.log((i+1), "일자의 일정 : ", tempArr[a]);
-	            						jsonData = JSON.stringify(tempArr[a]);
-	            						//여기에 ajax로 하나씩 서블릿에 보내 java객체化한 다음에, 해당 객체를 list에 차곡차곡 저장할 수 있을까?--------------------------
-	            						
-	     	            				$.ajax({
-	    	            					
-	    	            					url : "<%=request.getContextPath()%>/planner/saveLog.do",
-	    	            					type : "get",
-	    	            					data : {"jsonData" : jsonData}, 
-	    	            					dataType : "json",
-	    	            					async : false,
-	    	            					contentType : "application/json",
-	    	            					success : function(data){
-	    	            						console.log("저장 완료");
-	    	            					}, 
-	    	            					error : function(data){
-	    	            						console.log("저장 실패");
-	    	            					}
-	    	            					
-	    	            				}); 		
-
-	            					}	            						            					            					
+ 	            					tempArr.push(localStorage.getItem(i+1));
 	            				} 
 	            				
+ 	            				
+ 	            				console.dir('tempArr : ' + JSON.stringify(tempArr));
+ 	            				
+ 	            				fetch("<%=request.getContextPath()%>/planner/saveLog.do", {
+ 									  method: 'POST', // 또는 'PUT'
+ 									  headers: {
+ 									    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+ 									  },
+ 									  body: 'planPerDay=' + encodeURIComponent('['+tempArr+']'),
+ 									})
+ 									.then((response) => response.json())
+ 									.then((data) => {
+ 									  console.log('성공:', data);
+ 									})
+ 									.catch((error) => {
+ 									  console.error('실패:', error);
+ 									});
 
-            					
-
-	            				
 	            			}
 	            			
-
+	            			
+          					        	
+	            			
 		                </script>
 		                
 		                
