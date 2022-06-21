@@ -30,7 +30,7 @@
 			이미 가입하셨습니다.
 			<br><br>
 			<!-- 아이디 재입력창 구성 -->
-			<form action="<%=request.getContextPath() %>//emailDuplicate.do" method="post">
+			<form action="<%=request.getContextPath() %>/emailDuplicate.do" method="post">
 				<input type="text" name="email" id="email">
 				<input type="submit" value="중복검사" >
 			</form>

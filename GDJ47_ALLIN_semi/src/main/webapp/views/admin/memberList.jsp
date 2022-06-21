@@ -6,6 +6,8 @@
 
 //header에 member는 있는데 List라는 자료형은 임포트 한 적이 없다... 그래서 list도 import해줘야 한다.
 %>
+
+
 <%@ include file="/views/common/header.jsp" %>
 
  <body>
@@ -53,7 +55,9 @@
 				<td><%=m.getCountry() %></td>
 				<td><%=m.getImage() %></td>
 				<td><%=m.getAvgscore() %></td>
-				<td><%=m.getGrade() %></td>
+				<td><%=m.getGrade() %>&nbsp;<button onclick="<%=request.getContextPath() %>/updateGrade.do?userId=<%=m.getUserId()%>">수정</button></td>
+				
+				
 				<td><%=m.getEnrollDate() %></td>
 				<td><%=m.getPay()%></td>
 				<td><a href="<%=request.getContextPath()%>/deleteMember.do?userId=<%=m.getUserId() %>">탈퇴</a></td>
@@ -82,26 +86,9 @@
 	#joinForm {
 		margin: auto;
 		padding: 10px;
-	}
-	
-	#joinForm h1 {
 		text-align:center;
 	}
 	
-	
-	.btnArea {
-		text-align:center;
-		padding : 70px;
-	}
-	
-	button {
-		width : 100px;
-		height : 35px;
-		border : 0px;
-		color:white;
-		background:#282A35;
-		margin : 5px;
-	}
 
 	.table {
       border-collapse: collapse;
@@ -115,10 +102,7 @@
       background: #dadada46;
       text-align: center;
     }
-    .table th, .table td {
-      padding: 10px;
-      border: 1px solid #dadada92;
-    }
+
     .table th:first-child, .table td:first-child {
       border-left: 0;
     }
@@ -130,7 +114,9 @@
     }
     .table caption{caption-side: bottom; display: none;}
 
-
+	.button {
+	  text-align:right;
+    }  
 
 
 
@@ -143,3 +129,5 @@
    </body>
     
 <%@ include file="/views/common/footer.jsp" %>
+
+

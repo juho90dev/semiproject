@@ -69,6 +69,21 @@ public class adminDao {
 			close(pstmt);
 		}return result;
 	}
+
+
+	public int updateGrade(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateGrade"));
+			pstmt.setString(1, m.getUserId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	

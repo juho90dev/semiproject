@@ -76,7 +76,7 @@
                 <div class="place-review">장소 리뷰</div>
             </div>
             <div id="btn">
-                <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/createreiew/createreview.do')">작성하기</button>
+                <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/views/createreview/createreview.jsp')">작성하기</button>
             </div>
 
             <div class="dropdown">

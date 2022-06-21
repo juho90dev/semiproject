@@ -13,15 +13,26 @@ Member m=(Member)session.getAttribute("login");
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 </head>
-<div>
-        본 사이트의 모든 서비스를 이용하기 위해서는 10원의 이용료를 지불해야합니다.<br>
+<div style="text-align:center; font-weight: bold; 
+font-size: 2.0em;
+line-height: 1.0em">
+		
+        본 사이트의 모든 서비스를 이용하기 위해서는 100원의 이용료를 지불해야합니다.<br>
         저희 사이트는 영리사이트가 아니며 모든 이용료는 공익 재단에 기부될 예정입니다.<br>
-<button onclick="iamport();">기부금 결제</button>
+       
+<button onclick="iamport();"><%=m.getUserId()%>님 이용료 결제</button>
+
 </div>
 <body>
     <script>
-    
+    let id = "<%=m.getUserId()%>";
+    let email="<%=m.getEmail()%>";
+    console.log(id);
+    console.log(email);
     
     function iamport(){
     	    	
@@ -31,8 +42,9 @@ Member m=(Member)session.getAttribute("login");
 		    pg : 'html5_inicis',
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : "기부금",
-		    amount : 10, //실제 결제되는 가격
+		    name : "이용료",
+		    amount : 100, //실제 결제되는 가격
+		    buyer_email : email
 		    
 		}, function(rsp) {
 			console.log(rsp);
@@ -45,6 +57,7 @@ Member m=(Member)session.getAttribute("login");
 		       	
 		        $.ajax({
 		        	url: "<%=request.getContextPath()%>/pay.do",
+		        	data:{"id":id},
 		        	success: data=()=>{
 		        		
 		        		

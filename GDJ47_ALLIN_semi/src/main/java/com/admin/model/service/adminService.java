@@ -27,6 +27,15 @@ public class adminService {
 		close(conn);
 		return result;
 	}
+
+	public int updateGrade(Member m) {
+		Connection conn=getConnection();
+		int result=dao.updateGrade(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 	
 	

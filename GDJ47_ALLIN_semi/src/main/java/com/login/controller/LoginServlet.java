@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 		}else {
 			
-		response.sendRedirect("/SocialProject/views/login/loginFail.jsp");
+		response.sendRedirect("/GDJ47_ALLIN_semi/views/login/loginFail.jsp");
 		}
 		
 		

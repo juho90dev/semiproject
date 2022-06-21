@@ -1,9 +1,9 @@
 package com.login.model.dao;
 
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
-
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.login.model.vo.Member;
-
-import static com.common.JDBCTemplate.*;
 
 
 public class LoginDao {
@@ -279,8 +277,7 @@ public class LoginDao {
 			int result=0;
 			try {
 				pstmt=conn.prepareStatement(prop.getProperty("updatePay"));
-				pstmt.setString(1, m.getPay());
-				pstmt.setString(2, m.getUserId());
+				pstmt.setString(1, m.getUserId());
 				result=pstmt.executeUpdate();
 			}catch(SQLException e) {
 				e.printStackTrace();
