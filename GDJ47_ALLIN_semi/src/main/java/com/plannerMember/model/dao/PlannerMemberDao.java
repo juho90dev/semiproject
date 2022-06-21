@@ -30,12 +30,13 @@ public class PlannerMemberDao {
 	}
 	
 	
-	public List<Member> plannerMember(Connection conn) {
+	public List<Member> plannerMember(Connection conn, String grade) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> result = new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectPlannerMember"));
+			pstmt.setString(1, grade);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 //				Member m = new Member();

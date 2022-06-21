@@ -17,6 +17,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=705b81233756fa3f99e7c61bf323dd7e&libraries=services"></script>
 	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
 	
 	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
@@ -77,8 +78,6 @@
 			<div class="navbar_menu">
 				<nav role="navigation">
 					<ul id="main-menu">
-
-
 
 						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanCreator();">플랜 크리에이터</a></li>
