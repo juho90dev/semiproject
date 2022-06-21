@@ -15,7 +15,11 @@
 	for(Member m : list) {%>
 	<div class="box">
 		<div class="image">
-			<a href="<%=request.getContextPath()%>/plannerProfile.do"><%=m.getImage()%><img src=""></a>
+		<%if(m.getImage()==null) {%>
+			<a href="<%=request.getContextPath()%>/plannerProfile.do"><img src="<%=request.getContextPath()%>/images/logo.png"></a>
+		<%}else{ %>
+			<a href="<%=request.getContextPath()%>/plannerProfile.do"><img src="<%=m.getImage()%>"></a>
+		<%} %>
 		</div>
 		<div class="name_job"><%=m.getUserId()%></div>
 		<div class="rating">
