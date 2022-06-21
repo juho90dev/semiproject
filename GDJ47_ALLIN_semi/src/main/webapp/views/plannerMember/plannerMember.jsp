@@ -5,19 +5,19 @@
 <%
 	List<Member> list = (List<Member>)request.getAttribute("list");
 %>
-<form class="nav" action="<%=request.getContextPath()%>/">
+<%-- <form class="nav" action="<%=request.getContextPath()%>/">
 	<input type="text" id="text" placeholder="관심지역" 입력">
 	<input type="submit" id="search" value="검색">
-</form>
+</form> --%>
 
 <div class="container">
 <%if(!list.isEmpty()) {
 	for(Member m : list) {%>
 	<div class="box">
 		<div class="image">
-			<a href="<%=request.getContextPath()%>/plannerProfile.do">m.getImage()<img src="images/logo.png"></a>
+			<a href="<%=request.getContextPath()%>/plannerProfile.do"><%=m.getImage()%><img src=""></a>
 		</div>
-		<div class="name_job">m.getUserId()</div>
+		<div class="name_job"><%=m.getUserId()%></div>
 		<div class="rating">
 			<i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -27,14 +27,15 @@
 		</div>
 		<p> PLANNER</p>
 		<div class="btns">
-			<button onclick="location.assign('<%=request.getContextPath()%>/request.do')">request </button>
+			<button onclick="location.assign('<%=request.getContextPath()%>/request.do?plannerId=<%=m.getUserId()%>')">request </button>
 		</div>
+
 	</div>
-	<%	}
+		<%	}
 	}else{ %>
-		<p> 조회된 결과가 없습니다.</p>
+		<div class="resultList">조회된 결과가 없습니다.</div>
 	<%} %>
-	<!-- <div class="box">
+<!-- 	<div class="box">
 		<div class="image">
 			----  <img src="img2.jpeg" alt="">-
 		</div>
@@ -121,9 +122,14 @@
             <button>chatting </button>
             <button>request</button>
           </div>
-        </div>   
-</div> -->
+        </div>   --> 
+</div>
+
 <style>
+.resultList{
+	text-align : center;
+	font-size: 18px;
+}
 .nav {
 	margin-top : 20px;
 	margin-left : 550px;
