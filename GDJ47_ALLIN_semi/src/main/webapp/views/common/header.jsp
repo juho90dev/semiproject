@@ -52,7 +52,7 @@ Member login=(Member)session.getAttribute("login");
 				<img src="http://weldingsystemmall.co.kr/theme/hmon/img/icon/if_user-ciecle-round-account-person_3209203.png" width="30" height="30">
 				</td>
 				  <div class="dropdown-content">
-				  	<%if(login!=null&&login.getGrade().equals("일반")) {%>
+				  	<%if(login!=null&&login.getGrade().equals("normal")) {%>
 	                	<a onclick="mypagee();" style="cursor:pointer;">마이페이지</a>
 	                <%}else{%>
 	                	<a onclick="mypage();" style="cursor:pointer;">마이페이지</a>
