@@ -5,19 +5,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>api연습</title>
- <style>
-        th{
-
-            border:1px solid black;
-        }
-        table{
-            border:1px solid black;
-        }
-        td{
-            border:1px solid black;
-        }
-    </style>
 </head>
 <body>
 <label>날씨</label>
@@ -39,6 +26,19 @@
     <button title="중기육상예보는 조회일로부터 +3일 ~ +10일 사이의 기상정보만 조회가능" onclick="checkLongWeather();">날씨</button>
 	</div>
 	<div id=result></div>
+	
+	 <style>
+        th{
+
+            border:1px solid black;
+        }
+        table{
+            border:1px solid black;
+        }
+        td{
+            border:1px solid black;
+        }
+    </style>
 	
 	<script>
 	
