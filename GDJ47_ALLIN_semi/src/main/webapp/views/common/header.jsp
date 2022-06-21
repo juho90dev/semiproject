@@ -85,14 +85,14 @@ Member login=(Member)session.getAttribute("login");
 						<li><a href="">게시판</a></li>
 						<li><a href="javascript:openWeather()" >날씨예보</a></li>
 						<li><a href="">공지사항</a></li>
-<<<<<<< HEAD
+
 						<li><a href="">관리자</a></li>
 						
-=======
+
 	                <%if(login!=null&&login.getUserId().equals("admin")) {%>
 	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자모드</a></li>
 	                <%}%>
->>>>>>> branch 'master' of https://github.com/juho90dev/semiproject.git
+	                
 					</ul>
 				</nav>
 			</div>
