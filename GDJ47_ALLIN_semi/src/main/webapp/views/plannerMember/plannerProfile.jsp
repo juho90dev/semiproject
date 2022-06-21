@@ -4,7 +4,7 @@
 
 	<div class="box1">
         <div class="box2">
-            <h3>planner Id</h3>
+            <h3><%=request.getAttribute("plannerId") %></h3>
             <div class="image"><img class="image" src="잠만보.jpeg" width='300' height='300'></div>
             <br><br>
             <br>
@@ -16,6 +16,7 @@
             <hr>
             <br><h4>MY PLAN</h4>
             <br>여기에는 플랜루트 
+            <hr>
         </div>    
     </div>
     <style>

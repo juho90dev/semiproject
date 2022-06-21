@@ -16,9 +16,9 @@
 	<div class="box">
 		<div class="image">
 		<%if(m.getImage()==null) {%>
-			<a href="<%=request.getContextPath()%>/plannerProfile.do"><img src="<%=request.getContextPath()%>/images/logo.png"></a>
+			<a href="<%=request.getContextPath()%>/plannerProfile.do?plannerId=<%=m.getUserId()%>"><img src="<%=request.getContextPath()%>/images/logo.png"></a>
 		<%}else{ %>
-			<a href="<%=request.getContextPath()%>/plannerProfile.do"><img src="<%=m.getImage()%>"></a>
+			<a href="<%=request.getContextPath()%>/plannerProfile.do?plannerId=<%=m.getUserId()%>"><img src="<%=m.getImage()%>"></a>
 		<%} %>
 		</div>
 		<div class="name_job"><%=m.getUserId()%></div>

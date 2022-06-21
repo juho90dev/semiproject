@@ -27,6 +27,8 @@ public class PlannerProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String plannerId = request.getParameter("plannerId");
+		request.setAttribute("plannerId", plannerId);
 		request.getRequestDispatcher("views/plannerMember/plannerProfile.jsp").forward(request, response);
 	}
 
