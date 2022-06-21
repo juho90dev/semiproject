@@ -76,7 +76,7 @@ Member login=(Member)session.getAttribute("login");
 
 						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
 						<li><a href="">플랜 크리에이터</a></li>
-						<li><a href="<%=request.getContextPath()%>/views/planner/plannerIndex.jsp">플랜</a> 
+						<li><a href="javascript:void(0);" onclick="openPlanner();">플랜</a> 
 						<!-- <ul id="sub-menu">
                                 <li><a href="#" aria-label="subemnu">submenu</a></li>
                                
@@ -105,12 +105,23 @@ Member login=(Member)session.getAttribute("login");
 	
 	  <script>
 	  	//미결제회원 접근 제한
+	  	const openPlanner=()=>{
+	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
+	  		location.href=("<%=request.getContextPath()%>/views/planner/plannerIndex.jsp");
+	  		<%}else {%> 
+	  
+	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
+	  		
+	  		<%}%>
+	  		
+	  	}
+	  	
 	  	const openPlaces=()=>{
 	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
 	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
 	  		<%}else {%> 
 	  
-	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
+	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (로그인 후 홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
 	  		
 	  		<%}%>
 	  		
