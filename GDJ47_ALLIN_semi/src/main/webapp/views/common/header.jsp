@@ -145,6 +145,7 @@
 	  
 	  
 	  	const openWeather=()=>{
+	  		
 	  		window.open("<%=request.getContextPath()%>/weatherstart.do","","_blank");
 	  	}
 	  
