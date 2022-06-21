@@ -76,7 +76,7 @@ Member login=(Member)session.getAttribute("login");
 
 						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
 						<li><a href="">플랜 크리에이터</a></li>
-						<li><a href="">플랜</a> 
+						<li><a href="<%=request.getContextPath()%>/views/planner/plannerIndex.jsp">플랜</a> 
 						<!-- <ul id="sub-menu">
                                 <li><a href="#" aria-label="subemnu">submenu</a></li>
                                
