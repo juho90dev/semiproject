@@ -6,6 +6,9 @@ Member login=(Member)session.getAttribute("login");
 %>  
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -89,8 +92,9 @@ Member login=(Member)session.getAttribute("login");
 
 	                <%if(login!=null&&login.getUserId().equals("admin")) {%>
 	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
+	                <li id="memberManage"><a href="<%=request.getContextPath()%>/paid.do">결제</a></li>
 	                <%}%>
-	                
+	             
 					</ul>
 				</nav>
 			</div>
