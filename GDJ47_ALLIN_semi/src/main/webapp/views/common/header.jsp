@@ -13,6 +13,7 @@
 	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
 	
 	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
+	<title>ALL IN</title>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 				<img class=imgs1 src="<%=request.getContextPath()%>/images/logo.png" alt="">
 			</div>
 			<div class="title">
-				<a href=""> <img class=imgs2 src="<%=request.getContextPath()%>/images/logo1.png" alt=""></a>
+				<a href="<%=request.getContextPath()%>"> <img class=imgs2 src="<%=request.getContextPath()%>/images/logo1.png" alt=""></a>
 			</div>
 
 			<div class="btn">
