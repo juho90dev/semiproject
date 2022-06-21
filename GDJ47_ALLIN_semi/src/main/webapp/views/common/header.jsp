@@ -51,11 +51,6 @@ Member login=(Member)session.getAttribute("login");
 				<td class="dropbtn" >
 				<img src="http://weldingsystemmall.co.kr/theme/hmon/img/icon/if_user-ciecle-round-account-person_3209203.png" width="30" height="30">
 				</td>
-				<tr>
-							<td>
-							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
-							</td>
-						</tr>
 				  <div class="dropdown-content">
 				  	<%if(login!=null&&login.getGrade().equals("일반")) {%>
 	                	<a onclick="mypagee();" style="cursor:pointer;">마이페이지</a>
@@ -63,9 +58,13 @@ Member login=(Member)session.getAttribute("login");
 	                	<a onclick="mypage();" style="cursor:pointer;">마이페이지</a>
 	                <%}%>
 				    <a onclick="logout();" style="cursor:pointer;">로그아웃</a>
-				    
 				  </div>
 				</div>
+							<tr>
+							<td>
+							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
+							</td>
+						</tr>
 				
 			  </div>
 						</tr>
@@ -86,11 +85,10 @@ Member login=(Member)session.getAttribute("login");
 						<li><a href="javascript:openWeather()" >날씨예보</a></li>
 						<li><a href="">공지사항</a></li>
 
-						<li><a href="">관리자</a></li>
 						
 
 	                <%if(login!=null&&login.getUserId().equals("admin")) {%>
-	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자모드</a></li>
+	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
 	                <%}%>
 	                
 					</ul>
