@@ -62,7 +62,7 @@ Member login=(Member)session.getAttribute("login");
 				</div>
 							<tr>
 							<td>
-							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
+							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">이용료결제</button>
 							</td>
 						</tr>
 				
