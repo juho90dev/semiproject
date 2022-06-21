@@ -74,7 +74,7 @@ Member login=(Member)session.getAttribute("login");
 				<nav role="navigation">
 					<ul id="main-menu">
 
-						<li><a href="<%=request.getContextPath()%>/search/SearchPage.do">관광지</a></li>
+						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
 						<li><a href="">플랜 크리에이터</a></li>
 						<li><a href="">플랜</a> 
 						<!-- <ul id="sub-menu">
@@ -104,6 +104,19 @@ Member login=(Member)session.getAttribute("login");
 	</header>
 	
 	  <script>
+	  	//미결제회원 접근 제한
+	  	const openPlaces=()=>{
+	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
+	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
+	  		<%}else {%> 
+	  
+	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
+	  		
+	  		<%}%>
+	  		
+	  	}
+	  
+	  
 	  	const openWeather=()=>{
 	  		window.open("<%=request.getContextPath()%>/weatherstart.do","","_blank");
 	  	}
