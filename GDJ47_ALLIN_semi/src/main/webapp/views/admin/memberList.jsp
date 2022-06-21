@@ -7,12 +7,14 @@
 //header에 member는 있는데 List라는 자료형은 임포트 한 적이 없다... 그래서 list도 import해줘야 한다.
 %>
 
-
 <%@ include file="/views/common/header.jsp" %>
 
  <body>
+
   <div class="outer">
 		<div id="joinInfoArea">
+<a class=likeabutton href="">일반</a>
+<a class=likeabutton href="<%=request.getContextPath()%>/findPlanner.do?grade=<%=login.getGrade()%>">플래너</a>
 			<form id="joinForm" action="" method="post" onsubmit="return validate();">
 				
 				<!-- <h4>아이디</h4>
@@ -55,12 +57,13 @@
 				<td><%=m.getCountry() %></td>
 				<td><%=m.getImage() %></td>
 				<td><%=m.getAvgscore() %></td>
-				<td><%=m.getGrade() %>&nbsp;<button onclick="<%=request.getContextPath() %>/updateGrade.do?userId=<%=m.getUserId()%>">수정</button></td>
-				
+				<form action="<%=request.getContextPath() %>/updateGrade.do?userId=<%=m.getUserId()%>" method="post">
+				<td><%=m.getGrade()%>&nbsp;<button>수정</button></td>
+				</form>
 				
 				<td><%=m.getEnrollDate() %></td>
 				<td><%=m.getPay()%></td>
-				<td><a href="<%=request.getContextPath()%>/deleteMember.do?userId=<%=m.getUserId() %>">탈퇴</a></td>
+				<td><a href="<%=request.getContextPath()%>/deleteMember.do?userId=<%=m.getUserId() %>">삭제</a></td>
 				</tr>
        		<%	} 
        		 }%>
@@ -118,6 +121,21 @@
 	  text-align:right;
     }  
 
+	.likeabutton {
+    text-decoration: none; 
+    font: menu;
+    display: inline-block; 
+    padding: 2px 8px;
+    background: ButtonFace; 
+    color: ButtonText;
+    border-style: solid; 
+    border-width: 2px;
+    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+	}
+	
+	.likeabutton:active {
+    border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+	}
 
 
 	

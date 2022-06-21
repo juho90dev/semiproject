@@ -11,7 +11,7 @@
       <div class="container">
          <header>Find PassWord</header>
          <a>가입시 입력하신 이메일을 작성해주세요.</a>
-         <form id="loginFrm" action="<%=request.getContextPath() %>/" method="post">
+         <form id="loginFrm" action="<%=request.getContextPath()%>/pwdFind.do" method="post">
             <div class="input-field">
                <input type="text" required name="email">
                <label>이메일 입력</label>
