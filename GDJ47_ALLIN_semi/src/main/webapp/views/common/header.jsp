@@ -76,7 +76,7 @@ Member login=(Member)session.getAttribute("login");
 					<ul id="main-menu">
 
 						<li><a href="<%=request.getContextPath()%>/search/SearchPage.do">관광지</a></li>
-						<li><a href="">플랜 크리에이터</a></li>
+						<li><a href="<%=request.getContextPath()%>/plannerMember.do">플랜 크리에이터</a></li>
 						<li><a href="">플랜</a> 
 						<!-- <ul id="sub-menu">
                                 <li><a href="#" aria-label="subemnu">submenu</a></li>
