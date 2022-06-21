@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+
 import com.login.model.dao.LoginDao;
 import com.login.model.vo.Member;
 
@@ -26,7 +27,7 @@ public class PlannerMemberDao {
 			pstmt=conn.prepareStatement(prop.getProperty(""));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				
+				list.add(LoginDao.getLogin(rs));
 			}
 			
 		}catch(SQLException e) {
