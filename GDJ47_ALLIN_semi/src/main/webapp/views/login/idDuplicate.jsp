@@ -32,7 +32,7 @@
 			이미 사용중입니다!
 			<br><br>
 			<!-- 아이디 재입력창 구성 -->
-			<form action="<%=request.getContextPath() %>//idDuplicate.do" method="post">
+			<form action="<%=request.getContextPath() %>/idDuplicate.do" method="post">
 				<input type="text" name="userId" id="userId">
 				<input type="submit" value="중복검사" >
 			</form>
