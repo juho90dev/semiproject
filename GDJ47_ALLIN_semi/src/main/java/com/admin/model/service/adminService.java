@@ -28,7 +28,4 @@ public class adminService {
 		return result;
 	}
 	
-	
-	
-	
 }
