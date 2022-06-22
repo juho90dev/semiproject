@@ -7,7 +7,7 @@
 		<div class="box2">
 			<h3><%=request.getAttribute("plannerId") %></h3>
 			<div class="image">
-				<img class="image" src="잠만보.jpeg" width='300' height='300'>
+				<img class="image" src="" width='300' height='300'>
 			</div>
 			<br>
 			<br> <br> <br> <br>
