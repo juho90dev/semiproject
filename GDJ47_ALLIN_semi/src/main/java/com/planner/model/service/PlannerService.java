@@ -63,12 +63,21 @@ public class PlannerService {
 		return plannerNo;
 	}
 
-	public List<Planner> printList(String userId) { //아이디로 작성된 플래너들을 가져올 것임
+	public List<Planner> printList(String userId) { //MEMBER_ID를 기준으로, "PLANNER"의 LIST가져오기
 		
 		Connection conn = getConnection();
 		List<Planner> list = dao.printList(conn,userId);
 		close(conn);
 		return list;
+	}
+
+
+	public List<PlannerLog> printPlans(String plannerNo) {
+		
+		Connection conn = getConnection();
+		List<PlannerLog> plans = dao.printPlans(conn, plannerNo);
+		close(conn);
+		return plans;
 	}
 
 }

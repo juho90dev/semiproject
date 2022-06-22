@@ -17,6 +17,8 @@ public class RequestPlan {
 	private String approval;
 	private String requestPay;
 	
+	
+	
 	public RequestPlan(String memberId, String plannerId, String content, String startDay, String endDay,
 			String transport, String theme, String approval, String requestPay) {
 		super();
@@ -29,6 +31,13 @@ public class RequestPlan {
 		this.theme = theme;
 		this.approval = approval;
 		this.requestPay = requestPay;
+	}
+
+
+
+	public RequestPlan() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }

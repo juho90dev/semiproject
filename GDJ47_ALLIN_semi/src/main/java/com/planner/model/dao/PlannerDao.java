@@ -167,4 +167,44 @@ public class PlannerDao {
 	}
 
 
+	public List<PlannerLog> printPlans(Connection conn, String plannerNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PlannerLog> list = new ArrayList();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectPlans"));
+			pstmt.setString(1, plannerNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				PlannerLog p = PlannerLog.builder()
+						       .planCode(rs.getString("plan_code"))
+						       .plannerNo(rs.getString("planner_no"))
+						       .day(rs.getString("day"))
+						       .latitude(rs.getString("latitude"))
+						       .longitude(rs.getString("longitude"))
+						       .memo(rs.getString("memo"))
+						       .placeName(rs.getString("place_name"))
+						       .build();
+				
+				list.add(p);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+
+
 }

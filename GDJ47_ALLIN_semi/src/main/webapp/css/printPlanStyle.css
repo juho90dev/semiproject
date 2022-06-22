@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.container {
+width: 100vw;
+    height: 600px;
+    border: 1px solid red;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: block;
+    padding: 30px;
+}
+
+.planTitle {
+	width: 100%;
+	border: 1px solid red;
+	font-size: 40px;
+	padding-left: 22px;
+}
+
+.forOption {
+	width: 100%;
+	margin-top: 11px;
+	border: 1px solid red;
+}
+
+select#selectDays{
+	
+	width: 320px;
+    margin-left: 30;
+    margin-left: 17px;
+	
+}
+
+.detailInfo{
+	
+    width: 100%;
+    height: 80%;
+    margin-top: 11px;
+    display: flex;
+    border: 1px solid red;
+	
+}
+
+.forMap {
+	width: 50%;
+	height: 100%;
+	border: 1px solid red;
+	padding: 20px;
+}
+
+.forPlan {
+	width: 50%;
+	height: 100%;
+	border: 1px solid red;
+	overflow-y: scroll;
+}
