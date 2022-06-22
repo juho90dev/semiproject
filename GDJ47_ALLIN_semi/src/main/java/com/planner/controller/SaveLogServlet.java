@@ -163,11 +163,6 @@ public class SaveLogServlet extends HttpServlet {
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().print(jo);
 		
-		  //request.getRequestDispatcher("/views/common/response.jsp").forward(request, response);
-		 //request.getRequestDispatcher(request.getContextPath()).forward(request, response);
-		//response.sendRedirect(request.getContextPath()); //왜 이동을 못하지?
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
