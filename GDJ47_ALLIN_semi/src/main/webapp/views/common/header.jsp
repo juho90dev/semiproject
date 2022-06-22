@@ -120,7 +120,7 @@
 	  	}
 	  	const openPlanner=()=>{
 	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
-	  		location.href=("<%=request.getContextPath()%>/views/planner/plannerIndex.jsp");
+	  		location.href=("<%=request.getContextPath()%>/planner/plannerMakerStarter.do");
 	  		<%}else {%> 
 	  
 	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
