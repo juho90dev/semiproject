@@ -10,12 +10,12 @@
 <%@ include file="/views/common/header.jsp" %>
 
  <body>
+ <br>
+<a class=likeabutton href="<%=request.getContextPath()%>/findNormal.do">일반</a>
+<a class=likeabutton href="<%=request.getContextPath()%>/findPlanner.do">플래너</a>
+<a class=likeabutton href="<%=request.getContextPath()%>/memberList.do">전체</a>
 
-  <div class="outer">
 		<div id="joinInfoArea">
-<a class=likeabutton href="">일반</a>
-<a class=likeabutton href="<%=request.getContextPath()%>/findPlanner.do?grade=<%=login.getGrade()%>">플래너</a>
-			<form id="joinForm" action="" method="post" onsubmit="return validate();">
 				
 				<!-- <h4>아이디</h4>
 				<span class="input_area"><input type="text" maxlength="13" name="userId" value="" readonly></span> -->
@@ -57,21 +57,29 @@
 				<td><%=m.getCountry() %></td>
 				<td><%=m.getImage() %></td>
 				<td><%=m.getAvgscore() %></td>
-				<form action="<%=request.getContextPath() %>/updateGrade.do?userId=<%=m.getUserId()%>" method="post">
-				<td><%=m.getGrade()%>&nbsp;<button>수정</button></td>
-				</form>
+				<td>
+				<%=m.getGrade()%>&nbsp;
+				<%if(m.getGrade().equals("normal")) { %>
+				<button onclick="location.replace('<%=request.getContextPath() %>/updateGrade.do?userId=<%=m.getUserId()%>')">승급</button>
+				<%}else if(m.getGrade().equals("planner")) {%>
+				<button onclick="location.replace('<%=request.getContextPath() %>/downGrade.do?userId=<%=m.getUserId()%>')">강등</button>
+				<%} %>
+				</td>
 				
 				<td><%=m.getEnrollDate() %></td>
 				<td><%=m.getPay()%></td>
-				<td><a href="<%=request.getContextPath()%>/deleteMember.do?userId=<%=m.getUserId() %>">삭제</a></td>
+				<td>
+				<%if(m.getGrade().equals("normal")||m.getGrade().equals("planner")) {%>
+				<a href="<%=request.getContextPath()%>/deleteMember.do?userId=<%=m.getUserId() %>">삭제</a>
+				<%} %>
+				</td>
 				</tr>
-       		<%	} 
+       		<%} 
        		 }%>
 				</tbody>
 				</table> 
-			</form>
 		</div>
-	</div>
+
 
 
 

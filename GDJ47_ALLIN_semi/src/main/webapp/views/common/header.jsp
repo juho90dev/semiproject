@@ -18,8 +18,8 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	
-	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
 	<title>ALL IN</title>
 </head>
 
@@ -63,12 +63,13 @@
 				    <a onclick="logout();" style="cursor:pointer;">로그아웃</a>
 				  </div>
 				</div>
-							<tr>
+						<%if(login!=null&&login.getPay().equals("N")) {%>
+						<tr>
 							<td>
 							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">이용료결제</button>
 							</td>
 						</tr>
-				
+						<%}%>
 			  </div>
 						</tr>
 			</div>
@@ -92,7 +93,7 @@
 
 	                <%if(login!=null&&login.getUserId().equals("admin")) {%>
 	                <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
-	                <li id="memberManage"><a href="<%=request.getContextPath()%>/paid.do">결제</a></li>
+	                <li id="orderList"><a href="<%=request.getContextPath()%>/paid.do">서비스오더내역</a></li>
 	                <%}%>
 	             
 					</ul>
@@ -142,6 +143,7 @@
 	  
 	  
 	  	const openWeather=()=>{
+	  		
 	  		window.open("<%=request.getContextPath()%>/weatherstart.do","","_blank");
 	  	}
 	  

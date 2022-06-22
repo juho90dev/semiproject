@@ -13,16 +13,16 @@ import com.admin.model.service.adminService;
 import com.login.model.vo.Member;
 
 /**
- * Servlet implementation class findPlannerServlet
+ * Servlet implementation class findNormalServlet
  */
-@WebServlet("/findPlanner.do")
-public class findPlannerServlet extends HttpServlet {
+@WebServlet("/findNormal.do")
+public class findNormalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public findPlannerServlet() {
+    public findNormalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,7 @@ public class findPlannerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Member> list=new adminService().selectPlannerList();//호출하기
+		List<Member> list=new adminService().selectNormalList();//호출하기
 		
 		
 		//list를 페이지에 넘여야 하니까 request.setAttribute에 담아줌

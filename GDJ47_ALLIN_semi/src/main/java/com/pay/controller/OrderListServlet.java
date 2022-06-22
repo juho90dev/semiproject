@@ -1,4 +1,4 @@
-package com.login.controller;
+package com.pay.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class pwdFind
+ * Servlet implementation class OrderListServlet
  */
-@WebServlet("/pwdFind")
-public class pwdFind extends HttpServlet {
+@WebServlet("/paid.do")
+public class OrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public pwdFind() {
+    public OrderListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,12 +26,6 @@ public class pwdFind extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String email= request.getParameter("email");
-		
-		
-		
-		
 		
 	}
 

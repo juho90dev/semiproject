@@ -8,6 +8,7 @@ import static com.common.JDBCTemplate.rollback;
 import static com.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.HashMap;
 
 import com.login.model.dao.LoginDao;
 import com.login.model.vo.Member;
@@ -89,6 +90,8 @@ public class LoginService {
 		close(conn);
 		return result;
 	}
+
+
 
 
 
