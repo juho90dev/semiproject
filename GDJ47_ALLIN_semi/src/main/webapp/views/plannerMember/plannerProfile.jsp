@@ -13,11 +13,10 @@
 		<div class="box2">
 			<h3><%=request.getAttribute("plannerId") %></h3>
 			<div class="image">
-<<<<<<< HEAD
-				<img class="image" src="" width='300' height='300'>
-=======
+
+
  				<img class="image" src="잠만보.jpeg" width='300' height='300'> 
->>>>>>> branch 'master' of https://github.com/juho90dev/semiproject.git
+
 			</div>
 			<br>
 			<br> <br> <br> <br>
