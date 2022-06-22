@@ -8,33 +8,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoadPlanServlet
+ * Servlet implementation class PrintPlanServlet
  */
-@WebServlet("/planner/loadPlan.do")
-public class LoadPlanServlet extends HttpServlet {
+@WebServlet("/planner/printPlan.do")
+public class PrintPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadPlanServlet() {
+
+    public PrintPlanServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String plannerNo = request.getParameter("pNo"); //PLANNER_NO
+		System.out.println(plannerNo);
+		
+		request.setAttribute("plannerNo", plannerNo);
+		request.getRequestDispatcher("/views/planner/printPlans.jsp").forward(request, response);
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

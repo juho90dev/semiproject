@@ -33,10 +33,9 @@ public class SaveLogServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// TODO DB에 플랜 저장 後, 플랜 저장 완료 페이지로 이동함
-		// DB에서 리스트를 가져올지, localStorage를 다시 사용할지 고민 중
-		// 1. 플래너 정보 저장하기
+		// TODO DB에 플랜 저장 後, 메인화면으로 이동함
 		// ------------------------------------------------------------------------------
+		// 1. 플래너 정보 저장하기
 		//현재 접속 중인 회원 아이디 가져오기
 		//회원 아이디 가져오기
 		HttpSession session = request.getSession();
@@ -163,11 +162,6 @@ public class SaveLogServlet extends HttpServlet {
 		jo.put("title", title);
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().print(jo);
-		
-		  //request.getRequestDispatcher("/views/common/response.jsp").forward(request, response);
-		 //request.getRequestDispatcher(request.getContextPath()).forward(request, response);
-		//response.sendRedirect(request.getContextPath()); //왜 이동을 못하지?
-		
 		
 	}
 
