@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.login.model.vo.Member" %>    
 <%
 
 	//쿠키 사용 後
@@ -45,6 +45,11 @@
 	//0614 > "새로고침"할 경우, "localStorage"의 저장 데이터는 유지되나, 
 	//화면 상에서는 1번째 날의 계획이 리셋됨... 그리고 화면상에서 데이터가 리셋된 채로 option값을 이동하게 되면 실제 localStorage값도 리셋됨! 
 
+	Member login = (Member)session.getAttribute("login");
+	if(login!=null){
+		String id = login.getUserId();
+		System.out.println("아이디 : "+id);
+	} else System.out.println("정보 못 받아옴");
 	
 %>
 

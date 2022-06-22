@@ -1,6 +1,7 @@
 package com.planner.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.login.model.vo.Member;
 import com.planner.model.service.PlannerService;
 import com.planner.model.vo.Planner;
 import com.planner.model.vo.PlannerLog;
@@ -31,9 +34,17 @@ public class SaveLogServlet extends HttpServlet {
 
 		// TODO DB에 플랜 저장 後, 플랜 저장 완료 페이지로 이동함
 		// DB에서 리스트를 가져올지, localStorage를 다시 사용할지 고민 중
-
 		// 1. 플래너 정보 저장하기
 		// ------------------------------------------------------------------------------
+		//현재 접속 중인 회원 아이디 가져오기
+		//회원 아이디 가져오기
+		HttpSession session = request.getSession();
+		Member m = (Member)session.getAttribute("login");
+		//System.out.println("회원 정보 가져오기 "+m);
+		System.out.println("회원 확인"+m);
+		String id = m.getUserId();
+		System.out.println("아이디 : "+id);
+
 		
 		//사용자 입력 정보 받아오기 > 제목
 		String title = request.getParameter("plannerTitle");
@@ -73,7 +84,7 @@ public class SaveLogServlet extends HttpServlet {
 		
 		//1. "PLANNER"정보 가져오기
 		Planner planner = Planner.builder()
-					      .userId("abcd") //테스트 테이블인, MEMBER에 있는 아이디를 빌려옴
+					      .userId(id)
 					      .plannerTitle(title)
 					      .travelDays(days)
 					      .theme(theme)
