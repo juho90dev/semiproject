@@ -46,7 +46,7 @@
 		</div>
 	</div>
 </div>
-<button id=test>테스트</button>
+
 <script>
 
 
@@ -124,7 +124,9 @@
 			
 			e.addEventListener("click",e=>{ //상세 페이지로 이동
 				alert("플랜넘버 : "+plannerNo);
-				location.re
+				//서블릿에서 정보를 JSP로 가져가는 것보다,
+				//JSP에서 ajax로 정보를 요청하는 편이 좋겠다 (JS객체로 가져올 수 있으므로)
+				location.assign("<%=request.getContextPath()%>/planner/printPlan.do?pNo="+plannerNo);
 			})
 			
 		}
