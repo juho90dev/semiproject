@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.planner.model.vo.Planner;
@@ -118,6 +120,50 @@ public class PlannerDao {
 		}
 		
 		return plannerNo;
+	}
+
+
+	public List<Planner> printList(Connection conn, String userId) {
+		
+		List<Planner> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectPlannerList"));
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Planner p = Planner.builder()
+							.plannerNo(rs.getString("planner_no"))
+							.userId(rs.getString("member_id"))
+							.plannerTitle(rs.getString("planner_title"))
+							.travelDays(rs.getInt("travel_days"))
+							.writtenDate(rs.getDate("written_date"))
+							.images(rs.getString("images"))
+							.theme(rs.getString("theme"))
+							.areacode(rs.getInt("areacode"))
+							.sigungucode(rs.getInt("sigungucode"))
+							.score(rs.getInt("score"))
+							.build();
+
+				list.add(p);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return list;
 	}
 
 

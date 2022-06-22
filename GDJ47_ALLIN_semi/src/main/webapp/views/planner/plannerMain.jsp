@@ -218,13 +218,10 @@
 		 										if(polyline!=null&&polyline.setMap()!=null){ //선 삭제
 													polyline.setMap(null);
 		 										}
-		 										
- 												//console.log("마커 확인///////////",markersArr);
- 												//console.log("마커 확인2//////////", myMarkers);
+
 		  										if(markersArr!=null&&markersArr.length!=0){ 
 		  											
 		 											 markersArr.forEach(e=>{
-		 												 //console.log("//////////전환 확인", e);
 		 												 e.setVisible(false);
 		 											 });
 		 										
@@ -446,8 +443,12 @@
 	            			
 	            				alert("저장하시겠습니까?"); 
 
-	            				//"썸네일 저장도 해야 함..."
-	            			
+	            				//TODO 0622) 썸네일 및 소개글을 저장할 수 있는 로직 구현하기
+	            				//썸네일 및 소개글은 window.open()에서 새 창에서 구현할 것
+	            				//해당 창에서, DB저장 등도 완료해야 할듯...
+	            				//"PLANNER_ID"를 받아올 방법이 없음
+								//window.open("<%=request.getContextPath()%>/planner/addPlannerInfo.do","title","width=400,height=200");
+	            				
 	            			
  	            				//-------------------------------------------------------------------
  	            				//localStorage 반복문!
