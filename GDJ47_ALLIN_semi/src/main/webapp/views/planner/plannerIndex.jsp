@@ -305,34 +305,7 @@
 		console.log(document.querySelector("#area_ option").value);
 		console.log(document.querySelector("#sigungu_ option").value);
 		
-		
-		
-		
-		
-		
-		
-/* 		function fn_ckValidate(){
-			
-			const ckArea = document.querySelector("#area_ option").value;
-			const ckSigungu = document.querySelector("#sigungu_ option").value;
-			//const ckSigungu = document.getElementById("sigungu_").value;
-			
-			console.log(ckArea, ckSigungu);
-			
- 			if(ckArea==""){
 
-				alert("주요 방문지역을 입력해주세요!");
-				return false;
-			}
-			if(ckSigungu==""){
-				return false;
-			} 
-			
-			return true;
-		} */
-		
-		
-	
 	</script>
 
 </body>
