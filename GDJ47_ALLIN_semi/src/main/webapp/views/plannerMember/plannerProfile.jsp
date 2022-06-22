@@ -13,7 +13,7 @@
 		<div class="box2">
 			<h3><%=request.getAttribute("plannerId") %></h3>
 			<div class="image">
-<!-- 				<img class="image" src="잠만보.jpeg" width='300' height='300'>  -->
+ 				<img class="image" src="잠만보.jpeg" width='300' height='300'> 
 			</div>
 			<br>
 			<br> <br> <br> <br>
@@ -55,25 +55,12 @@
 		console.log(plannerZone);
 		
 
-		/* 		planners.forEach(e=>{
-			
-			e.addEventListener("click",e=>{
-				alert("안녕?");
-			});
-			
-		}) */
-/* 		plannerCho.addEventListener("click",e=>{
-			alert("안녕?");
-		}); */
-
-
 		(()=>{
 			
-			//alert("안녕?");
 			
 	 		$.ajax({
 				
-				<%-- url:"<%=request.getContextPath()%>/planner/printPlannerList.do?userId=<%=userId%>", --%>
+
 				url:"<%=request.getContextPath()%>/planner/printPlannerList.do",
 				data:{userId:"<%=userId%>"}, //본 아이디가 SQL의 식별 기준이 됨
 				dataType:"json",
@@ -135,8 +122,9 @@
 
 		function printPlan(e, plannerNo){
 			
-			e.addEventListener("click",e=>{
+			e.addEventListener("click",e=>{ //상세 페이지로 이동
 				alert("플랜넘버 : "+plannerNo);
+				location.re
 			})
 			
 		}
