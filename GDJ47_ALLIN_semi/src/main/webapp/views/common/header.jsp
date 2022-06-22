@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=705b81233756fa3f99e7c61bf323dd7e&libraries=services"></script>
 	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	
-	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.min.js"></script>
 	<title>ALL IN</title>
 </head>
 
