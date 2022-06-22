@@ -1,28 +1,23 @@
 package com.plannerMember.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.login.model.vo.Member;
-import com.plannerMember.service.PlannerMemberService;
-
 /**
- * Servlet implementation class PlannerMemberServlet
+ * Servlet implementation class PlannerProfileServlet
  */
-@WebServlet("/plannerMember.do")
-public class PlannerMemberServlet extends HttpServlet {
+@WebServlet("/plannerProfile.do")
+public class PlannerProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlannerMemberServlet() {
+    public PlannerProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +27,9 @@ public class PlannerMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String grade = "planner";
-		List<Member> list = new PlannerMemberService().plannerMember(grade);
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/plannerMember/plannerMember.jsp").forward(request, response);
+		String plannerId = request.getParameter("plannerId");
+		request.setAttribute("plannerId", plannerId);
+		request.getRequestDispatcher("views/plannerMember/plannerProfile.jsp").forward(request, response);
 	}
 
 	/**

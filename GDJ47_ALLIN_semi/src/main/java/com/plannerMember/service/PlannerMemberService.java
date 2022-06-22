@@ -12,9 +12,9 @@ public class PlannerMemberService {
 
 	private PlannerMemberDao dao = new PlannerMemberDao();
 	
-	public List<Member> plannerMember(){
+	public List<Member> plannerMember(String grade){
 		Connection conn = getConnection();
-		List<Member> result = dao.plannerMember(conn);
+		List<Member> result = dao.plannerMember(conn, grade);
 		close(conn);
 		return result;
 	}

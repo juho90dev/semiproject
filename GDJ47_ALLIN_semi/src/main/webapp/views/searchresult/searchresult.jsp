@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=705b81233756fa3f99e7c61bf323dd7e&libraries=services"></script>
  <div id="container1">
         <div class="title5">안녕 </div>
         <div class="address">경기 수원시 장안구 영화동 320-2 </div>
@@ -68,7 +68,20 @@
     <div id="container2">
         <div style="overflow:auto; width: 100%; height:500px;" class="tbroot">
             <div class="title1">지도</div>
-            <div class="map"></div>
+            <div id="map" style="width:100%;height:350px;"></div>
+
+
+			<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };
+			
+			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			</script>
+            <!-- <div class="map"></div> -->
             <div class="place-title">장소 한줄소개
                 <div class="place-content">test</div>
             </div>
@@ -551,7 +564,7 @@ svg #main-circ {
 
         }
 
-        .map {
+        #map {
             border: 1px solid green;
             display: inline-block;
             width: 100%;
