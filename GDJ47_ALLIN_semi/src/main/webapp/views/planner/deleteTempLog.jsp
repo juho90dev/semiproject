@@ -35,7 +35,7 @@
 		const deleteLog = ()=>{
 			
 			localStorage.clear(); //localStorage에 저장된 일정 전체 삭제
-			opener.location.replace("<%=request.getContextPath()%>"); //사이트 메인화면으로 이동해야 함
+			opener.location.replace("<%=request.getContextPath()%>"); //사이트 메인화면으로 이동함
 			close(); //창 닫기
 						
 		}

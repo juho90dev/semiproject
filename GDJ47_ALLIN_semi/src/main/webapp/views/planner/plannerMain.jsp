@@ -445,10 +445,10 @@
 	            			const saveSchedule = ()=> { //TODO 0619) AJAX로 객체배열 전송하기
 	            			
 	            				alert("저장하시겠습니까?"); 
-	            			
 
-	            				
- 				
+	            				//"썸네일 저장도 해야 함..."
+	            			
+	            			
  	            				//-------------------------------------------------------------------
  	            				//localStorage 반복문!
  	            				//fetch사용함!
@@ -467,18 +467,26 @@
  									  method: 'POST', // 또는 'PUT'
  									  headers: {
  									    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+ 									    'Accept': 'application/json'
  									  },
  									  body: 'planPerDay=' + encodeURIComponent('['+tempArr+']'), 
  									})
  									.then((response) => response.json())
  									.then((data) => {
+ 										
  									  console.log('성공:', data);
- 									})
- 									.catch((error) => {
- 									  console.error('실패:', error);
+ 									  alert(data.title+"저장 성공! 메인화면으로 돌아갑니다");
+ 									  console.log("아이디 확인"+data.userId)
+ 									  
+ 									  location.replace("<%=request.getContextPath()%>");
+ 									  
  									});
+/*  									.catch((error) => {
+ 									  console.error('실패:', error);
+ 									}); */
 
 	            			}
+	            			
 	            			
 	            			
           					        	
