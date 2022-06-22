@@ -8,20 +8,26 @@
 	<b> 플랜요청서 </b></font>
 </p>
 <hr>
-<form action="" method="post">
+<form action="<%=request.getContextPath()%>/orderRegister.do" method="post" onsubmit="orderSave();" >
 	<table width="650" height="350" border="1" cellpadding="5" align="center">
 		<tr>
-			<td> 신청인 아이디 </td>
-            <td id="request"><%=login.getUserId()%></td>
+			<td> 신청인아이디 </td>
+            <td><input type="text" name="memberId" value="<%=login.getUserId()%>" readonly></td>
         </tr>
 		<tr>
 			<td> 플래너아이디</td>
-			<td><%=request.getAttribute("plannerId") %></td>
+			<td><input type="text" name="plannerId" value="<%=request.getAttribute("plannerId")%>" readonly></td>
 		</tr>
 		<tr>
 			<td> 테마 </td>
 			<td>
-				<select size="1" name="job">
+				<input type="checkbox" name="theme" value="맛집">맛집&nbsp;&nbsp;
+				<input type="checkbox" name="theme" value="액티비티">액티비티&nbsp;&nbsp;
+				<input type="checkbox" name="theme" value="유적지">유적지&nbsp;&nbsp;
+				<input type="checkbox" name="theme" value="힐링">힐링&nbsp;&nbsp;
+				<input type="checkbox" name="theme" value="자연">자연&nbsp;&nbsp;
+				<input type="checkbox" name="theme" value="자유여행">자유여행&nbsp;&nbsp;
+			<!-- 	<select size="1" name="job" id="p3">
 					<option selected> 테마 선택 </option>"
 					<option> 맛집 </option>
 					<option> 액티비티 </option>
@@ -29,41 +35,43 @@
 					<option> 힐링 </option>
 					<option> 자연 </option>
 					<option> 자유여행 </option>
-				</select>
+			</select> -->
 			</td>
 		</tr>
 		<tr>
 			<td> 첫날 </td>
-			<td><p><input type="date"></p>&nbsp;</td>
+			<td><p><input id="p4" type="date" name="startDay" required></p>&nbsp;</td>
 		</tr>
 		<tr>
 			<td> 마지막날 </td>
-			<td><p><input type="date"></p>&nbsp;</td>
+			<td><p><input id="p5" type="date" name="endDay" required></p>&nbsp;</td>
 		</tr>
 		<tr>
 			<td> 교통수단 </td>
 			<td>
-				<input type="checkbox" name="trans" value="car">자동차&nbsp;&nbsp;
-				<input type="checkbox" name="trans" value="bus">버스&nbsp;&nbsp;
-				<input type="checkbox" name="trans" value="train">기차&nbsp;&nbsp;
-				<input type="checkbox" name="trans" value="walk">도보&nbsp;&nbsp;
+				<input type="checkbox" name="transport" value="자동차">자동차&nbsp;&nbsp;
+				<input type="checkbox" name="transport" value="버스">버스&nbsp;&nbsp;
+				<input type="checkbox" name="transport" value="기차">기차&nbsp;&nbsp;
+				<input type="checkbox" name="transport" value="도보">도보&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td> 요청 상세 내용 </td>
-			<td> <textarea rows="7" cols="60" name="intro" placeholer="요청 내용"> </textarea></td>
+			<td> <textarea rows="7" cols="60" name="content" placeholer="요청 내용" id="p6"> </textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" value="등록하기">&nbsp;&nbsp;
+				<input type="submit" value="등록하기" >&nbsp;&nbsp;
 				<input type="reset" value="재설정">&nbsp;&nbsp;
-				<input type="button" value="취소하기" onclick="location.assign('<%=request.getContextPath()%>')">
+				<input type="button" value="취소하기" onclick="location.assign('<%=request.getContextPath()%>/index.jsp')">
 			</td>
             </tr>
 	</table>
 </form>
 <script>
-    	
+	
+
+    
 </script>
 
 

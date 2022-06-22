@@ -1,28 +1,29 @@
 package com.admin.controller;
 
 import java.io.IOException;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.admin.model.service.adminService;
 import com.login.model.vo.Member;
 
 /**
- * Servlet implementation class findPlannerServlet
+ * Servlet implementation class downGradeServlet
  */
-@WebServlet("/findPlanner.do")
-public class findPlannerServlet extends HttpServlet {
+@WebServlet("/downGrade.do")
+public class downGradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public findPlannerServlet() {
+    public downGradeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +33,30 @@ public class findPlannerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Member> list=new adminService().selectPlannerList();//호출하기
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		Member m=new Member();
+		m.setUserId(request.getParameter("userId"));
+		int result=new adminService().downGrade(m);
 		
 		
-		//list를 페이지에 넘여야 하니까 request.setAttribute에 담아줌
-		request.setAttribute("list", list);
+		String msg="",loc="";
 		
-		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request,response);
+		if(result>0) {
+			msg="Grade normal로 수정 왼료";
+			//session에 저장된 로인정보도변경
+			HttpSession session=request.getSession();
+			session.setAttribute("loginMember", m);
+			loc="/memberList.do";
+		}else {
+			msg="Grade normal로 수정 실패!";
+			loc="/memberList.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		RequestDispatcher dispatch =request.getRequestDispatcher("/views/common/response.jsp");
+		dispatch.forward(request, response);
 	}
 
 	/**
