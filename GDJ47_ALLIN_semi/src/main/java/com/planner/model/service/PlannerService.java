@@ -80,4 +80,13 @@ public class PlannerService {
 		return plans;
 	}
 
+	public String selectTitle(String plannerNo) {
+		
+		Connection conn = getConnection();
+		String title = dao.selectTitle(conn,plannerNo);
+		close(conn);
+		
+		return title;
+	}
+
 }

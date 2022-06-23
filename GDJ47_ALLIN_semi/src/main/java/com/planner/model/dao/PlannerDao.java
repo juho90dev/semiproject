@@ -207,4 +207,30 @@ public class PlannerDao {
 	}
 
 
+	public String selectTitle(Connection conn, String plannerNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String title = "";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectTitle"));
+			pstmt.setString(1, plannerNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				title = rs.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return title;
+	}
+
+
 }

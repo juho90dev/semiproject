@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import = "com.login.model.vo.Member" %>
+<%@ page import = "com.login.model.vo.Member" %>
 <%
 	Member login=(Member)session.getAttribute("login");
-%>  
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +58,9 @@
 
 		const websocket = new WebSocket("ws://localhost:9090/<%=request.getContextPath()%>/chatting");
 		websocket.onopen=e=>{
-			websocket.send(new Message("msg"," ",'',<%=request.getParameter("roomName")%>))
+			let roomName = <%=request.getParameter("roomName")%>;
+			console.log(roomName);
+			websocket.send(new Message("msg"," ",'',roomName));
 		}
 		websocket.onmessage=e=>{
 			console.log(e);
