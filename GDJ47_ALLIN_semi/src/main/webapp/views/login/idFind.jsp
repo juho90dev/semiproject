@@ -43,7 +43,7 @@
 				url: url,
 				type : "post",
 				data : {email: email},
-				success : function(result){
+				success : function(){
 					if(result!=""){
 						$("#checkEmail").html('당신의 아이디는 '+result);
 						$("#checkEmail").attr();

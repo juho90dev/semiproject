@@ -12,12 +12,12 @@ public class adminService {
 	
 	private adminDao dao=new adminDao();
 
-	public List<Member> selectMemberList() {
-		Connection conn=getConnection();
-		List<Member> result=dao.selectMemberList(conn);
-		close(conn);
-		return result;
-	}
+//	public List<Member> selectMemberList() {
+//		Connection conn=getConnection();
+//		List<Member> result=dao.selectMemberList(conn);
+//		close(conn);
+//		return result;
+//	}
 	
 	public int DeleteMember(Member m) {
 		Connection conn=getConnection();
@@ -59,5 +59,21 @@ public class adminService {
 		close(conn);
 		return result;
 	}
+
+	public List<Member> selectMemberList(int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<Member> result=dao.selectMemberList(conn,cPage,numPerpage);
+		close(conn);
+		return result;
+	}
+	
+//	public List<Member> selectMemberList() {
+//		Connection conn=getConnection();
+//		List<Member> result=dao.selectMemberList(conn);
+//		close(conn);
+//		return result;
+//
+//	}
+
 	
 }

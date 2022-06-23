@@ -1,6 +1,8 @@
 package com.login.controller;
 
 import java.io.IOException;
+
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,21 +35,39 @@ public class memberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Member> list=new adminService().selectMemberList();//호출하기
+		
+		int cPage;
+		try{
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		int numPerpage=5;
+		
+		
+		List<Member> list=new adminService().selectMemberList(cPage, numPerpage);//호출하기
+		
+//		List<Member> list=new adminService().selectMemberList();//호출하기
+		
+		
+		request.setAttribute("list", list);
 		
 		
 		//list를 페이지에 넘여야 하니까 request.setAttribute에 담아줌
-		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request,response);
+	
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	6yyyyyyyyyyyyyy */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 }
+
+

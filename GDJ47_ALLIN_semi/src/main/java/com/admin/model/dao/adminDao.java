@@ -30,18 +30,16 @@ public class adminDao {
 	}
 
 
-	public List<Member> selectMemberList(Connection conn) {
+	public List<Member> selectMemberList(Connection conn, int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectMemberList"));
-//			pstmt.setInt(1, );
-//			pstmt.setInt(2, );
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-//				Member m=MemberDao.getMember(rs);
-//				list.add(m);
 				list.add(LoginDao.getLogin(rs));
 			}
 			
@@ -52,6 +50,33 @@ public class adminDao {
 			close(pstmt);
 		}return list;
 	}
+	
+	
+	
+//	public List<Member> selectMemberList(Connection conn) {
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		List<Member> list=new ArrayList();
+//		try {
+//			pstmt=conn.prepareStatement(prop.getProperty("selectMemberList"));
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+////				Member m=MemberDao.getMember(rs);
+////				list.add(m);
+//				list.add(LoginDao.getLogin(rs));
+//			}
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return list;
+//	}
+	
+	
+	
+	
 	
 	
 	
