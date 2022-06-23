@@ -1,4 +1,4 @@
-package com.chat.controller;
+package com.board.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ChattingServlet
+ * Servlet implementation class BoardListServlet
  */
-@WebServlet("/chatView.do")
-public class ChattingServlet extends HttpServlet {
+@WebServlet("/boardList.do")
+public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChattingServlet() {
+    public BoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +27,7 @@ public class ChattingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId = request.getParameter("userId");
-		request.setAttribute("userid", userId);
-		request.getRequestDispatcher("views/chat/chatView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
 	}
 
 	/**

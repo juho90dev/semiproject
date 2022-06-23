@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import = "com.login.model.vo.Member" %>
+<%
+	Member login=(Member)session.getAttribute("login");
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +40,7 @@
     </style>
 </head>
 <body>
-	<input id="sender" size="30" placeholder="ID를 입력하세요" value ="">
+	<input id="sender" size="30" placeholder="ID를 입력하세요" value ="<%=login.getUserId()%>">
 	<input id="receiver" size="10" placeholder="">
 	
 	
