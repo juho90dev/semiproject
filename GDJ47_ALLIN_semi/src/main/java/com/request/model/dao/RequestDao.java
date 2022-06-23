@@ -32,13 +32,14 @@ public class RequestDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertRequest"));
-			pstmt.setString(1, rp.getMemberId());
-			pstmt.setString(2, rp.getPlannerId());
-			pstmt.setString(3, rp.getContent());
-			pstmt.setString(4, rp.getStartDay());
-			pstmt.setString(5, rp.getEndDay());
-			pstmt.setString(6, rp.getTransport());
-			pstmt.setString(7, rp.getTheme());
+			pstmt.setInt(1, rp.getOrderNum());
+			pstmt.setString(2, rp.getMemberId());
+			pstmt.setString(3, rp.getPlannerId());
+			pstmt.setString(4, rp.getContent());
+			pstmt.setString(5, rp.getStartDay());
+			pstmt.setString(6, rp.getEndDay());
+			pstmt.setString(7, rp.getTransport());
+			pstmt.setString(8, rp.getTheme());
 			//pstmt.setString(8, rp.getApproval());
 			//pstmt.setString(9, rp.getRequestPay());
 			result=pstmt.executeUpdate();
@@ -59,6 +60,7 @@ public class RequestDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				RequestPlan rp = new RequestPlan();
+				rp.setOrderNum(rs.getInt("ORDER_NUM"));
 				rp.setMemberId(rs.getString("MEMBER_ID"));
 				rp.setPlannerId(rs.getString("PLANNER_ID"));
 				rp.setContent(rs.getString("CONTENT"));
@@ -77,6 +79,54 @@ public class RequestDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	
+	  public int acceptUpdate(Connection conn, int orderNum) { 
+		  PreparedStatement pstmt=null;
+		  int result=0; 
+		  try {
+			  pstmt=conn.prepareStatement(prop.getProperty("acceptUpdate"));
+			  pstmt.setInt(1, orderNum);
+			  result=pstmt.executeUpdate(); 
+		  }catch(SQLException e) { 
+			  e.printStackTrace();
+		  }finally { 
+			close(pstmt); 
+			
+		  }return result; 
+		
+	  }
+	  
+	  public List<RequestPlan> selectOrderList(Connection conn, String memberId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs = null;
+			List<RequestPlan> result = new ArrayList();
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("selectOrderList"));
+				pstmt.setString(1, memberId);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					RequestPlan rp = new RequestPlan();
+					rp.setOrderNum(rs.getInt("ORDER_NUM"));
+					rp.setMemberId(rs.getString("MEMBER_ID"));
+					rp.setPlannerId(rs.getString("PLANNER_ID"));
+					rp.setContent(rs.getString("CONTENT"));
+					rp.setStartDay(rs.getString("STARTDAY"));
+					rp.setEndDay(rs.getString("ENDDAY"));
+					rp.setTransport(rs.getString("TRANSPORT"));
+					rp.setTheme(rs.getString("THEME"));
+					rp.setApproval(rs.getString("APPROVAL"));
+					rp.setRequestPay(rs.getString("REQUEST_PAY"));
+					result.add(rp);
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+	
 
 	
 }
