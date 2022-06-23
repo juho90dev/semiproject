@@ -54,3 +54,52 @@ select#selectDays{
 	border: 1px solid red;
 	overflow-y: scroll;
 }
+
+.dayTitle{
+	
+	border:1px solid red;
+	size: 15px;
+	
+}
+
+#printDay{
+	margin:10px;
+	font-size:20px;
+}
+
+.plan {
+	width: 100%;
+	height: 90px;
+	border: 1px solid red;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display:block;
+}
+
+#placeName {
+	margin-bottom: 4px;
+	font-size: 20px;
+}
+
+#address {
+	font-size: 13px;
+}
+
+#memo {
+	font-size: 15px;
+	text-align:right;
+	margin-right:10px;
+}
+
+.words {
+	margin-left: 20px;
+}
+
+.planWords {
+	line-height: 23px;
+	margin-top: 5px;
+}
+.hide{
+	display:none;
+}
