@@ -10,7 +10,8 @@ List <RequestPlan> list=(List<RequestPlan>)request.getAttribute("list");
     
 
 <%@ include file="/views/common/header.jsp" %>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
  <body>
  <br>
 
@@ -20,7 +21,7 @@ List <RequestPlan> list=(List<RequestPlan>)request.getAttribute("list");
 					  <caption>표 제목</caption>
 					  <tr>
 					  <th>주문번호</th>
-					  <th>신청인아이디</th>
+					  <th>플랜크리에이터</th>
 					  <th>여행시작일</th>
 					  <th>여행종료일</th>
 					  <th>교통수단</th>
@@ -46,7 +47,7 @@ List <RequestPlan> list=(List<RequestPlan>)request.getAttribute("list");
        			for(RequestPlan rp : list){%>
 					<tr>
 					<td><%=rp.getOrderNum() %></td>
-					<td><%=rp.getMemberId() %></td>
+					<td><%=rp.getPlannerId() %></td>
 					<td><%=rp.getStartDay() %></td>
 					<td><%=rp.getEndDay() %></td>
 					<td><%=rp.getTransport() %></td>
@@ -56,14 +57,14 @@ List <RequestPlan> list=(List<RequestPlan>)request.getAttribute("list");
 					
 					
 					<td><%=rp.getRequestPay() %>&nbsp;
-					<%if(rp.getApproval().equals("N")) {%>
-						<button onclick="payRequest(<%=rp.getOrderNum()%>)">결제하기(결제금액: 100원)</button>
+					<%if(rp.getRequestPay().equals("N")) {%>
+						<button onclick="payRequest(<%=rp.getOrderNum()%>)">결제하기(결제금액:100원)</button>
 					<%}else {%>
 						<button onclick="payAlert();">결제완료</button>
 					<%} %>
 					</td>
 					<td>
-					<a href="<%=request.getContextPath()%>/deleteRequest.do?memberId=<%=rp.getMemberId()%>">삭제</a>
+					<button onclick="deleteRequest(<%=rp.getOrderNum()%>)">삭제</button>
 					</td>
 					</tr>
 				<%} %>
@@ -73,71 +74,78 @@ List <RequestPlan> list=(List<RequestPlan>)request.getAttribute("list");
 		</div>
 
 <script>
+		
+		let name="<%=login.getUserId()%>";
+		console.log(name);
+		//console.log(id);
+		//console.log(email);
 
-		let id = "<%=login.getUserId()%>";
-		console.log(id);
-		console.log(email);
-	
-	function iamport(){
-	
-	//가맹점 식별코드
-	IMP.init('imp05587091');
-	IMP.request_pay({
-	    pg : 'html5_inicis',
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : "이용료",
-	    amount : 100, //실제 결제되는 가격
-	    buyer_email : email
-	    
-	}, function(rsp) {
-		console.log(rsp);
-	    if ( rsp.success ) {
-	    	var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	       	
-	        $.ajax({
-	        	url: "<%=request.getContextPath()%>/payUpdate.do",
-	        	data:{"id":id},
-	        	success: data=()=>{
-	        		
-	        		
-	        	}
-	        });
-	       
-	        
-	    } else {
-	    	 var msg = '결제에 실패하였습니다.';
-	         msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	});
-}
-
-
-	const acceptRequest=(orderNum)=> {
-		console.log(orderNum);
-		if(confirm("결제를 진행하시겠습니까?")){
-	
+	const deleteRequest=(orderNum)=>{
+		if(confirm("해당 주문을 삭제하시겠습니까?")){
 			$.ajax({
-				url: "<%=request.getContextPath()%>/payUpdate.do",
-				data: {"orderNum":orderNum},
+				url: "<%=request.getContextPath()%>/deleteRequest.do",
+				data:{"orderNum":orderNum},
 				success: data=()=>{
-					alert("결제완료");
+					alert("주문삭제완료!");
 					location.reload();
 				}
-				
 			});
+		}else{
+			
+		}
+	}
+
+	const payRequest=(orderNum)=> {
+		console.log(orderNum);
+		
+		if(confirm("결제를 진행하시겠습니까?")){
+			
+			(function iamport(){
+    	    	
+				//가맹점 식별코드
+				IMP.init('imp05587091');
+				IMP.request_pay({
+				    pg : 'html5_inicis',
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : "이용료",
+				    amount : 100, //실제 결제되는 가격
+				    buyer_name : name
+				    
+				}, function(rsp) {
+					console.log(rsp);
+				    if ( rsp.success ) {
+				    	var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				       	
+				        $.ajax({
+				        	url: "<%=request.getContextPath()%>/payUpdate.do",
+				        	data:{"orderNum":orderNum},
+				        	success: data=()=>{
+								location.reload();
+				        		
+				        	}
+				        });
+				  
+				        
+				    } else {
+				    	 var msg = '결제에 실패하였습니다.';
+				         msg += '에러내용 : ' + rsp.error_msg;
+				    }
+				    alert(msg);
+				});
+			})();
+	
 			
 		}else{
 			
 		} 
 	}
 	
-	const acceptAlert=()=>{
+	const payAlert=()=>{
 		alert("이미 결제가 완료되었습니다!");
 	}
 	

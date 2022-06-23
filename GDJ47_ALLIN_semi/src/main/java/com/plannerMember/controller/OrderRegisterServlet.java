@@ -1,6 +1,7 @@
 package com.plannerMember.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,18 +57,10 @@ public class OrderRegisterServlet extends HttpServlet {
 		
 		int result = new RequestService().insertRequest(rp);
 		
+		List<RequestPlan> list=new RequestService().selectRequestList(memberId);
+		request.setAttribute("list", list);
 		System.out.println(result);
-		String msg="", loc="";
-		if(result>0) {
-			msg="등록에 성공했습니다!";
-			loc="/";
-		}else{
-			msg="등록에 실패했습니다. 다시 시도하세요!";
-			loc="";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc",loc);
-	
+		
 		//3.출력할 화면 선택
 		request.getRequestDispatcher("/views/requestList/customerpage.jsp").forward(request,response);
 	
