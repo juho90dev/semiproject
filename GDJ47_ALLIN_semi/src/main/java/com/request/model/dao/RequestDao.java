@@ -6,7 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.request.model.vo.RequestPlan;
@@ -39,6 +42,35 @@ public class RequestDao {
 			//pstmt.setString(8, rp.getApproval());
 			//pstmt.setString(9, rp.getRequestPay());
 			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+
+	public List<RequestPlan> selectRequestList(Connection conn, String plannerId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<RequestPlan> result = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectRequestList"));
+			pstmt.setString(1, plannerId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				RequestPlan rp = new RequestPlan();
+				rp.setMemberId(rs.getString("MEMBER_ID"));
+				rp.setPlannerId(rs.getString("PLANNER_ID"));
+				rp.setContent(rs.getString("CONTENT"));
+				rp.setStartDay(rs.getString("STARTDAY"));
+				rp.setEndDay(rs.getString("ENDDAY"));
+				rp.setTransport(rs.getString("TRANSPORT"));
+				rp.setTheme(rs.getString("THEME"));
+				rp.setApproval(rs.getString("APPROVAL"));
+				rp.setRequestPay(rs.getString("REQUEST_PAY"));
+				result.add(rp);
+			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

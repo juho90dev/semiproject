@@ -218,13 +218,10 @@
 		 										if(polyline!=null&&polyline.setMap()!=null){ //선 삭제
 													polyline.setMap(null);
 		 										}
-		 										
- 												//console.log("마커 확인///////////",markersArr);
- 												//console.log("마커 확인2//////////", myMarkers);
+
 		  										if(markersArr!=null&&markersArr.length!=0){ 
 		  											
 		 											 markersArr.forEach(e=>{
-		 												 //console.log("//////////전환 확인", e);
 		 												 e.setVisible(false);
 		 											 });
 		 										
@@ -445,10 +442,14 @@
 	            			const saveSchedule = ()=> { //TODO 0619) AJAX로 객체배열 전송하기
 	            			
 	            				alert("저장하시겠습니까?"); 
-	            			
 
+	            				//TODO 0622) 썸네일 및 소개글을 저장할 수 있는 로직 구현하기
+	            				//썸네일 및 소개글은 window.open()에서 새 창에서 구현할 것
+	            				//해당 창에서, DB저장 등도 완료해야 할듯...
+	            				//"PLANNER_ID"를 받아올 방법이 없음
+								//window.open("<%=request.getContextPath()%>/planner/addPlannerInfo.do","title","width=400,height=200");
 	            				
- 				
+	            			
  	            				//-------------------------------------------------------------------
  	            				//localStorage 반복문!
  	            				//fetch사용함!
@@ -467,18 +468,26 @@
  									  method: 'POST', // 또는 'PUT'
  									  headers: {
  									    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+ 									    'Accept': 'application/json'
  									  },
  									  body: 'planPerDay=' + encodeURIComponent('['+tempArr+']'), 
  									})
  									.then((response) => response.json())
  									.then((data) => {
+ 										
  									  console.log('성공:', data);
- 									})
- 									.catch((error) => {
- 									  console.error('실패:', error);
+ 									  alert(data.title+"저장 성공! 메인화면으로 돌아갑니다");
+ 									  console.log("아이디 확인"+data.userId)
+ 									  
+ 									  location.replace("<%=request.getContextPath()%>");
+ 									  
  									});
+/*  									.catch((error) => {
+ 									  console.error('실패:', error);
+ 									}); */
 
 	            			}
+	            			
 	            			
 	            			
           					        	

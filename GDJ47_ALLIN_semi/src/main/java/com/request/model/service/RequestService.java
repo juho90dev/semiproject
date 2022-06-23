@@ -1,11 +1,12 @@
 package com.request.model.service;
 
-import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.*;
 import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.request.model.dao.RequestDao;
 import com.request.model.vo.RequestPlan;
@@ -23,4 +24,12 @@ public class RequestService {
 		return result;
 		
 	}
+	public List<RequestPlan> selectRequestList(String plannerId) {
+		
+		Connection conn=getConnection();
+		List<RequestPlan> result=dao.selectRequestList(conn, plannerId);
+		close(conn);
+		return result;
+	}
+	
 }

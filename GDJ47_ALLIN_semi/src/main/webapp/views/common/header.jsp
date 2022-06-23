@@ -85,7 +85,7 @@
                                 <li><a href="#" aria-label="subemnu">submenu</a></li>
                                
                             </ul> --></li>
-						<li><a href="">게시판</a></li>
+						<li><a href="<%=request.getContextPath()%>/boardList.do">게시판</a></li>
 						<li><a href="javascript:openWeather()" >날씨예보</a></li>
 						<li><a href="">공지사항</a></li>
 
