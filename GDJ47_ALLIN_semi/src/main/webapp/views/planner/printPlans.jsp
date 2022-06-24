@@ -10,11 +10,14 @@
 %>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/printPlanStyle.css"/>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a918dc059c0c7fe988d04540ed91f259&libraries=services"></script>	
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a918dc059c0c7fe988d04540ed91f259&libraries=services"></script>	
 <div class="container">
 
 	<div class="planTitle"><%=plannerTitle%></div>
 	<div class="forOption">
+		<p class="optGuide">일자별 플랜을 확인해보세요</p>
 		<!-- PLANNER테이블의 "TRAVEL_DAYS"컬럼 참고 -->
 		<select id="selectDays">
 		</select>
@@ -26,7 +29,7 @@
 		<div class="forPlan">
 			<div class="planZone">
 				<div class="dayTitle">
-					<p id="printDay">1</p>
+					<p id="printDay"></p>
 				</div>
 				
 
@@ -101,6 +104,7 @@
  						console.log(dayOneArr);
  						planContainer.innerHTML = "";
  						printDay.innerText = 1;
+ 						//printDay.innerHTML += "<span style='font-weight:500'>Day </span>"+1;
  										
  					}					
  				});
@@ -134,21 +138,23 @@
  					plans.forEach(e=>{ //전체 여행일자 순회
  							
  						if(e.day==ckDays){	//전체 여행일자 中, 사용자가 선택한 날짜를 지정함
- 																		
- 							printDay.innerText = e.day; //일자 출력하기	 							
+ 							printDay.innerText = e.day;											
+ 							//printDay.innerText += "Day "+e.day; //일자 출력하기	 							
  							planArr.push(e); //특정 일자의 내용만, 객체배열로 저장함
  							//console.log(ckDays,"의 플랜 : ", planArr, "길이 확인", planArr.length); //일자 확인
- 							//planContainer.innerHTML = ""; //플랜 영역 비우기				
+ 							//planContainer.innerHTML = ""; //플랜 영역 비우기
+ 							console.log("/////////////////", planArr);
  						} 						
  					});
  					
  					
 					planArr.forEach(a=>{ //일자별 정보 출력 메소드 실행
 						
+						console.log("안녕?");
 						printPlans(a);
-
-					});	
 					
+					});	
+					console.log("왜 못 불러오지???", positions);
 					mapStarter(planArr,positions,forLine);
  					
 				});		
