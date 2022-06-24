@@ -3,7 +3,7 @@
 <%@ page import="com.login.model.vo.Member" %>    
 <%
 
-	//쿠키 사용 後
+	//쿠키 사용
 	int days=0;
 	String plannerTitle = "";	
 
@@ -12,10 +12,10 @@
 		
 		for(Cookie c : cookies){
 			
-			if(c.getName().equals("forOption")){ //여행 일자
+			if(c.getName().equals("forOption")){ //여행 일자 > 옵션 생성
 				days = Integer.parseInt(c.getValue());				
 			}			
-			if(c.getName().equals("forTitle")){ //타이틀
+			if(c.getName().equals("forTitle")){ //타이틀 > 문자열 "공백"->이스케이프 처리 -> Cookie저장 -> 원본 값으로 parsing하기
 				String titleTemp = c.getValue();
 				if(titleTemp.contains("%")){
 					plannerTitle = titleTemp.replace("%"," ");
@@ -25,17 +25,17 @@
 		}		
 	}
 	
-	
-	//String plannerTitle = (String)request.getAttribute("plannerTitle");
 	System.out.println("타이틀 확인 : "+plannerTitle);
 	
 	//localStorage 사용 前 -------------------------------------
-	int fromDate=0;
+	//DB에 입력 값 저장-> 지도로 복귀, 하는 과정에서 지도가 초기화면으로 계속 리셋됨.
+	//사용자가 마지막으로 전환한 option > value에 해당하는 일자로 화면을 출력하기 위해 다음 코드를 작성함
+/* 	int fromDate=0;
 	String fromThisDay = (String)request.getAttribute("fromThisDay");
 	if(fromThisDay!=null){
 		fromDate = Integer.parseInt(fromThisDay);
 		System.out.println(fromDate);
-	}
+	} */
 	
 	//---------------------------------------------------------
 	//0611 > 작성 이력이 있는, 일자와 일정을 출력하기
@@ -52,14 +52,14 @@
 	//---------------------------------------------------------
 	//0614 > "새로고침"할 경우, "localStorage"의 저장 데이터는 유지되나, 
 	//화면 상에서는 1번째 날의 계획이 리셋됨... 그리고 화면상에서 데이터가 리셋된 채로 option값을 이동하게 되면 실제 localStorage값도 리셋됨! 
-
+	//TODO 0624) 로그인이 풀리는 경우, 문제가 발생함. 다음 경우에 대해서는 로그아웃 時, 메인화면으로 전환되도록 로직을 구현할 것임
 	Member login = (Member)session.getAttribute("login");
 	if(login!=null){
 		String id = login.getUserId();
 		System.out.println("아이디 : "+id);
 	} else {
 		
-		System.out.println("정보 못 받아옴. 로그아웃됨");
+		System.out.println("정보 못 받아옴. 로그아웃됨. 메인화면으로의 화면 전환 필요");
 		
 	}
 	
@@ -94,7 +94,7 @@
 			            		    			<input type="hidden" id="newDay" name="newDay_" value="">
 					           			</form>   
 			                	
-			                	<!-- 사용자가 입력한 일수 만큼, select > option이 생성되도록 구현함 -->
+			                		<!-- 사용자가 입력한 일수 만큼, select > option이 생성되도록 구현함 -->
 				                	<select id="daysOption">
 				                	</select>			                			                
 			                </div>		                
@@ -108,13 +108,9 @@
 			                		<h5 id="deleteInfo">* 더블클릭 시, 카드를 삭제할 수 있습니다</h5>
 			                	</div>
 			                	
-			                	
-	
-			                	
-			                <!-- 드래그 앤 드롭 (시험 예시) : 장소 관련 카드가 생성될 것임. 후에 구현할 것! innerText에는 장소名, value는 장소코드 등이 저장되겠다 -->
+			                	<!-- 드래그 앤 드롭 (시험 예시) : 장소 관련 카드가 생성될 것임. 후에 구현할 것! innerText에는 장소名, value는 장소코드 등이 저장되겠다 -->
 			                
-									<div id="detailPlan"></div>					
-									
+									<div id="detailPlan"></div>														
 										    <div id="dropZone">
 <!--  										    <div id="p1" class="box_drag" draggable="true" >plan 1</div>
 										        <div id="p2" class="box_drag" draggable="true" >plan 2</div>
@@ -125,8 +121,7 @@
 										        <div id="p7" class="box_drag" draggable="true" >plan 7</div>  -->
 										        <!-- <div></div> -->
 										    </div>              	
-					                </div>
-					                
+					                </div>					                
 					        </div>
 	            		</div>
 	            		<div id="buttons">
@@ -137,22 +132,21 @@
 					     
 	         </div>
 	         	 </div>
+	         	 	<!-- "지도(카카오맵API)가 출력될 영역임. 지도 관련 메소드 포함" -->
  	     	     	<%@include file="/views/planner/plannerMap.jsp" %> 
 	   			 </div>
     	          		
 	            		<script>
 	            		
 
-	            		//로그아웃 時, alert창 띄우고 메인화면으로 돌려보내기
+	            		//자동 로그아웃 時, alert창 띄우고 메인화면으로 돌려보내기
 	            		(()=>{
 	            			
-	            			<%if (login==null){%>
-	            			
+	            			<%if (login==null){%>	            			
 	            				alert("로그아웃되었습니다. 다시 로그인해주세요.");
 	            				//TODO 0624) 메인화면으로 이동하는 로직 (작업해야 해서 잠시 주석처리 해둠)
 	            				//쿠키도 삭제해야 함...
-	            				//location.replace("<%=request.getContextPath()%>");
-	            			
+	            				//location.replace("<%=request.getContextPath()%>");	            			
 	            			<%}%>
 	            			
 	            		})();
@@ -182,16 +176,13 @@
 							
 							
 		            	/* option변경할 때마다, "day n의 여행계획"으로 출력될 텍스트가 변경되도록 구현 */
-		            	
-	            		
+            		
 							const thisDay = document.querySelector("#daysOption>option").value;
-							document.getElementById("dayTitle").innerText= <%=fromDate!=0?fromDate:1%>
+							document.getElementById("dayTitle").innerText= 1; //기본은 1일부터임
+														
+							let markersArr = []; //앞으로 생성될 마커들을 저장하는 배열
 							
-							
-							let markersArr = [];
 		            		function printMyLog(myLog, logArr){ //일자 별 마커 및 선 출력 + 옵션 전환 時 선 삭제
-		            			
-		            			
 		            			
 			            		for(let i=0;i<myLog.length;i++){	
 			            			
@@ -205,8 +196,7 @@
 									    // 마커를 생성합니다
 									    var marker = new kakao.maps.Marker({
 									        map: map, // 마커를 표시할 지도
-									        //position: positions[i].latlng, // 마커를 표시할 위치
-									        position: new kakao.maps.LatLng(myLog[i].latitude, myLog[i].longitude),
+									        position: new kakao.maps.LatLng(myLog[i].latitude, myLog[i].longitude), //사용자의 저장 기록을 토대로 마커 위치를 설정함
 									        title : myLog[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 									        image : markerImage // 마커 이미지 
 									    });
@@ -223,7 +213,7 @@
 									    var polyline = new kakao.maps.Polyline({
 									        path: logArr, // 선을 구성하는 좌표배열 입니다
 									        strokeWeight: 5, // 선의 두께 입니다
-									        strokeColor: '#FFAE00', // 선의 색깔입니다
+									        strokeColor: '#e61919', // 선의 색깔입니다
 									        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 									        strokeStyle: 'solid', // 선의 스타일입니다
 									        endArrow:'true' //화살표 표시
@@ -248,13 +238,12 @@
 		  										if(markersArr!=null&&markersArr.length!=0){ 
 		  											
 		 											 markersArr.forEach(e=>{
-		 												 e.setVisible(false);
+		 												 //TODO 0624) 일단 null처리함...
+		 												 //e.setVisible(false);
 		 											 });
 		 										
-		  										} 
-										
-										});
-			            			
+		  										} 										
+										});			            			
 			            		}
 		            		
 			
@@ -262,13 +251,10 @@
 								//1. 1일차의 데이터를 localStorage에 저장했으나 "새로고침"할 경우 화면상 카드는 리셋됨을 확인함!
 								//0615-----------------------------------------------------------------
 								//2. 장소 정보를 객체로서 저장함! 객체의 정보를 재가공하지 않고, 적절히 꺼내 쓸 수 있도록 구현하기
-								const dayOnePlan = JSON.parse(localStorage.getItem(1));
+								const dayOnePlan = JSON.parse(localStorage.getItem(1)); //1일차에 저장된 기록을 지도에 출력하기 위해, 저장 정보를 가져옴
 								var imageSrc = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-256.png'; //마커 이미지
-								var linePath = [];	
-								
-								
-								//console.log(dayOnePlan[0].id);
-								
+								var linePath = []; //"선"을 이어주기 위해 배열을 만듦
+
 								if(dayOnePlan!=null&&thisDay==1){
 									console.log("1일차 데이터 있어", dayOnePlan);
 									
@@ -301,8 +287,6 @@
 									}
             						
 									printMyLog(dayOnePlan,linePath);
-
-									
 				
 								}
 								
@@ -310,10 +294,11 @@
 		            				//0613------------------------------------------------------------------
 		            				//1. select 前/後 일자 정보 가져오기
 		            				
-		            				let preCho = "";
-		            				let nowCho = "";
+		            				let preCho = ""; //선택 前 일자
+		            				let nowCho = ""; //전환 後 일자
 		            				
 		            				daysOption.addEventListener("focus", e=>{
+		            					
 		            					daysOption.blur();
 		            					preCho = daysOption.value;
 		            					
@@ -322,16 +307,17 @@
 														
 	            					daysOption.addEventListener("change",e=>{ //옵션 전환 시, 
 	            					//선택 옵션 일자에 저장된 일정이 있다면 해당 일정 정보를 출력하고, 
-	            					//)
-	            					
-	            					
+	            					//저장된 값이 없을 경우, 아무것도 출력하지 않는다
+	            						
+	            						//TODO 0624) 선택 前 일자의 마커만 사라지기 위한 로직 구현하기!!!
  		            					console.log("마커 확인2//////////", myMarkers);
+	            					
 		            						myMarkers.forEach(e=>{ 
-		            							//TODO 0618) 이전 option에서 생성한 마커들 삭제하고 싶었으나, (문제 : 만든 것들 일괄적으로 사라진다는 점)
+		            							//TODO 0618) 이전 option에서 생성한 마커들만 삭제하고 싶었으나, (********* 문제 : 만든 것들 일괄적으로 사라진다는 점)
 		            							//mapTest2.jsp의 moveTo()메소드에서, 카드에 mouseover 시, 대응되는 좌표에 마커가 임시적으로 생성됐다 사라지는 로직 구현
 		            							//그러나 지도 상에서는 마커를 확인할 수 없으니 불편하고 가독성도 좋지 않음...
 		            							//(설사, 마커를 표시한다고 해도, 해당 마커에 대한 이벤트는 존재하지 않음. 만약 마커를 출력할 수 있다면 마우스 오버 시, 제공되는 서비스가 있어야 할듯. 인포윈도우를 띄우든가)
-		            							e.setVisible(false);
+		            							e.setMap(false);
 		            							//전일자의 마커만 안 보이도록 구현할 수는 없을까?
 	            							}); 
 
@@ -465,17 +451,21 @@
 	            				
 	            			}
 	            			
-	            			const saveSchedule = ()=> { //TODO 0619) AJAX로 객체배열 전송하기
+	            			const saveSchedule = ()=> { //0619) AJAX로 객체배열 전송하기
+	            			
+	            				//TODO 0624) 예외처리 필수
+	            				//"당일여행"만 계획한 경우||옵션 값을 변경하지 않고 바로 저장하기를 입력한 경우...
+	            			
+	            			
 	            			
 	            				alert("저장하시겠습니까?"); 
 
-	            				//TODO 0622) 썸네일 및 소개글을 저장할 수 있는 로직 구현하기
+	            				//TODO) 썸네일 및 소개글을 저장할 수 있는 로직 구현하기
 	            				//썸네일 및 소개글은 window.open()에서 새 창에서 구현할 것
 	            				//해당 창에서, DB저장 등도 완료해야 할듯...
 	            				//"PLANNER_ID"를 받아올 방법이 없음
 								//window.open("<%=request.getContextPath()%>/planner/addPlannerInfo.do","title","width=400,height=200");
-	            				
-	            			
+	            					            			
  	            				//-------------------------------------------------------------------
  	            				//localStorage 반복문!
  	            				//fetch사용함!

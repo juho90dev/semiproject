@@ -4,46 +4,47 @@
 <!DOCTYPE html>
 <%
 
-int areaCode = 0;
-String areaStr = "";
+			//사용자가 입력한 "주요 방문 지역", area코드를 문자열로 변환
+			//목적 : "검색창"의 value값으로 대입하기
+			int areaCode = 0;
+			String areaStr = "";
+			
+			Cookie[]cookies2 = request.getCookies();
+			if(cookies2!=null){
+				
+				for(Cookie c : cookies2){
+					
+					if(c.getName().equals("forArea")){ //지역코드 > 대분류
+						areaCode = Integer.parseInt(c.getValue());				
+					}					
+				}		
+			}
 
-Cookie[]cookies2 = request.getCookies();
-if(cookies2!=null){
-	
-	for(Cookie c : cookies2){
-		
-		if(c.getName().equals("forArea")){ //지역코드 > 대분류
-			areaCode = Integer.parseInt(c.getValue());				
-		}
-		
-	}		
-}
-
-switch(areaCode){
-
-case 1 : areaStr="서울";break;
-case 2 : areaStr="인천";break;
-case 3 : areaStr="대전";break;
-case 4 : areaStr="대구";break;
-case 5 : areaStr="광주";break;
-case 6 : areaStr="부산";break;
-case 7 : areaStr="울산";break;
-case 8 : areaStr="세종특별자치시";break;
-case 31 : areaStr="경기도";break;
-case 32 : areaStr="강원도";break;
-case 33 : areaStr="충청북도";break;
-case 34 : areaStr="충청남도";break;
-case 35 : areaStr="경상북도";break;
-case 36 : areaStr="경상남도";break;
-case 37 : areaStr="전라북도";break;
-case 38 : areaStr="전라남도";break;
-case 39 : areaStr="제주도";break;
-
-}
-
-if(areaStr!=null){
-	System.out.println("주요 방문 지역 확인 : "+areaStr);
-}
+			switch(areaCode){
+			
+				case 1 : areaStr="서울";break;
+				case 2 : areaStr="인천";break;
+				case 3 : areaStr="대전";break;
+				case 4 : areaStr="대구";break;
+				case 5 : areaStr="광주";break;
+				case 6 : areaStr="부산";break;
+				case 7 : areaStr="울산";break;
+				case 8 : areaStr="세종특별자치시";break;
+				case 31 : areaStr="경기도";break;
+				case 32 : areaStr="강원도";break;
+				case 33 : areaStr="충청북도";break;
+				case 34 : areaStr="충청남도";break;
+				case 35 : areaStr="경상북도";break;
+				case 36 : areaStr="경상남도";break;
+				case 37 : areaStr="전라북도";break;
+				case 38 : areaStr="전라남도";break;
+				case 39 : areaStr="제주도";break;
+			
+			}
+			
+			if(areaStr!=null){
+				System.out.println("주요 방문 지역 확인 : "+areaStr);
+			}
 
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
@@ -62,7 +63,7 @@ if(areaStr!=null){
 <div class="map_wrap">
     <div id="map"></div>
 
-<!-- TODO 0618) 검색 리스트 출력 안 되도록 임시 설정! -->
+<!-- 0618) 검색 리스트 출력 안 되도록 설정! -->
     <div id="menu_wrap" class="bg_white" style="display:none">
 		        <div class="option">
 		            <div>
@@ -193,7 +194,7 @@ function placesSearchCB(data, status, pagination) {
 //------------------------------------------------------------------------
 
 
-
+/* 	//TODO 0624) 커스텀 오버레이 문제
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//커스텀 오버레이 만들기 > 새로 등록한 마커 클릭 시 출력될 것
 	var savedInfo = '<div class="wrap">' + 
@@ -223,16 +224,16 @@ function placesSearchCB(data, status, pagination) {
 	});
 
 	infoOverlay.setMap();		
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 
 function printOverlay(createdMarker){
 	
 	    kakao.maps.event.addListener(createdMarker, 'click', function() {
 		    	
-		    	//alert("안녕?");
+		    	alert("안녕?");
 		    	//window.open("http://www.naver.com");
-				infoOverlay.setMap();		      
+				//infoOverlay.setMap();		      
 		    });
 } 
 
@@ -319,7 +320,8 @@ var customContent = '<div class="wrap">' +
 
     	//console.log(e.target);
     	
-    	e.addEventListener("dblclick",e=>{ //삭제 대상 카드 클릭 시 (카드 및 마커가 삭제됨)		
+    	e.addEventListener("dblclick",e=>{ //삭제 대상 카드 클릭 시 (카드 및 마커가 삭제됨)	
+    	
     		alert("삭제!");
 
     		let placeLat = e.target.getAttribute("latitude"); //카드의 위도
@@ -343,12 +345,12 @@ var customContent = '<div class="wrap">' +
     			console.log(placeLat, placeLng);
     			
 				if(mkLat==placeLat&&mkLng==placeLng){
-					myMarkers[i].setVisible(false);
+					myMarkers[i].setMap(null);
 					break;
 				}    			
     		}
     		
-    		//마커 삭제 2) printMyLog()메소드로부터 생성된 마커 지우기
+    		//마커 삭제 2) printMyLog()메소드로부터 생성된 마커(=localStorage에 저장된 마커) 지우기
     		for(let i=0;i<markersArr.length;i++){
     			
     			//myMarkers[i].setMap(null); //마커 전체 삭제
@@ -357,11 +359,11 @@ var customContent = '<div class="wrap">' +
     			console.log(mkLat2, mkLng2);
     			
 				if(mkLat2==placeLat&&mkLng2==placeLng){
-					markersArr[i].setVisible(false);
+					markersArr[i].setMap(null);
 					break;
 				}    			
     		}
-	
+    		
     		dropZone.removeChild(e.target);
 		    		
     	});
@@ -376,8 +378,6 @@ var customContent = '<div class="wrap">' +
     
     	//let dropZones = document.querySelectorAll("div#dropZone>div");
     	var thisMarker = "";
-
-		
 		
 	     	e.addEventListener("mouseover",e=>{
 	 		
@@ -399,7 +399,6 @@ var customContent = '<div class="wrap">' +
 	     	
 	     	//0618) 마우스 오버 시, 해당 일자에 마커가 생성됨. 마우스 아웃 시, 마커는 사라짐!
 	     	e.addEventListener("mouseout",e=>{
-	     		//alert("안녕!");
 	     		thisMarker.setMap(null);
 	     	})
 	     	
@@ -407,11 +406,7 @@ var customContent = '<div class="wrap">' +
 	     	e.addEventListener("dblclick",e=>{
 	     		thisMarker.setMap(null);
 	     	})
-	     	
 
-	     	
-	     	//thisMarker.setMap(null);
-    	 
     } 
     
     
@@ -547,7 +542,7 @@ function displayPlaces(places) {
 				//0616 마커의 이미지 변경을 위해----------------------------------------
 				const isAdded = document.getElementById("addBtn");
 				
-				isAdded.addEventListener("click", e=>{ //"좋아요" 클릭 발생 시
+				isAdded.addEventListener("click", e=>{ //"추가하기" 버튼 클릭 발생 시
 			
 	/* 				var markerImage = new kakao.maps.MarkerImage( //마커 이미지 변경						
 								    'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-256.png', //마커 : 이미지
@@ -555,7 +550,7 @@ function displayPlaces(places) {
 					
 	 				marker.setImage(markerImage); */
 	 									
-	 				//0617 마커의 이미지 변경, 뿐만 아니라... 마커를 새로 생성하기 -> 생성된 마커를 기준으로 선 잇기도 가능하므로
+	 				//구현 내용 변경 -> 0617 마커의 이미지 변경(X) 마커 "생성"하기 -> 사유 : 생성된 마커를 기준으로 선 잇기도 가능하므로
 	
 				    			    
 				    //마커 생성 메소드 호출하기
@@ -605,13 +600,13 @@ function displayPlaces(places) {
 }
 
 
-// "좋아요" 클릭 시, 해당 좌표를 토대로 마커 생성하는 함수
-// 내가 만들었던 마커들을 관리하기 위해, "배열"을 만듦
+// "추가하기" 클릭 시, 해당 좌표를 토대로 마커를 생성하는 함수
+// 내가 만들었던 마커들을 관리하기 위해, 배열, myMarkers를 만듦
 let myMarkers = [];
-function addMarkerFunc(lat,lng,placeName){
+function addMarkerFunc(lat,lng,placeName){ //새로 추가하는 마커들 = 아직 localStorage에 저장되지 않은 "임지"로서의 마커는 이미지를 다르게 표시하기로 하자
 
 	// 마커 이미지
-	var imageSrc = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-256.png';
+	var imageSrc = 'https://cdn0.iconfinder.com/data/icons/zondicons/20/travel-walk-256.png';
 	
     // 마커 이미지의 이미지 크기 입니다
     var imageSize = new kakao.maps.Size(36, 37); 
@@ -638,6 +633,7 @@ function addMarkerFunc(lat,lng,placeName){
 	console.log("????????!!", marker);    
     
     printOverlay(marker); //마커 클릭 시, 내가 저장했던 내용을 확인할 수 있음!
+    
 }    
 
 
@@ -676,7 +672,7 @@ function getListItem(index, places) {
 }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-function addMarker(position, idx, title) {
+function addMarker(position, idx, title) { 
     var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
         imgOptions =  {
