@@ -416,12 +416,14 @@ function displayPlaces(places) {
           	
           		overlay.setMap(null);
  	
-			//마커 이벤트 > 클릭 이벤트 > 커스텀 오버레이를 만듦!		
-
+       		
+			//마커 이벤트 > 클릭 이벤트 > 커스텀 오버레이를 만듦!				
+			//커스텀 오버레이 > 검색 리스트로부터 출력된 마커 관련 
 			kakao.maps.event.addListener(marker, 'click', function() {
 				
 
 				overlay.setMap(map);
+				//infoOverlay.setMap(map);
 				
 				let lat = marker.getPosition().getLat(); //위도
 				let lng = marker.getPosition().getLng(); //경도
@@ -489,7 +491,6 @@ function displayPlaces(places) {
 				
 				
 			});
-
           	//------------------------------------------------------------------------
 
             itemEl.onmouseover =  function () {
@@ -537,13 +538,64 @@ function addMarkerFunc(lat,lng,placeName){
         title : placeName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image : markerImage // 마커 이미지 
     });
-    
-    
-    
+   
     myMarkers.push(marker);
+
+  	//TODO 0624) 새로 생성한 마커 클릭 時에도 커스텀 오버레이가 출력될 수 있도록....
+  	//조금 다른 형태의 커스텀 오버레이여야 함... "메모"는 수정 가능하도록 해야 함	
+/* 	marker.addEventListener("click",e=>{
+		alert("마커!");
+	}) */
+	console.log("????????!!", marker);    
     
+    printOverlay(marker); //마커 클릭 시, 내가 저장했던 내용을 확인할 수 있음!
 }    
 
+
+
+
+
+
+function printOverlay(marker){
+		
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	//커스텀 오버레이 만들기 > 새로 등록한 마커 클릭 시 출력될 것
+	var savedInfo = '<div class="wrap">' + 
+	'    <div class="info">' + 
+	'        <div class="title">' + 
+	'            플랜에 등록된 장소예요' + 
+	'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	'        </div>' + 
+	'        <div class="body">' + 
+	'            <div class="img">' +
+	'                <img src="https://cdn2.iconfinder.com/data/icons/geest-travel-kit/128/travel_journey-04-2-256.png" width="73" height="70">' +
+	'           </div>' + 
+	'            <div class="desc">' + 
+	'                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>'
+	'            </div>' + 
+	'        </div>' + 
+	'    </div>' +    
+	'</div>';
+	
+	
+	//마커 위에 커스텀오버레이를 표시합니다
+	//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+	var infoOverlay = new kakao.maps.CustomOverlay({
+	content: savedInfo,
+	map: map,
+	position: marker.getPosition()       
+	});
+
+	infoOverlay.setMap(null);		
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	
+	    kakao.maps.event.addListener(marker, 'click', function() {
+		    	
+		    	alert("안녕?");
+				//infoOverlay.setMap();		      
+		    });
+} 
 
 
 
@@ -640,7 +692,6 @@ function displayPagination(pagination) {
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
-
     
 }
 
