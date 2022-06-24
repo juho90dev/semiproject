@@ -77,7 +77,7 @@
 				<nav role="navigation">
 					<ul id="main-menu">
 
-						<li><a href="javascript:void(0);" onclick="<%=request.getContextPath()%>/search/SearchPage.do">관광지</a></li>
+						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanCreator();">플랜 크리에이터</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanner();">플랜</a> 
 						<!-- <ul id="sub-menu">
@@ -109,6 +109,7 @@
 	
 	  <script>
 	  	//비회원 접근제한
+	  	
 	  	const openPlanCreator=()=>{
 	  		<%if(login!=null) {%>
 	  		location.href=("<%=request.getContextPath()%>/plannerMember.do");
@@ -129,6 +130,13 @@
 	  		
 	  	}
 	  	
+
+		const openPlaces=()=>{
+
+	  		
+	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
+
+	  	}
  
 	  	const openWeather=()=>{
 	  		

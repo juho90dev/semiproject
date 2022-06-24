@@ -69,6 +69,19 @@
 	</table>
 </form>
 <script>
+		var flag = false;
+		$("input[name='wr1[]']").each( function () {
+		    if (this.checked) {
+		        flag = !flag; 
+		        return false;
+		    }
+		});
+		
+		if (!flag) {
+		    alert("종류는 하나 이상 체크해주세요.");
+		    return false;
+		}
+
 	const fmReset=()=>{
 		$("#p4").val("");
 		$("#p5").val("");
