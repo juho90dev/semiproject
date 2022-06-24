@@ -146,7 +146,46 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 //------------------------------------------------------------------------
+function printOverlay(createdMarker){
+		
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	//커스텀 오버레이 만들기 > 새로 등록한 마커 클릭 시 출력될 것
+	var savedInfo = '<div class="wrap">' + 
+	'    <div class="info">' + 
+	'        <div class="title">' + 
+	'            플랜에 등록된 장소예요' + 
+	'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	'        </div>' + 
+	'        <div class="body">' + 
+	'            <div class="img">' +
+	'                <img src="https://cdn2.iconfinder.com/data/icons/geest-travel-kit/128/travel_journey-04-2-256.png" width="73" height="70">' +
+	'           </div>' + 
+	'            <div class="desc">' + 
+	'                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>'
+	'            </div>' + 
+	'        </div>' + 
+	'    </div>' +    
+	'</div>';
+	
+	
+	//마커 위에 커스텀오버레이를 표시합니다
+	//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+	var infoOverlay = new kakao.maps.CustomOverlay({
+	content: savedInfo,
+	map: map,
+	position: createdMarker.getPosition()       
+	});
 
+	infoOverlay.setMap(null);		
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	
+	    kakao.maps.event.addListener(createdMarker, 'click', function() {
+		    	
+		    	//alert("안녕?");
+				infoOverlay.setMap();		      
+		    });
+} 
 
 //마커 위에 커스텀오버레이를 표시합니다
 //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
@@ -556,46 +595,7 @@ function addMarkerFunc(lat,lng,placeName){
 
 
 
-function printOverlay(createdMarker){
-		
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	//커스텀 오버레이 만들기 > 새로 등록한 마커 클릭 시 출력될 것
-	var savedInfo = '<div class="wrap">' + 
-	'    <div class="info">' + 
-	'        <div class="title">' + 
-	'            플랜에 등록된 장소예요' + 
-	'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-	'        </div>' + 
-	'        <div class="body">' + 
-	'            <div class="img">' +
-	'                <img src="https://cdn2.iconfinder.com/data/icons/geest-travel-kit/128/travel_journey-04-2-256.png" width="73" height="70">' +
-	'           </div>' + 
-	'            <div class="desc">' + 
-	'                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>'
-	'            </div>' + 
-	'        </div>' + 
-	'    </div>' +    
-	'</div>';
-	
-	
-	//마커 위에 커스텀오버레이를 표시합니다
-	//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-	var infoOverlay = new kakao.maps.CustomOverlay({
-	content: savedInfo,
-	map: map,
-	position: createdMarker.getPosition()       
-	});
 
-	infoOverlay.setMap(null);		
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-	
-	    kakao.maps.event.addListener(createdMarker, 'click', function() {
-		    	
-		    	alert("안녕?");
-				infoOverlay.setMap();		      
-		    });
-} 
 
 
 
