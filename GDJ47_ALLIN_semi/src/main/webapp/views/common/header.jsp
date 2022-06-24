@@ -131,14 +131,9 @@
 	  	}
 	  	
 	  	const openPlaces=()=>{
-	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
+	  		
 	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
-	  		<%}else {%> 
-	  
-	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (로그인 후 홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
-	  		
-	  		<%}%>
-	  		
+
 	  	}
 	  
 	  
