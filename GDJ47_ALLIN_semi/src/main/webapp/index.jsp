@@ -9,11 +9,12 @@
         </video>
     </div>
  	<style>
-         .mainvideo{ 
-         	width: 100%; height: auto; overflow: hidden;margin: 0px auto; position: relative; 
-         }
-         video { 
-         	width: 100%; 
+        
+         video {
+         	display:flex;
+         	margin-left:25%;
+         	margin-top:20px;
+         	width: 50%; 
          }
     </style>
 

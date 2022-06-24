@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=705b81233756fa3f99e7c61bf323dd7e&libraries=services"></script>
+
  <div id="container1">
         <div class="title5">안녕 </div>
         <div class="address">경기 수원시 장안구 영화동 320-2 </div>
@@ -68,20 +68,7 @@
     <div id="container2">
         <div style="overflow:auto; width: 100%; height:500px;" class="tbroot">
             <div class="title1">지도</div>
-            <div id="map" style="width:100%;height:350px;"></div>
-
-
-			<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = { 
-			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
-			    };
-			
-			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
-			</script>
-            <!-- <div class="map"></div> -->
+            <div class="map"></div>
             <div class="place-title">장소 한줄소개
                 <div class="place-content">test</div>
             </div>
@@ -89,7 +76,8 @@
                 <div class="place-review">장소 리뷰</div>
             </div>
             <div id="btn">
-                <button type="button" class="btn btn-success" onclick="location.assign('<%=request.getContextPath()%>/views/createreview/createreview.jsp')">작성하기</button>
+                <button type="button" class="btn btn-success" 
+                onclick="location.assign('<%=request.getContextPath()%>/views/createreview/createreview.jsp')">작성하기</button>
             </div>
 
             <div class="dropdown">
@@ -529,13 +517,13 @@ svg #main-circ {
 
         #container3 {
             display: inline-block;
-
+		
             
         }
 
         .place-review {
             display: flex;
-            border: 1px solid blue;
+
             font-size: 30px;
             color: yellowgreen;
             width: 200px;
@@ -546,13 +534,13 @@ svg #main-circ {
         }
 
         .place-title {
-            border: 1px solid black;
+  
             font-size: 30px;
             color: yellowgreen;
         }
 
         .place-content {
-            border: 1px solid green;
+			
             font-size: 20px;
             color: black;
         }
@@ -560,12 +548,12 @@ svg #main-circ {
         .title1 {
             font-size: 30px;
             color: yellowgreen;
-            border: 1px solid red;
+
 
         }
 
-        #map {
-            border: 1px solid green;
+        .map {
+
             display: inline-block;
             width: 100%;
             height: 300px;
@@ -576,9 +564,9 @@ svg #main-circ {
             display: inline-block;
             margin-top: 30px;
             margin-left: 70px;
-
+			border : 1px solid black;
             width: 90%;
-            border: 1px solid black;
+
         }
         .img6{
             border: 1px solid red;
@@ -593,7 +581,7 @@ svg #main-circ {
             margin-right: 5%;
             width: 1000px;
             height: 400px;
-            border: 1px solid black;
+
             margin-bottom: 10px;
         }
 
@@ -607,7 +595,7 @@ svg #main-circ {
             margin-top: 30px;
             margin-left: 70px;
             width: 90%;
-            border: 1px solid black;
+			border : 1px solid black;
         }
 
         .title5 {
@@ -616,12 +604,12 @@ svg #main-circ {
             height : 20%;
             font-size: 30px;
             color: yellowgreen;
-            border: 1px solid red;
+
 
         }
 
         .address {
-            border: 1px solid blue;
+
             width: 50%;
         }
     </style>
