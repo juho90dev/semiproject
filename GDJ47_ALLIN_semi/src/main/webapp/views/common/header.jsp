@@ -109,11 +109,6 @@
 	
 	  <script>
 	  	//비회원 접근제한
-	  	const openPlaces=()=>{
-	  		
-	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
-	  	
-	  	}
 	  	
 	  	const openPlanCreator=()=>{
 	  		<%if(login!=null) {%>
@@ -135,6 +130,11 @@
 	  		
 	  	}
 	  	
+		const openPlaces=()=>{
+	  		
+	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
+	  	
+	  	}
  
 	  	const openWeather=()=>{
 	  		
