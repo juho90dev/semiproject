@@ -240,6 +240,7 @@ button {
     color: white;
 }
 </style>
+<section id="memberList-container">
 <div class="container">
 <%if(!list.isEmpty()) {
 	for(Member m : list) {%>
@@ -271,8 +272,16 @@ button {
 	<%} %>
 
 </div>
+</section>
+
+     
+               <ul class="pagination justify-content-center">
+                  <%=request.getAttribute("pageBar") %>
+               </ul>
+      
 
 <style>
+section#memberList-container {text-align:center;}
 .resultList{
 	text-align : center;
 	font-size: 18px;

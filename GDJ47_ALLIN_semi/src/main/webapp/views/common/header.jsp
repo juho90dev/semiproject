@@ -130,10 +130,12 @@
 	  		
 	  	}
 	  	
+
 		const openPlaces=()=>{
+
 	  		
 	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
-	  	
+
 	  	}
  
 	  	const openWeather=()=>{
