@@ -5,8 +5,8 @@
 
 	//쿠키 사용 後
 	int days=0;
+	String plannerTitle = "";	
 
-	
 	Cookie[]cookies = request.getCookies();
 	if(cookies!=null){
 		
@@ -15,10 +15,18 @@
 			if(c.getName().equals("forOption")){ //여행 일자
 				days = Integer.parseInt(c.getValue());				
 			}			
+			if(c.getName().equals("forTitle")){ //타이틀
+				String titleTemp = c.getValue();
+				if(titleTemp.contains("%")){
+					plannerTitle = titleTemp.replace("%"," ");
+				} else plannerTitle = titleTemp;
+			
+			}			
 		}		
 	}
 	
-	String plannerTitle = (String)request.getAttribute("plannerTitle");
+	
+	//String plannerTitle = (String)request.getAttribute("plannerTitle");
 	System.out.println("타이틀 확인 : "+plannerTitle);
 	
 	//localStorage 사용 前 -------------------------------------
@@ -49,7 +57,11 @@
 	if(login!=null){
 		String id = login.getUserId();
 		System.out.println("아이디 : "+id);
-	} else System.out.println("정보 못 받아옴");
+	} else {
+		
+		System.out.println("정보 못 받아옴. 로그아웃됨");
+		
+	}
 	
 %>
 
@@ -130,6 +142,20 @@
     	          		
 	            		<script>
 	            		
+
+	            		//로그아웃 時, alert창 띄우고 메인화면으로 돌려보내기
+	            		(()=>{
+	            			
+	            			<%if (login==null){%>
+	            			
+	            				alert("로그아웃되었습니다. 다시 로그인해주세요.");
+	            				//TODO 0624) 메인화면으로 이동하는 로직 (작업해야 해서 잠시 주석처리 해둠)
+	            				//쿠키도 삭제해야 함...
+	            				//location.replace("<%=request.getContextPath()%>");
+	            			
+	            			<%}%>
+	            			
+	            		})();
 	            		
 	            		//새로고침 時, 편집 내용이 소멸될 수 있음을 알림
 	            		window.onbeforeunload = function(e){

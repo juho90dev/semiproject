@@ -1,6 +1,51 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+
+int areaCode = 0;
+String areaStr = "";
+
+Cookie[]cookies2 = request.getCookies();
+if(cookies2!=null){
+	
+	for(Cookie c : cookies2){
+		
+		if(c.getName().equals("forArea")){ //지역코드 > 대분류
+			areaCode = Integer.parseInt(c.getValue());				
+		}
+		
+	}		
+}
+
+switch(areaCode){
+
+case 1 : areaStr="서울";break;
+case 2 : areaStr="인천";break;
+case 3 : areaStr="대전";break;
+case 4 : areaStr="대구";break;
+case 5 : areaStr="광주";break;
+case 6 : areaStr="부산";break;
+case 7 : areaStr="울산";break;
+case 8 : areaStr="세종특별자치시";break;
+case 31 : areaStr="경기도";break;
+case 32 : areaStr="강원도";break;
+case 33 : areaStr="충청북도";break;
+case 34 : areaStr="충청남도";break;
+case 35 : areaStr="경상북도";break;
+case 36 : areaStr="경상남도";break;
+case 37 : areaStr="전라북도";break;
+case 38 : areaStr="전라남도";break;
+case 39 : areaStr="제주도";break;
+
+}
+
+if(areaStr!=null){
+	System.out.println("주요 방문 지역 확인 : "+areaStr);
+}
+
+%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mapStyle.css"/>
 
@@ -23,7 +68,7 @@
 		            <div>
 		            	<h1 id="listTitle" style="text-align:left;padding:10px;margin-bottom:0px;margin-left:5px;font-family:Rubik;">SEARCH!</h1>
 		                <form onsubmit="searchPlaces(); return false;" id="searchBox">
-		                    	<input type="text" value="에버랜드" id="keyword" size="40" placeholder="검색어를 입력하세요"> 
+		                    	<input type="text" value="<%=areaStr%>" id="keyword" size="40" placeholder="검색어를 입력하세요"> 
 		                    	<button id="searchBtn" type="submit">검색하기</button> 
 		                </form>
 		            </div>
@@ -51,9 +96,9 @@ const showList = (()=>{ //"검색하기" 버튼 클릭 時, "검색 리스트"�
 	return()=>{
 		
 		if(++cnt%2!=0){
-			searchList.style.display="none";
-		} else {
 			searchList.style.display="";
+		} else {
+			searchList.style.display="none";
 		}
 		
 	}
@@ -146,8 +191,9 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 //------------------------------------------------------------------------
-function printOverlay(createdMarker){
-		
+
+
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//커스텀 오버레이 만들기 > 새로 등록한 마커 클릭 시 출력될 것
 	var savedInfo = '<div class="wrap">' + 
@@ -176,13 +222,16 @@ function printOverlay(createdMarker){
 	position: createdMarker.getPosition()       
 	});
 
-	infoOverlay.setMap(null);		
+	infoOverlay.setMap();		
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
+
+function printOverlay(createdMarker){
 	
 	    kakao.maps.event.addListener(createdMarker, 'click', function() {
 		    	
 		    	//alert("안녕?");
+		    	//window.open("http://www.naver.com");
 				infoOverlay.setMap();		      
 		    });
 } 
@@ -449,6 +498,7 @@ function displayPlaces(places) {
     	
 			var overlay = new kakao.maps.CustomOverlay({
 			    content: customContent,
+			    //content: savedInfo,
 			    map: map,
 			    position: marker.getPosition()       
 			});
