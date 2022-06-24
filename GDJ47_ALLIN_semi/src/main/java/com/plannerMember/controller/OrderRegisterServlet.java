@@ -63,9 +63,14 @@ public class OrderRegisterServlet extends HttpServlet {
 		
 		//3.출력할 화면 선택
 		
+		String path = request.getRequestURL()+"";
+
+		//변수명.substring(0,변수명.indexOf("/")
+		path = path.substring(0, path.lastIndexOf("/"));
+		System.out.println(path);
 	
-		request.getRequestDispatcher("request.getContextPath()/customerpage.do?memberId=id").forward(request, response);
-	
+		//request.getRequestDispatcher(path+"/customerpage.do?memberId="+id).forward(request, response);
+		response.sendRedirect(path+"/customerpage.do?memberId="+id);
 	}
 
 	/**
