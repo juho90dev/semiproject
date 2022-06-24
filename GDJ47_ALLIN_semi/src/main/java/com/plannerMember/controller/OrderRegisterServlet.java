@@ -35,7 +35,7 @@ public class OrderRegisterServlet extends HttpServlet {
 		System.out.println("서블릿구동!");
 		
 		int orderNum = (int)(Math.random()*1000);
-		String memberId=request.getParameter("memberId");
+		String id=request.getParameter("memberId");
 		String plannerId=request.getParameter("plannerId");
 		String content=request.getParameter("content");
 		String startDay=request.getParameter("startDay");
@@ -45,7 +45,7 @@ public class OrderRegisterServlet extends HttpServlet {
 		//String approval = "";
 		//String requestPay= "";
 		System.out.println("전체데이터테스트출력");
-		System.out.println(memberId);
+		System.out.println(id);
 		System.out.println(plannerId);
 		System.out.println(startDay);
 		System.out.println(endDay);
@@ -53,18 +53,19 @@ public class OrderRegisterServlet extends HttpServlet {
 		System.out.println(String.join(",", transport));
 		System.out.println(String.join(",", theme));
 		
-		RequestPlan rp = new RequestPlan(orderNum, memberId, plannerId, content, startDay, endDay, String.join(",", transport), String.join(",", theme), null, null);
+		RequestPlan rp = new RequestPlan(orderNum, id, plannerId, content, startDay, endDay, String.join(",", transport), String.join(",", theme), null, null);
 		
 		int result = new RequestService().insertRequest(rp);
 		
-		List<RequestPlan> list=new RequestService().selectRequestList(memberId);
+		List<RequestPlan> list=new RequestService().selectRequestList(id);
 		request.setAttribute("list", list);
 		System.out.println(result);
 		
 		//3.출력할 화면 선택
-		request.getRequestDispatcher("/views/requestList/customerpage.jsp").forward(request,response);
+		
 	
-//		response.sendRedirect(request.getContextPath()); //
+		request.getRequestDispatcher("request.getContextPath()/customerpage.do?memberId=id").forward(request, response);
+	
 	}
 
 	/**
