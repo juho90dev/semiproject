@@ -16,6 +16,7 @@
 <div class="container">
 
 	<div class="planTitle"><%=plannerTitle%></div>
+	<hr>
 	<div class="forOption">
 		<p class="optGuide">일자별 플랜을 확인해보세요</p>
 		<!-- PLANNER테이블의 "TRAVEL_DAYS"컬럼 참고 -->
@@ -52,12 +53,14 @@
 			</div>
 		</div>
 	</div>
+	<hr>
 </div>
+
 
 
  <%@ include file="/views/common/footer.jsp"%> 
  <script>
- 
+
 	//태그 동적 생성 관련 > DOM으로 불러오기
  	let planTitle = document.querySelector(".planTitle"); //플래너 제목
  	console.log(planTitle);
@@ -67,6 +70,7 @@
  	let planContainer = document.querySelector(".planContainer");
  	let positions = [];
  	let forLine = [];
+ 	let addrTemp = "";
 
  	(()=>{
  		//alert("안녕?");
@@ -103,8 +107,8 @@
  						dayOneArr.push(e);
  						console.log(dayOneArr);
  						planContainer.innerHTML = "";
- 						printDay.innerText = 1;
- 						//printDay.innerHTML += "<span style='font-weight:500'>Day </span>"+1;
+ 						printDay.innerText = "";
+ 						printDay.innerHTML += "<span style='font-weight:500'>Day </span>"+1;
  										
  					}					
  				});
@@ -138,23 +142,26 @@
  					plans.forEach(e=>{ //전체 여행일자 순회
  							
  						if(e.day==ckDays){	//전체 여행일자 中, 사용자가 선택한 날짜를 지정함
- 							printDay.innerText = e.day;											
+ 							
+ 							printDay.innerText = "";
+ 							printDay.innerHTML += "<span style='font-weight:500'>Day </span>"+e.day;
+ 							//printDay.innerText = e.day;											
  							//printDay.innerText += "Day "+e.day; //일자 출력하기	 							
  							planArr.push(e); //특정 일자의 내용만, 객체배열로 저장함
  							//console.log(ckDays,"의 플랜 : ", planArr, "길이 확인", planArr.length); //일자 확인
  							//planContainer.innerHTML = ""; //플랜 영역 비우기
- 							console.log("/////////////////", planArr);
+ 							
  						} 						
  					});
  					
  					
 					planArr.forEach(a=>{ //일자별 정보 출력 메소드 실행
 						
-						console.log("안녕?");
+						
 						printPlans(a);
 					
 					});	
-					console.log("왜 못 불러오지???", positions);
+
 					mapStarter(planArr,positions,forLine);
  					
 				});		
@@ -188,10 +195,11 @@
 			createName.innerText = e.placeName;
 			createPlanWords.appendChild(createName);
 			
-/*  		const createAddress = document.createElement("div"); //주소
+  			const createAddress = document.createElement("div"); //주소
 			createAddress.classList.add("words");
-			createAddress.id="address";
-			createName.innerText = ""; */
+			createAddress.id="address";		
+			createPlanWords.appendChild(createAddress);
+			getAddress(e.latitude,e.longitude,createAddress);
 			
 			const createMemo = document.createElement("div"); //메모
 			createMemo.classList.add("words");
@@ -217,6 +225,9 @@
  			//좌표 관련 객체 생성 및 배열에 보관하기
 			positions.push({title:e.placeName,latlng: new kakao.maps.LatLng(e.latitude,e.longitude)});
 			forLine.push(new kakao.maps.LatLng(e.latitude,e.longitude));
+			
+			//"좌표"를 기준으로 주소 정보를 받아올 수 있음
+			
 			
 						
  	}
@@ -265,11 +276,11 @@
 
 		// 지도에 선을 표시합니다 
 		polyline.setMap(map); 
-
 		
 
 
  	}
+ 	
  	
 	function panTo(lat,lng){
 		
@@ -297,7 +308,7 @@
 	
 	
 	
- 	function moveMap(card,latitude,longitude){
+ 	function moveMap(card,latitude,longitude){ //플랜에 mouserover 시, 해당 장소로 지도를 이동시킴
  		
  		var thisMarker = "";
  		
@@ -317,8 +328,35 @@
      		//TODO 0623) 본래의 지도로 원상복귀해야 함 -> mapStarter()메소드에서 dayArr로 구현하면 될 수도...
      	})
  	}
+ 	
 
+		function getAddress(lat,lng,addressTag){ //카드에 "주소" 정보 추가
+		
+		    let geocoder = new kakao.maps.services.Geocoder();
+		    let coord = new kakao.maps.LatLng(lat, lng);
+		    
+		    let callback = function(result, status) {
+		        if (status === kakao.maps.services.Status.OK) {
+		            console.log(result);
+		            addrTemp = result[0]['address']['address_name'];
+		            console.log(addrTemp);
+		            addressTag.innerText = addrTemp;
+		            
+		        }
+		    };
+
+		    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+  
+		} 
+		
+
+		
 
  	
+
+ 	
+
+
+	
  
  </script>
