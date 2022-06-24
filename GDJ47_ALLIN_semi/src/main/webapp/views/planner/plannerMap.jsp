@@ -161,7 +161,7 @@ var customContent = '<div class="wrap">' +
             '            <div class="desc">' + 
             '                <div class="ellipsis" style="font-size:50;margin-bottom:8px;">장소를 플랜에 추가할까요?</div>' +
             				 '<input type="text" id="memo" placeholder="메모를 작성해주세요">'+ //☆ 해당 장소에 대한 정보를 이미 사용자가 작성했다면, value에 값을 넣어도 되지 않을까
-    '               		 <button id="addBtn" onclick="addList();" class="addToList" style="font-size:12px;margin-left:20px;width:50px;">좋아요</button>' + 
+    '               		 <button id="addBtn" onclick="addList();" class="addToList" style="font-size:12px;margin-left:20px;width:80px;">추가하기</button>' + 
             '        	 </div>' + 
             '    </div>' +    
             '</div>'+
@@ -474,10 +474,19 @@ function displayPlaces(places) {
 				}); 
 
 				
-				const exitBtn = document.getElementById("exitBtn"); //인포메이션 창 닫기
+				//● 커스텀 오버레이 > "닫기"
+				//1. X 버튼 클릭 時
+				const exitBtn = document.getElementById("exitBtn");
 				exitBtn.addEventListener("click", e=>{
 					overlay.setMap(null);
 				})
+				//2. "등록" 버튼 클릭 時
+				//0624) "등록" 클릭 時, 커스텀 오버레이창 닫기
+				const addBtnClose = document.getElementById("addBtn");
+				addBtnClose.addEventListener("click",e=>{
+					overlay.setMap(null);
+				});
+				
 				
 			});
 
