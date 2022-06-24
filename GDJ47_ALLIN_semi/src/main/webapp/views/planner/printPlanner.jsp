@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/savedLogStyle.css"/>
 
 
+
 <body>
 
 	<div id="container">

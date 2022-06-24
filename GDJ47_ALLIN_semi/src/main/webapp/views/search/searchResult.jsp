@@ -18,7 +18,7 @@
 			<div id="koreatravel">
 
 				<form id="search" 
-					action="<%=request.getContextPath()%>/search/SearchPage.do" method="post">
+					action="<%=request.getContextPath()%>/searchPage.do" method="post">
 					<div class="travel1">
 
 						<select name="maintema" id="maintema" onchange="change(this)">
@@ -79,7 +79,7 @@
 		for(Search s1 : s){%>
 		<div id="searresult">
 			<div class="firstimg1">
-				<a href="<%=request.getContextPath()%>/searchResult.do">
+				<a href="<%=request.getContextPath()%>/views/searchresult/searchresult.jsp">
 					<img src="<%=s1.getFirstImage()%>" alt="">
 				</a>
 			</div>
@@ -633,4 +633,5 @@ h1 {
     }
 
   </script>
+  
 <%@ include file="/views/common/footer.jsp"%>
