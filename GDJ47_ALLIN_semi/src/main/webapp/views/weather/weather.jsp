@@ -8,8 +8,27 @@
 </head>
 <body>
 <label>날씨</label>
+	<h2>단기예보</h2>
+	<select class="form-control" id="menu2" name="menu2" required>>
+		<option value="" disabled selected>지역</option>
+	    <option value="11B00000">서울, 인천, 경기도</option>
+	    <option value="11D10000">강원도영서</option>
+	    <option value="11D20000">강원도영동</option>
+	    <option value="11C20000">대전, 세종, 충청남도</option>
+	    <option value="11C10000">충청북도</option>
+	    <option value="11F20000">광주, 전라남도</option>
+	    <option value="11F10000">전라북도</option>
+	    <option value="11H10000">대구, 경상북도</option>
+	    <option value="11H20000">부산, 울산, 경상남도</option>
+	    <option value="11G00000">제주도</option>
+	</select>
+	<button onclick="checkShortWeather();">기상청 단기예보조회</button>
+	<div id=result2></div>
+	</div>
+
 	<div>
-	<p>*일 2회(06:00,18:00)회 생성 되며 최근 24시간 자료만 제공<br>출처: 기상청 중기육상예보</p>
+	<h2>중기예보</h2>
+	<p>*중기육상예보는 조회일로부터 +3일 ~ +10일 사이의 기상정보만 조회가능<br><br>일 2회(06:00,18:00)회 생성 되며 최근 24시간 자료만 제공<br>출처: 기상청 중기육상예보</p>
 	<select class="form-control" id="menu" name="menu" required>
 	    <option value="" disabled selected>지역</option>
 	    <option value="11B00000">서울, 인천, 경기도</option>
@@ -23,10 +42,10 @@
 	    <option value="11H20000">부산, 울산, 경상남도</option>
 	    <option value="11G00000">제주도</option>
 	</select>
-    <button title="중기육상예보는 조회일로부터 +3일 ~ +10일 사이의 기상정보만 조회가능" onclick="checkLongWeather();">날씨</button>
+    <button title="중기육상예보는 조회일로부터 +3일 ~ +10일 사이의 기상정보만 조회가능" onclick="checkLongWeather();">기상청 중기예보조회</button>
 	</div>
 	<div id=result></div>
-	
+	<div>
 	 <style>
         th{
 
@@ -41,6 +60,19 @@
     </style>
 	
 	<script>
+	const checkShortWeather=()=>{
+
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/publicdata2.do",
+			
+			success: data=>{
+			const weather2=JSON.parse(data);
+			console.log(weather2);
+			
+			}
+		});
+	}
 	
 	const display_image=(x)=> {
 		let str="";

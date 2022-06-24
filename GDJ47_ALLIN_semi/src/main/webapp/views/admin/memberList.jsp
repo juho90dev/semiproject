@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.login.model.vo.Member" %>
 <%
 	List<Member> list=(List<Member>)request.getAttribute("list");
 
 //header에 member는 있는데 List라는 자료형은 임포트 한 적이 없다... 그래서 list도 import해줘야 한다.
 %>
+
 
 <%@ include file="/views/common/header.jsp" %>
 
