@@ -1,8 +1,7 @@
 package com.plannerMember.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +33,9 @@ public class OrderRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("서블릿구동!");
-		String memberId=request.getParameter("memberId");
+		
+		int orderNum = (int)(Math.random()*1000);
+		String id=request.getParameter("memberId");
 		String plannerId=request.getParameter("plannerId");
 		String content=request.getParameter("content");
 		String startDay=request.getParameter("startDay");
@@ -44,7 +45,7 @@ public class OrderRegisterServlet extends HttpServlet {
 		//String approval = "";
 		//String requestPay= "";
 		System.out.println("전체데이터테스트출력");
-		System.out.println(memberId);
+		System.out.println(id);
 		System.out.println(plannerId);
 		System.out.println(startDay);
 		System.out.println(endDay);
@@ -52,26 +53,19 @@ public class OrderRegisterServlet extends HttpServlet {
 		System.out.println(String.join(",", transport));
 		System.out.println(String.join(",", theme));
 		
-		RequestPlan rp = new RequestPlan(memberId, plannerId, content, startDay, endDay, String.join(",", transport), String.join(",", theme), null, null);
+		RequestPlan rp = new RequestPlan(orderNum, id, plannerId, content, startDay, endDay, String.join(",", transport), String.join(",", theme), null, null);
 		
 		int result = new RequestService().insertRequest(rp);
 		
+		List<RequestPlan> list=new RequestService().selectRequestList(id);
+		request.setAttribute("list", list);
 		System.out.println(result);
-		String msg="", loc="";
-		if(result>0) {
-			msg="회원가입을 축하드립니다!";
-			loc="/";
-		}else{
-			msg="회원가입에 실패했습니다. 다시 시도하세요!";
-			loc="";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc",loc);
-	
+		
 		//3.출력할 화면 선택
-		//request.getRequestDispatcher("").forward(request,response);
+		
 	
-//		response.sendRedirect(request.getContextPath()); //
+		request.getRequestDispatcher("request.getContextPath()/customerpage.do?memberId=id").forward(request, response);
+	
 	}
 
 	/**

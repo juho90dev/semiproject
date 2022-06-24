@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class RequestPlan {
 	
+	private int orderNum;
 	private String memberId;
 	private String plannerId;
 	private String content;
@@ -19,9 +20,10 @@ public class RequestPlan {
 	
 	
 	
-	public RequestPlan(String memberId, String plannerId, String content, String startDay, String endDay,
+	public RequestPlan(int orderNum, String memberId, String plannerId, String content, String startDay, String endDay,
 			String transport, String theme, String approval, String requestPay) {
 		super();
+		this.orderNum = orderNum;
 		this.memberId = memberId;
 		this.plannerId = plannerId;
 		this.content = content;

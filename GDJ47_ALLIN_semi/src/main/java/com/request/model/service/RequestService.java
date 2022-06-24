@@ -32,4 +32,37 @@ public class RequestService {
 		return result;
 	}
 	
+	public int acceptUpdate(int orderNum) {
+		Connection conn = getConnection();
+		int result=dao.acceptUpdate(conn, orderNum);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int updatePay(int orderNum) {
+		Connection conn = getConnection();
+		int result=dao.updatePay(conn, orderNum);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int deleteRequest(int orderNum) {
+		Connection conn = getConnection();
+		int result=dao.deleteRequest(conn, orderNum);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<RequestPlan> selectOrderList(String memberId) {
+		
+		Connection conn=getConnection();
+		List<RequestPlan> result=dao.selectOrderList(conn, memberId);
+		close(conn);
+		return result;
+	}
+	
 }
