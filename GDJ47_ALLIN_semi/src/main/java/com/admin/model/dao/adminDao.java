@@ -2,6 +2,7 @@ package com.admin.model.dao;
 
 import static com.common.JDBCTemplate.close;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,13 +31,13 @@ public class adminDao {
 	}
 
 
-	public List<Member> selectMemberList(Connection conn, int cPage, int numPerpage) {
+	public List<Member> selectMemberList(Connection conn, int cPage, int  numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectMemberList"));
-			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(1, (cPage-1)* numPerpage+1);
 			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -61,8 +62,6 @@ public class adminDao {
 //			pstmt=conn.prepareStatement(prop.getProperty("selectMemberList"));
 //			rs=pstmt.executeQuery();
 //			while(rs.next()) {
-////				Member m=MemberDao.getMember(rs);
-////				list.add(m);
 //				list.add(LoginDao.getLogin(rs));
 //			}
 //			
@@ -171,6 +170,68 @@ public class adminDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+
+
+	public int selectMemberCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+
+
+	public List<Member> searchMemberList(Connection conn, String type, String keyword, int cPage, int numPerpage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> result=new ArrayList();
+		String sql=prop.getProperty("searchMember");
+		sql=sql.replace("$COL", type);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, type.equals("userName")?"%"+keyword+"%":keyword);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(LoginDao.getLogin(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+
+
+	public int searchMemberCount(Connection conn, String type, String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchMemberCount").replace("$COL",type);
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, type.equals("userName")?"%"+keyword+"%":keyword);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
 	}
 	
 	

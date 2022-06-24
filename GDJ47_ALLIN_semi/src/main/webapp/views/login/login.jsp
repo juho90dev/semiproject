@@ -46,11 +46,12 @@
          </div>
  --> 
  		<div class="links">
- 			<div class="kakao">
+ <!-- 			<div class="kakao">
  				<a id="btn-kakao-login" href="">
  				<img src="https://www.baekjecc.com/image/login/kakao_login_btn.png"/ width=320px height=50px>
  				</a>
  			</div>
+ 	-->
  		
  		</div>
          <div class="signup">

@@ -1,9 +1,8 @@
-package com.login.controller;
+package com.admin.controller;
 
 import java.io.IOException;
-
-
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,17 +14,18 @@ import com.admin.model.service.adminService;
 import com.login.model.vo.Member;
 
 
+
 /**
- * Servlet implementation class memberList
+ * Servlet implementation class MemberSearch
  */
-@WebServlet("/memberList.do")
-public class memberListServlet extends HttpServlet {
+@WebServlet("/searchMember.do")
+public class MemberSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberListServlet() {
+    public MemberSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,56 +35,48 @@ public class memberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String type=request.getParameter("searchType");
+		String keyword=request.getParameter("searchKeyword");
+
 		
 		int cPage;
-		try{
+		int numPerpage=5;
+		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerpage=5;
+//		String page=request.getParameter("cPage");
+//		if(page==null) {
+//			cPage=1;
+//		}else {
+//			cPage=Integer.parseInt(page);
+//		}
 		
+		Map<String,Object> param=Map.of("type",type,"keyword",keyword,
+				"cPage",cPage,"numPerpage",numPerpage);
 		
-		List<Member> list=new adminService().selectMemberList(cPage, numPerpage);//호출하기
-		System.out.println(list);
-		
-//		List<Member> list=new adminService().selectMemberList();//호출하기
-		
-		
-		request.setAttribute("list", list);
-		
-		
-		//list를 페이지에 넘여야 하니까 request.setAttribute에 담아줌
-		
-//		
-		//사용자가 원하는 페이지를 요청할 수 있게 페이지바를 만들어보자
-		//1. 전체 페이지수
-		int totalData=new adminService().selectMemberCount();
-		int totalPage=(int)Math.ceil((double)totalData/5);
-		
-		//2. 출력할 페이지번호의 갯수 정하기
+		List<Member> result=new adminService().searchMemberList(type,keyword,cPage,numPerpage);
+		int totalData=new adminService().searchMemberCount(type,keyword);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
-		
-		//3. 출력할 페이지번호 시작, 끝 정하기
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
-		
-		//4. pageBar생성하기
 		String pageBar="";
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-					+"/memberList.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getRequestURL()
+				+"?cPage="+(pageNo-1)+"&searchType="+type+"&searchKeyword="+keyword+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(cPage==pageNo) {
-				pageBar+="<span>"+pageNo+"<span>";
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/memberList.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getRequestURL()
+						+"?cPage="+(pageNo)+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -92,29 +84,19 @@ public class memberListServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/memberList.do?cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getRequestURL()
+			+"?cPage="+(pageNo)+"&searchType="+type+"&searchKeyword="+keyword+"'>[다음]</a>";
 		}
-		
 		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("list", result);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request,response);
-	
-	
+		request.getRequestDispatcher("/views/member/memberList.jsp")
+		.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	6yyyyyyyyyyyyyy */
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

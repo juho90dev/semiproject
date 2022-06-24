@@ -99,6 +99,7 @@
             
             <div class="auth">
 
+<!-- 
             Or sign with
          	</div>
             <div class="kakao">
@@ -106,7 +107,7 @@
  				<img src="https://www.baekjecc.com/image/login/kakao_login_btn.png"/ width=320px height=50px>
  				</a>
  			</div>
-
+-->
 
 
          </form>
