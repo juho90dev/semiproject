@@ -8,7 +8,7 @@
 	<b> 플랜요청서 </b></font>
 </p>
 <hr>
-<form action="<%=request.getContextPath()%>/orderRegister.do" method="post" onsubmit="orderSave();" >
+<form action="<%=request.getContextPath()%>/orderRegister.do" method="post" onsubmit="return checkBox(this);" >
 	<table width="650" height="350" border="1" cellpadding="5" align="center">
 		<tr>
 			<td> 신청인아이디 </td>
@@ -57,7 +57,7 @@
 		</tr>
 		<tr>
 			<td> 요청 상세 내용 </td>
-			<td> <textarea id="content" rows="7" cols="60" name="content" placeholer="요청 내용" id="p6"> </textarea></td>
+			<td> <textarea id="content" rows="7" cols="60" name="content" placeholder="요청 내용" id="p6"> </textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
@@ -69,18 +69,33 @@
 	</table>
 </form>
 <script>
-		var flag = false;
-		$("input[name='wr1[]']").each( function () {
-		    if (this.checked) {
-		        flag = !flag; 
-		        return false;
-		    }
-		});
-		
-		if (!flag) {
-		    alert("종류는 하나 이상 체크해주세요.");
-		    return false;
-		}
+	const checkBox=(form)=>{ 
+		//테마 체크박스 적어도 1개 이상 선택
+		var arr_form = document.getElementsByName('theme'); 
+	    var num = 0; 
+	    for(var i=0; i<arr_form.length; i++){ 
+	        if(arr_form[i].checked){ 
+	            num++; 
+	        } 
+	    } 
+	    if(!num){ 
+	        alert('테마를 적어도 하나 이상 선택해주시기 바랍니다'); 
+	        return false; 
+	    } 
+			
+		//교통수단 체크박스 최소 1개 이상 선택
+	    var arr_form = document.getElementsByName('transport'); 
+	    var num = 0; 
+	    for(var i=0; i<arr_form.length; i++){ 
+	        if(arr_form[i].checked){ 
+	            num++; 
+	        } 
+	    } 
+	    if(!num){ 
+	        alert('교통수단을 적어도 하나 이상 선택해주시기 바랍니다'); 
+	        return false; 
+	    } 
+	} 
 
 	const fmReset=()=>{
 		$("#p4").val("");
