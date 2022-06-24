@@ -21,10 +21,10 @@ Member m=(Member)session.getAttribute("login");
 font-size: 2.0em;
 line-height: 1.0em">
 		
-        본 사이트의 모든 서비스를 이용하기 위해서는 100원의 이용료를 지불해야합니다.<br>
+        
         저희 사이트는 영리사이트가 아니며 모든 이용료는 공익 재단에 기부될 예정입니다.<br>
-       
-<button onclick="iamport();"><%=m.getUserId()%>님 이용료 결제</button>
+		기부금 100원
+<button onclick="iamport();"><%=m.getUserId()%>님 기부금 결제</button>
 
 </div>
 <body>

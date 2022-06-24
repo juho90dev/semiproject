@@ -63,13 +63,12 @@
 				    <a onclick="logout();" style="cursor:pointer;">로그아웃</a>
 				  </div>
 				</div>
-						<%if(login!=null&&login.getPay().equals("N")) {%>
 						<tr>
 							<td>
-							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">이용료결제</button>
+							 <button type="button" class="btn btn-outline-dark" onclick="javascript:openPay()">기부금결제</button>
 							</td>
 						</tr>
-						<%}%>
+						
 			  </div>
 						</tr>
 			</div>
@@ -78,7 +77,7 @@
 				<nav role="navigation">
 					<ul id="main-menu">
 
-						<li><a href="javascript:void(0);" onclick="openPlaces();">관광지</a></li>
+						<li><a href="javascript:void(0);" onclick="<%=request.getContextPath()%>/search/SearchPage.do">관광지</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanCreator();">플랜 크리에이터</a></li>
 						<li><a href="javascript:void(0);" onclick="openPlanner();">플랜</a> 
 						<!-- <ul id="sub-menu">
@@ -109,39 +108,28 @@
 	</header>
 	
 	  <script>
-	  	//미결제회원 접근 제한
+	  	//비회원 접근제한
 	  	const openPlanCreator=()=>{
-	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
+	  		<%if(login!=null) {%>
 	  		location.href=("<%=request.getContextPath()%>/plannerMember.do");
 	  		<%}else {%> 
 	  
-	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
+	  		 alert("회원전용메뉴입니다. 회원가입 후 로그인해주세요!");
 	  		
 	  		<%}%>
 	  	}
 	  	const openPlanner=()=>{
-	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
+	  		<%if(login!=null) {%>
 	  		location.href=("<%=request.getContextPath()%>/planner/plannerMakerStarter.do");
 	  		<%}else {%> 
 	  
-	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
+	  		 alert("회원전용메뉴입니다. 회원가입 후 로그인해주세요!");
 	  		
 	  		<%}%>
 	  		
 	  	}
 	  	
-	  	const openPlaces=()=>{
-	  		<%if(login!=null&&login.getPay().equals("Y")) {%>
-	  		location.href=("<%=request.getContextPath()%>/search/SearchPage.do");
-	  		<%}else {%> 
-	  
-	  		 alert("사이트 이용을 위해서는 결제를 완료해야합니다. (로그인 후 홈페이지 상단 이용료결제버튼을 눌러 결제페이지로 이동해주세요!)");
-	  		
-	  		<%}%>
-	  		
-	  	}
-	  
-	  
+ 
 	  	const openWeather=()=>{
 	  		
 	  		window.open("<%=request.getContextPath()%>/weatherstart.do","","_blank");

@@ -97,6 +97,37 @@ public class RequestDao {
 		
 	  }
 	  
+	  public int updatePay(Connection conn, int orderNum) { 
+		  PreparedStatement pstmt=null;
+		  int result=0; 
+		  try {
+			  pstmt=conn.prepareStatement(prop.getProperty("updatePay"));
+			  pstmt.setInt(1, orderNum);
+			  result=pstmt.executeUpdate(); 
+		  }catch(SQLException e) { 
+			  e.printStackTrace();
+		  }finally { 
+			close(pstmt); 
+			
+		  }return result; 
+		
+	  }
+	  public int deleteRequest(Connection conn, int orderNum) {
+		  
+		  PreparedStatement pstmt=null;
+		  int result=0; 
+		  try {
+			  pstmt=conn.prepareStatement(prop.getProperty("deleteRequest"));
+			  pstmt.setInt(1, orderNum);
+			  result=pstmt.executeUpdate(); 
+		  }catch(SQLException e) { 
+			  e.printStackTrace();
+		  }finally { 
+			close(pstmt); 
+			
+		  }return result; 
+	  }
+	  
 	  public List<RequestPlan> selectOrderList(Connection conn, String memberId) {
 			PreparedStatement pstmt=null;
 			ResultSet rs = null;

@@ -9,7 +9,8 @@ Member m=(Member)session.getAttribute("login");
     <body>
   <div class="outer">
 		<div id="joinInfoArea">
-		<a href="<%=request.getContextPath() %>">이전 페이지로 이동</a>
+		<a href="<%=request.getContextPath() %>">이전 페이지로 이동</a><br><br>
+		<a href="<%=request.getContextPath() %>/customerpage.do?memberId=<%=m.getUserId()%>">주문한 플랜 내역</a>
 			<form id="joinForm" action="<%=request.getContextPath() %>/updateMemberr.do" method="post" onsubmit="return validate();">
 				<h1>정보 수정</h1>
 				
