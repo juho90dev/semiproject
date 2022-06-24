@@ -556,7 +556,7 @@ function addMarkerFunc(lat,lng,placeName){
 
 
 
-function printOverlay(marker){
+function printOverlay(createdMarker){
 		
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//커스텀 오버레이 만들기 > 새로 등록한 마커 클릭 시 출력될 것
@@ -583,17 +583,17 @@ function printOverlay(marker){
 	var infoOverlay = new kakao.maps.CustomOverlay({
 	content: savedInfo,
 	map: map,
-	position: marker.getPosition()       
+	position: createdMarker.getPosition()       
 	});
 
 	infoOverlay.setMap(null);		
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 	
-	    kakao.maps.event.addListener(marker, 'click', function() {
+	    kakao.maps.event.addListener(createdMarker, 'click', function() {
 		    	
 		    	alert("안녕?");
-				//infoOverlay.setMap();		      
+				infoOverlay.setMap();		      
 		    });
 } 
 
