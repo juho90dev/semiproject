@@ -361,6 +361,7 @@ var customContent = '<div class="wrap">' +
 				if(mkLat2==placeLat&&mkLng2==placeLng){
 					markersArr[i].setMap(null);
 					break;
+					
 				}    			
     		}
     		
