@@ -18,7 +18,7 @@
 			<div id="koreatravel">
 
 				<form id="search" 
-					action="<%=request.getContextPath()%>/searchResult.do" method="post">
+					action="<%=request.getContextPath()%>/searchPage.do" method="post">
 					<div class="travel1">
 
 						<select name="maintema" id="maintema" onchange="change(this)">
@@ -79,15 +79,9 @@
 		for(Search s1 : s){%>
 		<div id="searresult">
 			<div class="firstimg1">
-			<% if(s1.getFirstImage()==null){%>
-				<a href="<%=request.getContextPath()%>/infoResult.do?title=<%=s1.getTitle()%>&/infoResult.do?title=<%=s1.getTitle()%>&address=<%=s1.getAddress()%>">
-				<img src="<%=request.getContextPath()%>/images/logo.png" alt=""></a>
-				<%}else { %>
-				<a href="<%=request.getContextPath()%>/infoResult.do?title=<%=s1.getTitle()%>&address=<%=s1.getAddress()%>&firstImage=<%=s1.getFirstImage()%>" >
-					<img src="<%=s1.getFirstImage()%>" alt=""></a>
-				<%-- 	 --%>
+				<a href="<%=request.getContextPath()%>/views/searchresult/searchresult.jsp">
+					<img src="<%=s1.getFirstImage()%>" alt="">
 				</a>
-				<%}%>
 			</div>
 			<div class="firstimg1title"> <%=s1.getTitle()%> </div>
 		</div>
@@ -210,7 +204,6 @@
 	border: 1px solid blue;
 	width: 300px;
 	height: 250px;
-	
 
 }
 
@@ -315,9 +308,7 @@
 }
 
 .img {
-	
 	margin: 15px;
-	
 }
 
 #imgWord {
@@ -642,4 +633,5 @@ h1 {
     }
 
   </script>
+  
 <%@ include file="/views/common/footer.jsp"%>

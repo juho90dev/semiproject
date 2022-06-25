@@ -4,6 +4,7 @@
 <%
 Member m=(Member)session.getAttribute("login");
 %> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     
     
     <body>
@@ -21,8 +22,10 @@ Member m=(Member)session.getAttribute("login");
 				<span class="input_area"><input type="email" name="email" value="<%=m.getEmail()%>" readonly></span>
 				
 				<h4>비밀번호</h4>
-				<span class="input_area"><input type="password" maxlength="15" name="userPwd" value="<%=m.getPassword()%>" readonly></span>
-				<button id="pwdUpdateBtn" type="button">비밀번호 변경</button>
+					<input type="button" value="비밀번호 변경" onclick="fn_updatePassword();">
+				
+				    
+				
 
         <h4>전화번호</h4>
 				<span class="input_area"><input type="tel" maxlength="11" name="phone"
@@ -71,6 +74,18 @@ Member m=(Member)session.getAttribute("login");
 	</div>
 	
 	<script>
+	
+	const fn_updatePassword=()=>{
+		open("<%=request.getContextPath()%>/updatePwdMiddle.do?userId=<%=m.getUserId()%>");
+		
+	}
+	
+
+	
+	
+	
+	
+	
 		function validate(){
 			return true;
 		}
@@ -141,6 +156,8 @@ Member m=(Member)session.getAttribute("login");
     	document.getElementById("introduce").value="<%=m.getIntroduce()%>";
     	
     	document.getElementById("image").value="<%=m.getImage()%>";
+    	
+    	
     	
     	
     	

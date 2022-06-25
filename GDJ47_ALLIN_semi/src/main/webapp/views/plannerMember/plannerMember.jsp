@@ -4,6 +4,7 @@
 <%@ page import="java.util.List" %>
 <%
 	List<Member> list = (List<Member>)request.getAttribute("list");
+	String pageBar=(String)request.getAttribute("pageBar");
 %>
 <%-- <form class="nav" action="<%=request.getContextPath()%>/">
 	<input type="text" id="text" placeholder="관심지역" 입력">

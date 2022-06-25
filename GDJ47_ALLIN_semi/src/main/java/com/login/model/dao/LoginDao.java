@@ -193,6 +193,34 @@ public class LoginDao {
 			}return idCheck;
 		}
 
+		
+		
+		public int checkPwd(Connection conn, String userPwd) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int pwdCheck=0;
+			try {
+				
+				pstmt=conn.prepareStatement(prop.getProperty("selectMemberPwd"));
+				pstmt.setString(1, userPwd);
+				rs=pstmt.executeQuery();
+				if(rs.next()|| userPwd.equals("")) {
+					pwdCheck=0;
+				}else {
+					pwdCheck=1;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return pwdCheck;
+		}
+		
+		
+		
+		
+		
 
 
 
@@ -285,6 +313,32 @@ public class LoginDao {
 				close(pstmt);
 			}return result;
 		}
+
+
+
+
+
+
+		public int updatePassword(Connection conn, String userId, String newPw) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("updatePassword"));
+				pstmt.setString(1,newPw);
+				pstmt.setString(2, userId);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+
+
+
+
+
+
 
 
 
