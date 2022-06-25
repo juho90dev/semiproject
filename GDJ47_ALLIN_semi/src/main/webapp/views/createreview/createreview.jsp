@@ -82,7 +82,7 @@
         height:20%;
         font-size: 30px;
         color: yellowgreen;
-        border: 1px solid red;
+      
 
     }
 
@@ -92,15 +92,10 @@
         height:20%;
         font-size: 30px;
         color: yellowgreen;
-        border: 1px solid red;
-
+       
     }
 
 
-    .address {
-        border: 1px solid blue;
-
-    }
 
    .loaction-img1 {
             display: inline-block;
@@ -109,7 +104,7 @@
             margin-right: 25%;
             width: 50%;
             height: 300px;
-            border: 1px solid black;
+       
     }
     .img3{
         display: inline-block;

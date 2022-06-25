@@ -1,11 +1,11 @@
-package com.searchresult.model.vo;
+package com.search.model.vo;
 
 
 public class Search {
 	//getter-setter 기본생성자 만들기
 	private String address;
-	private int areaCode;
-	private int sigunguCode;
+	private int areacode;
+	private int sigungucode;
 	private String cat1;
 	private String cat2;
 	private String contentId;
@@ -19,12 +19,12 @@ public Search() {
 	// TODO Auto-generated constructor stub
 }
 
-public Search(String address, int areaCode, int sigunguCode, String cat1, String cat2, String contentId,
+public Search(String address, int areacode, int sigungucode, String cat1, String cat2, String contentId,
 		String contentTypeId, String firstImage, String mapx, String mapy, String title) {
 	super();
 	this.address = address;
-	this.areaCode = areaCode;
-	this.sigunguCode = sigunguCode;
+	this.areacode = areacode;
+	this.sigungucode = sigungucode;
 	this.cat1 = cat1;
 	this.cat2 = cat2;
 	this.contentId = contentId;
@@ -52,29 +52,29 @@ public void setAddress(String address) {
 /**
  * @return the areaCode
  */
-public int getAreaCode() {
-	return areaCode;
+public int getAreacode() {
+	return areacode;
 }
 
 /**
  * @param areaCode the areaCode to set
  */
-public void setAreaCode(int areaCode) {
-	this.areaCode = areaCode;
+public void setAreacode(int areacode) {
+	this.areacode = areacode;
 }
 
 /**
  * @return the sigunguCode
  */
-public int getSigunguCode() {
-	return sigunguCode;
+public int getSigungucode() {
+	return sigungucode;
 }
 
 /**
  * @param sigunguCode the sigunguCode to set
  */
-public void setSigunguCode(int sigunguCode) {
-	this.sigunguCode = sigunguCode;
+public void setSigungucode(int sigungucode) {
+	this.sigungucode = sigungucode;
 }
 
 /**
@@ -191,7 +191,7 @@ public void setTitle(String title) {
 
 @Override
 public String toString() {
-	return "Search [address=" + address + ", areaCode=" + areaCode + ", sigunguCode=" + sigunguCode + ", cat1=" + cat1
+	return "Search [address=" + address + ", areacode=" + areacode + ", sigungucode=" + sigungucode + ", cat1=" + cat1
 			+ ", cat2=" + cat2 + ", contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", firstImage="
 			+ firstImage + ", mapx=" + mapx + ", mapy=" + mapy + ", title=" + title + "]";
 }
