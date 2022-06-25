@@ -59,7 +59,7 @@
 		const websocket = new WebSocket("ws://localhost:9090/<%=request.getContextPath()%>/chatting");
 		websocket.onopen=e=>{
 			let roomName = <%=request.getParameter("roomName")%>;
-			console.log(roomName);
+			console.log(roomName); 
 			websocket.send(new Message("msg"," ",'',roomName));
 		}
 		websocket.onmessage=e=>{

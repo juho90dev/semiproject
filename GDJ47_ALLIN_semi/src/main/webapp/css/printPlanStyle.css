@@ -3,7 +3,7 @@
 .container {
 width: 100vw;
     height: 600px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin-top: 50px;
     margin-bottom: 50px;
     display: block;
@@ -12,22 +12,27 @@ width: 100vw;
 
 .planTitle {
 	width: 100%;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	font-size: 40px;
 	padding-left: 22px;
+	word-spacing: 1px;
+    letter-spacing: -1px;
+    font-family:"Noto Sans KR";
 }
 
 .forOption {
 	width: 100%;
 	margin-top: 11px;
-	border: 1px solid red;
+	text-align:right;
+	/* border: 1px solid red; */
 }
 
 select#selectDays{
 	
 	width: 320px;
-    margin-left: 30;
-    margin-left: 17px;
+/*     margin-left: 30;
+    margin-left: 17px; */
+    float:right;
 	
 }
 
@@ -37,28 +42,34 @@ select#selectDays{
     height: 80%;
     margin-top: 11px;
     display: flex;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 	
 }
 
 .forMap {
 	width: 50%;
 	height: 100%;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	padding: 20px;
 }
 
 .forPlan {
 	width: 50%;
 	height: 100%;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	overflow-y: scroll;
+}
+
+.forPlan::-webkit-scrollbar{
+	display:none;
+	
 }
 
 .dayTitle{
 	
-	border:1px solid red;
+	/* border:1px solid red; */
 	size: 15px;
+	text-align: right;
 	
 }
 
@@ -68,14 +79,17 @@ select#selectDays{
 }
 
 .plan {
-	width: 100%;
-	height: 90px;
-	border: 1px solid red;
-	border-radius: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	display:block;
-}
+width: 100%;
+    height: 90px;
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    background-color: #e9e9e9;
+    padding-top: 5px;
+    font-family:"Noto Sans KR:wght@100";
+    }
 
 #placeName {
 	margin-bottom: 4px;
@@ -102,4 +116,9 @@ select#selectDays{
 }
 .hide{
 	display:none;
+}
+.optGuide{
+	font-size: 15px;
+    margin-bottom: 3px;
+    font-style: oblique;
 }

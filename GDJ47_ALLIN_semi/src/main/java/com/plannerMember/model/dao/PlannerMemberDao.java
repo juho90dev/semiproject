@@ -1,5 +1,6 @@
 package com.plannerMember.model.dao;
 
+
 import static com.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.admin.model.dao.adminDao;
+
 import com.login.model.dao.LoginDao;
 import com.login.model.vo.Member;
 
@@ -30,22 +31,63 @@ public class PlannerMemberDao {
 	}
 	
 	
-	public List<Member> plannerMember(Connection conn, String grade) {
+//	public List<Member> plannerMember(Connection conn, String grade) {
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		List<Member> result = new ArrayList();
+//		try {
+//			pstmt=conn.prepareStatement(prop.getProperty("selectPlannerMember"));
+//			pstmt.setString(1, grade);
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+////				Member m = new Member();
+////				m.setUserId(rs.getString("MEMBER_ID"));
+////				m.setImage(rs.getString("IMAGE"));
+////				result.add(m);
+//				result.add(LoginDao.getLogin(rs));
+//			}
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return result;
+//	}
+	
+	
+	public List<Member> selectPlannerMemberList(Connection conn,String grade, int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<Member> result = new ArrayList();
+		ResultSet rs = null;
+		List<Member> list = new ArrayList();
+		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectPlannerMember"));
+			pstmt = conn.prepareStatement(prop.getProperty("selectMemberList"));
 			pstmt.setString(1, grade);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-//				Member m = new Member();
-//				m.setUserId(rs.getString("MEMBER_ID"));
-//				m.setImage(rs.getString("IMAGE"));
-//				result.add(m);
-				result.add(LoginDao.getLogin(rs));
+//				Member m = MemberDao.getMember(rs);
+//				list.add(m);
+				list.add(LoginDao.getLogin(rs));
 			}
-			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectPlannerMemberCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -53,4 +95,8 @@ public class PlannerMemberDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	
+	
+	
 }
