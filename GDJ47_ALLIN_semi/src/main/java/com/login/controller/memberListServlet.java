@@ -42,7 +42,7 @@ public class memberListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerpage=5;
+		int numPerpage=10;
 		
 		
 		List<Member> list=new adminService().selectMemberList(cPage, numPerpage);//호출하기

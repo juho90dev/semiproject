@@ -22,8 +22,7 @@ Member m=(Member)session.getAttribute("login");
 				<span class="input_area"><input type="email" name="email" value="<%=m.getEmail()%>" readonly></span>
 				
 				<h4>비밀번호</h4>
-				<span class="input_area"><input type="password" maxlength="15" name="userPwd" value="<%=m.getPassword()%>" readonly></span>
-				<button id="pwdUpdateBtn" type="button">비밀번호 변경</button>
+					<input type="button" value="비밀번호 변경" onclick="fn_updatePassword();">
 
         <h4>전화번호</h4>
 				<span class="input_area"><input type="tel" maxlength="11" name="phone"
@@ -78,6 +77,11 @@ Member m=(Member)session.getAttribute("login");
 	<script>
 		function validate(){
 			return true;
+		}
+		
+		const fn_updatePassword=()=>{
+			open("<%=request.getContextPath()%>/updatePwdMiddle.do?userId=<%=m.getUserId()%>");
+			
 		}
 
 

@@ -110,18 +110,16 @@ public class adminDao {
 	}
 
 
-	public List<Member> selectPlannerList(Connection conn) {
+	public List<Member> selectPlannerList(Connection conn, int cPage, int  numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectPlannerList"));
-//			pstmt.setInt(1, );
-//			pstmt.setInt(2, );
+			pstmt.setInt(1, (cPage-1)* numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-//				Member m=MemberDao.getMember(rs);
-//				list.add(m);
 				list.add(LoginDao.getLogin(rs));
 			}
 			
@@ -134,18 +132,16 @@ public class adminDao {
 	}
 
 
-	public List<Member> selectNormalList(Connection conn) {
+	public List<Member> selectNormalList(Connection conn, int cPage, int  numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectNormalList"));
-//			pstmt.setInt(1, );
-//			pstmt.setInt(2, );
+			pstmt.setInt(1, (cPage-1)* numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-//				Member m=MemberDao.getMember(rs);
-//				list.add(m);
 				list.add(LoginDao.getLogin(rs));
 			}
 			
@@ -198,7 +194,7 @@ public class adminDao {
 		sql=sql.replace("$COL", type);
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, type.equals("userName")?"%"+keyword+"%":keyword);
+			pstmt.setString(1, type.equals("MEMBER_ID")||type.equals("email")?"%"+keyword+"%":keyword);
 			pstmt.setInt(2, (cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
@@ -221,7 +217,7 @@ public class adminDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, type.equals("userName")?"%"+keyword+"%":keyword);
+			pstmt.setString(1, type.equals("MEMBER_ID")||type.equals("email")?"%"+keyword+"%":keyword);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 			
@@ -238,3 +234,4 @@ public class adminDao {
 	
 
 }
+

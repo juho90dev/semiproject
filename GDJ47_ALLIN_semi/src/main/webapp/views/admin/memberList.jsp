@@ -16,7 +16,7 @@
 	section#memberList-container table#tbl-member {width:100%; border:1px solid gray; border-collapse:collapse;}
 	section#memberList-container table#tbl-member th, table#tbl-member td {border:1px solid gray; padding:10px; }
  	div#search-container {margin:0 0 10px 0; padding:3px; }
-    div#search-userId{display:inline-block;}
+    div#search-MEMBER_ID{display:inline-block;}
     div#search-email{display:none;}
     div#search-gender{display:none;}
     div#numPerpage-container{float:right;}
@@ -33,16 +33,16 @@
 		<div id="joinInfoArea">
 				
 				<!-- <h4>아이디</h4>
-				<span class="input_area"><input type="text" maxlength="13" name="userId" value="" readonly></span> -->
+				<span class="input_area"><input type="text" maxlength="13" name="MEMBER_ID" value="" readonly></span> -->
 		<section id="memberList-container">
          <div id="search-container">
         	<select id="searchType">
-        		<option value="userId" <%=searchType!=null&&searchType.equals("userId")?"selected":"" %>>아이디</option>
+        		<option value="MEMBER_ID" <%=searchType!=null&&searchType.equals("MEMBER_ID")?"selected":"" %>>아이디</option>
         		<option value="email"<%=searchType!=null&&searchType.equals("email")?"selected":"" %>>이메일</option>
         	</select>
-        	<div id="search-userId">
+        	<div id="search-MEMBER_ID">
         		<form action="<%=request.getContextPath()%>/searchMember.do">
-        			<input type="hidden" name="searchType" value="userId" >
+        			<input type="hidden" name="searchType" value="MEMBER_ID" >
         			<input type="text" name="searchKeyword" size="25" 
         			placeholder="검색할 아이디를 입력하세요" list="ids">
         			<datalist id="ids">
@@ -144,7 +144,7 @@
 					</ul>
 		</div>
 		 </section>
-		 	<script>
+	<script>
 		$(()=>{
 			$("#searchType").change(e=>{
 				/* alert("type이 변경됨"); */

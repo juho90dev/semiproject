@@ -19,13 +19,13 @@ import com.login.model.vo.Member;
  * Servlet implementation class MemberSearch
  */
 @WebServlet("/searchMember.do")
-public class MemberSearch extends HttpServlet {
+public class MemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearch() {
+    public MemberSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -90,8 +90,7 @@ public class MemberSearch extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", result);
 		
-		request.getRequestDispatcher("/views/member/memberList.jsp")
-		.forward(request, response);
+		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request,response);
 	}
 
 	/**

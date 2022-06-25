@@ -56,6 +56,13 @@ public class LoginService {
 		close(conn);
 		return idCheck;
 	}
+	
+	public int checkPwd(String userPwd) {
+		Connection conn=getConnection();
+		int pwdCheck=dao.checkPwd(conn,userPwd);
+		close(conn);
+		return pwdCheck;
+	}
 
 	public int checkLoginEmail(String email) {
 		Connection conn=getConnection();
@@ -90,6 +97,17 @@ public class LoginService {
 		close(conn);
 		return result;
 	}
+
+	public int updatePassword(String userId, String newPw) {
+		Connection conn=getConnection();
+		int result=dao.updatePassword(conn,userId,newPw);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+
 
 
 

@@ -37,16 +37,16 @@ public class adminService {
 		return result;
 	}
 
-	public List<Member> selectPlannerList() {
+	public List<Member> selectPlannerList(int cPage ,int numPerpage) {
 		Connection conn=getConnection();
-		List<Member> result=dao.selectPlannerList(conn);
+		List<Member> result=dao.selectPlannerList(conn,cPage, numPerpage);
 		close(conn);
 		return result;
 	}
 
-	public List<Member> selectNormalList() {
+	public List<Member> selectNormalList(int cPage ,int numPerpage) {
 		Connection conn=getConnection();
-		List<Member> result=dao.selectNormalList(conn);
+		List<Member> result=dao.selectNormalList(conn,cPage, numPerpage);
 		close(conn);
 		return result;
 	}

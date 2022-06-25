@@ -32,11 +32,66 @@ public class findNormalServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Member> list=new adminService().selectNormalList();//호출하기
+		int cPage;
+		try{
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		int numPerpage=10;
+		
+		
+		List<Member> list=new adminService().selectNormalList(cPage, numPerpage);//호출하기
+		
+//		List<Member> list=new adminService().selectMemberList();//호출하기
+		
+		
+		request.setAttribute("list", list);
 		
 		
 		//list를 페이지에 넘여야 하니까 request.setAttribute에 담아줌
-		request.setAttribute("list", list);
+		
+//		
+		//사용자가 원하는 페이지를 요청할 수 있게 페이지바를 만들어보자
+		//1. 전체 페이지수
+		int totalData=new adminService().selectMemberCount();
+		int totalPage=(int)Math.ceil((double)totalData/5);
+		
+		//2. 출력할 페이지번호의 갯수 정하기
+		int pageBarSize=5;
+		
+		//3. 출력할 페이지번호 시작, 끝 정하기
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		
+		//4. pageBar생성하기
+		String pageBar="";
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+					+"/memberList.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+		}
+		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+="<span>"+pageNo+"<span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()
+				+"/memberList.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/memberList.do?cPage="+pageNo+"'>[다음]</a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);
 		
 		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request,response);
 	}
