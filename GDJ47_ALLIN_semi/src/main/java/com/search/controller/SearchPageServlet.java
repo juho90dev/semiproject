@@ -15,7 +15,7 @@ import com.search.model.vo.Search;
 /**
  * Servlet implementation class SearchPageServlet2
  */
-@WebServlet("/searchPage.do")
+@WebServlet("/search/SearchPage.do")
 public class SearchPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
