@@ -201,6 +201,8 @@
 									        image : markerImage // 마커 이미지 
 									    });
 									    
+									    printOverlay(marker); //TODO 0624) 마커 클릭 時, 발생할 이벤트
+									    
 									    //마커 간 선으로 연결하기 ------------------------------------------------------------------------
 			
 										logArr.push(new kakao.maps.LatLng(myLog[i].latitude, myLog[i].longitude));

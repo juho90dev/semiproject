@@ -364,8 +364,9 @@ var customContent = '<div class="wrap">' +
 				}    			
     		}
     		
+    		
     		dropZone.removeChild(e.target);
-		    		
+
     	});
  	
     };
@@ -630,12 +631,10 @@ function addMarkerFunc(lat,lng,placeName){ //새로 추가하는 마커들 = 아
 /* 	marker.addEventListener("click",e=>{
 		alert("마커!");
 	}) */
-	console.log("????????!!", marker);    
     
     printOverlay(marker); //마커 클릭 시, 내가 저장했던 내용을 확인할 수 있음!
     
 }    
-
 
 
 
