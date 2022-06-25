@@ -135,10 +135,10 @@
      
         const toggleBtn = document.querySelector('.material-symbols-outlined');
         const menu = document.querySelector('.navbar_menu');
-        toggleBtn.addEventListener('click', () => {
+        /* toggleBtn.addEventListener('click', () => {
             menu.classList.toggle('active');
             icons.classList.toggle('active');
-        })
+        }) */
         
         
                 const logout=()=>{

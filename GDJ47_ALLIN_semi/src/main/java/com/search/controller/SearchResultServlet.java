@@ -692,6 +692,10 @@ public class SearchResultServlet extends HttpServlet {
 				cat2 = "A0502";
 			}
 		}
+		
+		 List<Search> s = new SearchService().search(cat1,cat2, areacode,sigungucode);
+	
+		request.setCharacterEncoding("UTF-8"); request.setAttribute("information",s);
 		request.getRequestDispatcher("/views/search/searchpage.jsp").forward(request, response);
 	}
 	
