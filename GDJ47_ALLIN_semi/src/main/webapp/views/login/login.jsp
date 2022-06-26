@@ -30,10 +30,11 @@
 
             </form>
 
-	<a href="/GDJ47_ALLIN_semi/views/login/idFind.jsp">아이디 찾기</a> | <a href="/GDJ47_ALLIN_semi/views/login/passwordFind.jsp">비밀번호 찾기</a>
+	<a href="<%=request.getContextPath() %>/idFindMiddle.do">아이디 찾기</a> | <a href="<%=request.getContextPath() %>/pwdFindMiddle.do">비밀번호 찾기</a>
+	<!-- 	<a href="/GDJ47_ALLIN_semi/views/login/idFind.jsp">아이디 찾기</a> | <a href="/GDJ47_ALLIN_semi/views/login/passwordFind.jsp">비밀번호 찾기</a> -->
          
          <div class="auth">
-            Or login with
+            <a href="<%=request.getContextPath()%>">HOME으로 이동</a>
          </div>
 <!--       
 		<div class="links">
@@ -55,7 +56,8 @@
  		
  		</div>
          <div class="signup">
-            회원이 아니라면 <a href="/GDJ47_ALLIN_semi/views/login/join.jsp">지금 가입하세요</a>
+            회원이 아니라면 <a href="<%=request.getContextPath()%>/JoinEndMiddleServlet.do">지금 가입하세요</a>
+            <!--             회원이 아니라면 <a href="/GDJ47_ALLIN_semi/views/login/join.jsp">지금 가입하세요</a> -->
          </div>
          
       </div>

@@ -107,6 +107,24 @@ public class LoginService {
 		return result;
 	}
 
+	public Member checkPassword(String userId, String email) {
+		
+		Connection conn=getConnection();//db연결
+		Member l=dao.checkPassword(conn, userId, email);
+		close(conn);
+		return l;
+		
+	}
+
+	public int finalPwd(String userId, String password) {
+		Connection conn=getConnection();
+		int result=dao.finalPwd(conn,userId,password);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 
 
 

@@ -14,16 +14,16 @@ import com.login.model.service.LoginService;
 import com.login.model.vo.Member;
 
 /**
- * Servlet implementation class updateMemberr
+ * Servlet implementation class pwdRefreshServlet
  */
-@WebServlet("/updateMemberr.do")
-public class updateMemberr extends HttpServlet {
+@WebServlet("/pwdRefresh.do")
+public class pwdRefreshServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateMemberr() {
+    public pwdRefreshServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,34 +32,30 @@ public class updateMemberr extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
-		Member m=new Member();
-		m.setUserId(request.getParameter("userId"));
-		m.setEmail(request.getParameter("email"));
-		m.setPassword(request.getParameter("password"));
-		m.setPhone(request.getParameter("phone"));
-		m.setCity(request.getParameter("addressDo1"));
-		m.setCountry(request.getParameter("addressDogun"));
+		// TODO Auto-generated method stub
+		//클라이언트가 보낸 userId, password값 가져오기
+		String userId=request.getParameter("userId");
+		String email=request.getParameter("email");
 		
-		int result=new LoginService().updateMemberr(m);
+		//db에 연결하기
+		Member l=new LoginService().checkPassword(userId, email);
+		System.out.println(l);
 		
 		String msg="",loc="";
 		
-		if(result>0) {
-			msg="정상적으로 정보가 수정되었습니다";
-			//session에 저장된 로인정보도변경
-			HttpSession session=request.getSession();
-			session.setAttribute("loginMember", m);
-			loc="/logout.do";
+		if(l!=null) {
+			msg="회원정보가 일치 합니다. 비밀번호를 변경하세요!";
+			loc="/pwdInitialMiddle.do";
+//			response.sendRedirect("/GDJ47_ALLIN_semi/pwdInitial.do");
+			
 		}else {
-			msg="정보수정을 실패했습니다. 다시 시도하세요!";
-			loc="/views/mypage/mypagee.jsp";
+			msg="회원정보가 일치하지 않습니다.";
+			loc="/pwdInitialMiddle.do";
+//			response.sendRedirect("/GDJ47_ALLIN_semi/pwdFindMiddle.do");
 		}
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		
-		
 		
 		RequestDispatcher dispatch =request.getRequestDispatcher("/views/common/response.jsp");
 		dispatch.forward(request, response);
