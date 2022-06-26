@@ -14,28 +14,18 @@
          <form id="loginFrm" action="<%=request.getContextPath()%>/pwdRefresh.do" method="post">
             <a>가입한 아이디/이메일을 작성해주세요.</a>
             <div class="input-field">
-               <input type="text" required name="userId" class="input-check-userId">
+               <input type="text" required name="userId">
                <label>아이디 입력</label>
             </div>
             <div class="input-field">
-               <input type="text" required name="email" class="input-check-email">
+               <input type="text" required name="email">
                <label>이메일 입력</label>
             </div>
             <div class="button">
                <div class="inner"></div>
-               <button type="button" onclick="refresh_pwd();">button</button>
-            </div>
-            
-            
-            <div>
-            <font id="checkEmail" size="2"></font>
+               <button>button</button>
             </div>
  
       </div>
-      
-      
-      
-      
-      
 </body>
 </html>
