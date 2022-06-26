@@ -43,7 +43,7 @@
 	const deleteNotice=(noticeNo)=>{
 		console.log(noticeNo);
 		$.ajax({
-			url:"<%=request.getContextPath()%>/deleteNotice.do",
+			url:"<%=request.getContextPath()%>/notice/deleteNotice.do",
 			data:{"noticeNo":noticeNo},
 			success: data=()=>{
 				alert("삭제완료!");
