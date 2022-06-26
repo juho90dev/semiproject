@@ -10,13 +10,13 @@
 	<table class="table">
 		<caption>표 제목</caption>{
 		<%if(login!=null) {%>
-		<tr>
+<%-- 		<tr>
 			<td colspan="6" style="text-align:right">
 				<button class="button button4" onclick="location.assign('<%=request.getContextPath()%>/boardWrite.do')">
 					글 작성
 				</button>
 			</td>
-		</tr>
+		</tr> --%>
 		<%} %>
 		<tr>
 			<th></th>
@@ -33,9 +33,9 @@
 				
 				<%if(boards.isEmpty()){%>
        			<tr>
-       				<td colspan="11"><h3>조회된결과가 없습니다!</h3></td>
+       				<td colspan="11"><h3>조회된 내용이 없습니다.</h3></td>
        			</tr>
-       			<%} else {
+       			<%} else  {
 	       			for(Board b : boards){%>
 					<tr>
 					<td></td>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
+
 <form action="<%=request.getContextPath()%>/insertBoard.do" method="post" >
 	<table width="650" height="350" border="1" cellpadding="5" align="center">
 		<tr></tr>
@@ -31,5 +32,4 @@
             </tr>
 	</table>
 </form>
-
 <%@ include file="/views/common/footer.jsp"%>

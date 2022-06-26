@@ -86,15 +86,14 @@
                                 <li><a href="#" aria-label="subemnu">submenu</a></li>
                                
                             </ul> --></li>
+                  <li><a href="<%=request.getContextPath()%>/boardWrite.do?login.getUserId()">신고게시판</a></li>
                   <li><a href="javascript:openWeather()" >날씨예보</a></li>
-                  <li><a href="">공지사항</a></li>
+                  <li><a href="<%=request.getContextPath()%>/noticeList.do"">공지사항</a></li>
 
                   
 
                    <%if(login!=null&&login.getUserId().equals("admin")) {%>
-                  <li><a href="<%=request.getContextPath()%>/boardList.do">신고게시판</a></li>
                    <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
-                   <li id="orderList"><a href="<%=request.getContextPath()%>/paid.do">서비스오더내역</a></li>
                    <%}%>
                 
                </ul>
@@ -163,7 +162,7 @@
         
         
         const openPay=()=>{
-           window.open("<%=request.getContextPath()%>/views/pay/pay.jsp");
+           location.assign("<%=request.getContextPath()%>/views/pay/pay.jsp");
         }
         
         const login=()=>{

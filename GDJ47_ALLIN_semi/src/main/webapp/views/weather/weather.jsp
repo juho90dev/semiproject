@@ -8,7 +8,7 @@
 </head>
 <body>
 <label>날씨</label>
-	<!-- <h2>단기예보</h2>
+	<!--  <h2>단기예보</h2>
 		<div class="citytravel1">
 
           <select name="addressDo" id="addressDo" onchange="addressDochange(this)">
@@ -37,7 +37,7 @@
           </select>
           <button onclick="checkShortWeather();">실시간날씨조회</button> 
           <button onclick="checkShortWeather();">실시간날씨조회</button>
-        </div> -->
+        </div>  -->
 
 	<div>
 	<h2>중기예보</h2>
