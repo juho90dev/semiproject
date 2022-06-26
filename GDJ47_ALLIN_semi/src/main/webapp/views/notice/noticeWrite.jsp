@@ -10,7 +10,7 @@
   </style>
 <section id="notice-container">
 	<h2>공지사항 작성</h2>
-    <form action="<%=request.getContextPath() %>/notice/noticeWriteEnd.do" method="post" enctype="multipart/form-data">
+    <form action="<%=request.getContextPath() %>/noticeWriteEnd.do" method="post" enctype="multipart/form-data">
         <table id="tbl-notice">
         <tr>
             <th>제 목</th>

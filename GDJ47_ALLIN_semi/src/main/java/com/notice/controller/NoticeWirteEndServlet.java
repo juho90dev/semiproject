@@ -18,7 +18,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 /**
  * Servlet implementation class NoticeWirteEndServlet
  */
-@WebServlet("/notice/noticeWriteEnd.do")
+@WebServlet("/noticeWriteEnd.do")
 public class NoticeWirteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -83,10 +83,10 @@ public class NoticeWirteEndServlet extends HttpServlet {
 			String loc="";
 			if(result>0) {
 				msg="공지사항등록완료!";
-				loc="/notice/noticeList.do";
+				loc="/noticeList.do";
 			}else {
 				msg="공지사항등록실패!";
-				loc="/notice/noticeWrite.do";
+				loc="/noticeWrite.do";
 			}
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);

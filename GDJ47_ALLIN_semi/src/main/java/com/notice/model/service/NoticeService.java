@@ -1,7 +1,6 @@
 package com.notice.model.service;
 
 import static com.common.JDBCTemplate.*;
-import static com.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
@@ -35,6 +34,15 @@ public class NoticeService {
 		Notice n=dao.selectNotice(conn,no);
 		close(conn);
 		return n;
+	}
+	
+	public int deleteNotice(int noticeNo) {
+		Connection conn = getConnection();
+		int result=dao.deleteNotice(conn, noticeNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 }
