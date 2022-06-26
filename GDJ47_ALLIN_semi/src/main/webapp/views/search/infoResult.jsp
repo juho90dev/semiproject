@@ -391,7 +391,7 @@ function changeCategoryClass(el) {
             </div>
             <div id="btn">
                 <button type="button" class="btn btn-success" 
-                onclick="location.assign('<%=request.getContextPath()%>/views/createreview/createreview.jsp')">작성하기</button>
+                onclick="location.assign('<%=request.getContextPath()%>/createreview.do')">작성하기</button>
             </div>
 
             <div class="dropdown">

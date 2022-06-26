@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
-	   <div id="container1">
-        <div class="title1">안녕 </div>
-        <div class="address">경기 수원시 장안구 영화동 320-2</div>
-        <div class="loaction-img1">
-            <img src="" alt="" class="img3">
-        </div>
-    </div>
+
     <div id="board">
         <div class="title2"> 장소 리뷰 작성하기 </div>
         <form action="" method="post">
