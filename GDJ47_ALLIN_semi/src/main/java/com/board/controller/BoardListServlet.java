@@ -43,8 +43,9 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=5;
 		}
+		String id = request.getParameter("memberId");
 		
-		List<Board> boards = new BoardService().selectBoardList(cPage, numPerpage);
+		List<Board> boards = new BoardService().selectBoardList(id, cPage, numPerpage);
 		int totalBoard = new BoardService().selectBoardCount();
 		int totalPage = (int)Math.ceil((double)totalBoard/numPerpage);
 		

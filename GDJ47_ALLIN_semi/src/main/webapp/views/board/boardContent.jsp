@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<%@ page import="java.util.List, com.board.model.vo.Board" %>
+<%
+	List<Board> boards=(List<Board>)request.getAttribute("boards");
+%>
 <style>
 	td {
 		text-align: left !important;
@@ -30,7 +34,7 @@
  <tbody>
   <tr>
    <th align="center">글번호</th>
-   <td> </td>
+   <td>></td>
   </tr>
   <tr>
    <th align="center">제목</th>
@@ -48,7 +52,7 @@
 <tr>
 <td colspan="2" align="center">
  <input type="button" value="목록" onclick="location.assign('<%=request.getContextPath()%>/boardList.do') " />
- <input type="button" value="수정" onclick=" '"/>
+ <input type="button" value="수정" onclick="location.assign('<%=request.getContextPath()%>/updateBoard.do') "/>
  <input type="button" value="삭제" onclick=" "/>
  </td>
  </tr>
