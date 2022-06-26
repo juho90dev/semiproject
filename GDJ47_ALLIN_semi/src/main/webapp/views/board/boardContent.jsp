@@ -3,7 +3,7 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ page import="java.util.List, com.board.model.vo.Board" %>
 <%
-	List<Board> boards=(List<Board>)request.getAttribute("boards");
+	Board b =(Board)request.getAttribute("boards");
 %>
 <style>
 	td {
@@ -34,15 +34,15 @@
  <tbody>
   <tr>
    <th align="center">글번호</th>
-   <td>></td>
+   <td><%=b.getBoardNum()%></td>
   </tr>
   <tr>
    <th align="center">제목</th>
-   <td> </td>
+   <td></td>
   </tr>
   <tr>
    <th align="center">작성자</th>
-   <td> </td>
+   <td></td>
   </tr>
   <tr>
    <td colspan="2" height="200px"> </td>

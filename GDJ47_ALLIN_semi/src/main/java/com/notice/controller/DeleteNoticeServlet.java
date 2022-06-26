@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.notice.model.service.NoticeService;
 import com.request.model.service.RequestService;
 
 /**
@@ -33,7 +34,7 @@ public class DeleteNoticeServlet extends HttpServlet {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		System.out.println(noticeNo);
-		int result=new RequestService().deleteRequest(noticeNo);
+		int result=new NoticeService().deleteNotice(noticeNo);
 		
 	}
 

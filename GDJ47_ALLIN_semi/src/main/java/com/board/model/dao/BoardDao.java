@@ -84,9 +84,9 @@ public class BoardDao {
 	}
 	
 	
-	public List<Board> contentBoard(Connection conn, int no){
+	public Board contentBoard(Connection conn, int no){
 		PreparedStatement pstmt = null;
-		List<Board> result  = new ArrayList();
+		Board b  = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("contentBoard"));
@@ -94,14 +94,14 @@ public class BoardDao {
 
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				result.add(getBoard(rs));
+				if(rs.next()) b=getBoard(rs);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return result;
+		}return b;
 	}
 	
 	private Board getBoard(ResultSet rs) throws SQLException{

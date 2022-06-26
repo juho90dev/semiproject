@@ -41,9 +41,9 @@ public class BoardService {
 		return result;
 	}
 	
-	public List<Board> contentBoard(int no){
+	public Board contentBoard(int no){
 		Connection conn = getConnection();
-		List<Board> result = dao.contentBoard(conn, no);
+		Board result = dao.contentBoard(conn, no);
 		close(conn);
 		return result;
 	}
