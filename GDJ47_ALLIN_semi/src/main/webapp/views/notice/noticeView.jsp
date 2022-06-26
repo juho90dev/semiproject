@@ -31,10 +31,13 @@
             <th>내 용</th>
             <td><%=n.getNoticeContent() %></td>
         </tr>
-        <tr>
+ 		<tr>
             <th colspan="2">
+            <%if(login!=null&&login.getUserId().equals("admin")){ %>
                 <button onclick="deleteNotice(<%=n.getNoticeNo() %>)">삭제</button>
+           <%} %>
             </th>
+        
         </tr>
     </table>
 </section>
