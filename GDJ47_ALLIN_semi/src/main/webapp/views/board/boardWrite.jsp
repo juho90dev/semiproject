@@ -4,7 +4,8 @@
 
 <form action="<%=request.getContextPath()%>/insertBoard.do" method="post" >
 	<table width="650" height="350" border="1" cellpadding="5" align="center">
-		
+		<tr></tr>
+		<br><br>
 		<tr>
 			<td> 작성자 아이디 </td>
             <td><input type="text" name="memberId" value="<%=login.getUserId()%>" readonly></td>

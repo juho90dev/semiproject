@@ -33,9 +33,9 @@
 				
 				<%if(boards.isEmpty()){%>
        			<tr>
-       				<td colspan="11"><h3>조회된결과가 없습니다!</h3></td>
+       				<td colspan="11"><h3>관리자만 볼 수 있습니다.</h3></td>
        			</tr>
-       			<%} else {
+       			<%} else if(login!=null&&login.getUserId().equals("admin")) {
 	       			for(Board b : boards){%>
 					<tr>
 					<td></td>
