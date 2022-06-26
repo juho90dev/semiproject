@@ -4,6 +4,8 @@
 <%
 Member m=(Member)session.getAttribute("login");
 %> 
+
+<%@ include file="/views/common/header.jsp"%>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     
     
@@ -15,22 +17,22 @@ Member m=(Member)session.getAttribute("login");
 		<a href="<%=request.getContextPath() %>/boardList.do?memberId=<%=m.getUserId()%>">신고한 내역</a>
 			<form id="joinForm" action="<%=request.getContextPath() %>/updateMemberr.do" method="post" onsubmit="return validate();">
 				<h1>정보 수정</h1>
-				
+				<br>
 				<h4>아이디</h4>
-				<span class="input_area"><input type="text" maxlength="13" name="userId" value="<%=m.getUserId()%>" readonly></span>
+				<span class="input_area"><input type="text" maxlength="13" name="userId" value="<%=m.getUserId()%>" readonly></span><br><br>
 
         <h4>이메일</h4>
-				<span class="input_area"><input type="email" name="email" value="<%=m.getEmail()%>" readonly></span>
+				<span class="input_area"><input type="email" name="email" value="<%=m.getEmail()%>" readonly></span><br><br>
 				
 				<h4>비밀번호</h4>
-					<input type="button" value="비밀번호 변경" onclick="fn_updatePassword();">
+					<input type="button" value="비밀번호 변경" onclick="fn_updatePassword();"><br><br>
 				
 				    
 				
 
         <h4>전화번호</h4>
 				<span class="input_area"><input type="tel" maxlength="11" name="phone"
-										placeholder="(-없이)01012345678" value="<%=m.getPhone()%>"></span>
+										placeholder="(-없이)01012345678" value="<%=m.getPhone()%>"></span><br><br>
 								
 		<h4>관심지역</h4>
           <div class="citytravel1">
@@ -62,7 +64,7 @@ Member m=(Member)session.getAttribute("login");
            </select>
          </div>
          
-       
+
 										
 				
 
@@ -77,7 +79,7 @@ Member m=(Member)session.getAttribute("login");
 	<script>
 	
 	const fn_updatePassword=()=>{
-		open("<%=request.getContextPath()%>/updatePwdMiddle.do?userId=<%=m.getUserId()%>");
+		location.replace("<%=request.getContextPath()%>/updatePwdMiddle.do?userId=<%=m.getUserId()%>");
 		
 	}
 	
@@ -224,3 +226,5 @@ Member m=(Member)session.getAttribute("login");
 
 
    </body>
+   
+   <%@ include file="/views/common/footer.jsp"%>

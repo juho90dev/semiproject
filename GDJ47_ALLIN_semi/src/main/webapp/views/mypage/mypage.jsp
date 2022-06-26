@@ -4,6 +4,7 @@
 <%
 Member m=(Member)session.getAttribute("login");
 %> 
+<%@ include file="/views/common/header.jsp"%>
     
     
     <body>
@@ -17,17 +18,17 @@ Member m=(Member)session.getAttribute("login");
 				<h1>정보 수정</h1>
 				
 				<h4>아이디</h4>
-				<span class="input_area"><input type="text" maxlength="13" name="userId" value="<%=m.getUserId()%>" readonly></span>
+				<span class="input_area"><input type="text" maxlength="13" name="userId" value="<%=m.getUserId()%>" readonly></span><br><br>
 
         <h4>이메일</h4>
-				<span class="input_area"><input type="email" name="email" value="<%=m.getEmail()%>" readonly></span>
+				<span class="input_area"><input type="email" name="email" value="<%=m.getEmail()%>" readonly></span><br><br>
 				
 				<h4>비밀번호</h4>
-					<input type="button" value="비밀번호 변경" onclick="fn_updatePassword();">
+					<input type="button" value="비밀번호 변경" onclick="fn_updatePassword();"><br><br>
 
         <h4>전화번호</h4>
 				<span class="input_area"><input type="tel" maxlength="11" name="phone"
-										placeholder="(-없이)01012345678" value="<%=m.getPhone()%>"></span>
+										placeholder="(-없이)01012345678" value="<%=m.getPhone()%>"></span><br><br>
 								
 		<h4>관심지역</h4>
           <div class="citytravel1">
@@ -57,13 +58,13 @@ Member m=(Member)session.getAttribute("login");
            <select name="addressDogun" id="addressDogun">
              <option value="sigundo">시/군/구</option>
            </select>
-         </div>
+         </div><br><br>
          
          <h4>소개글</h4>
-		 <textarea class="input_area" name="introduce" id="introduce" cols="25" maxlength="100" rows="4"></textarea>
+		 <textarea class="input_area" name="introduce" id="introduce" cols="25" maxlength="100" rows="4"></textarea><br><br>
 
 		 <h4>프로필</h4>
-		 <img  name="image" id="preview" height="70" width="70"><br><br><input type="file" onchange="readURL(this);" >
+		 <img  name="image" id="preview" height="70" width="70"><br><br><input type="file" onchange="readURL(this);" ><br><br>
 										
 				
 
@@ -81,7 +82,7 @@ Member m=(Member)session.getAttribute("login");
 		}
 		
 		const fn_updatePassword=()=>{
-			open("<%=request.getContextPath()%>/updatePwdMiddle.do?userId=<%=m.getUserId()%>");
+			location.replace("<%=request.getContextPath()%>/updatePwdMiddle.do?userId=<%=m.getUserId()%>");
 			
 		}
 
@@ -227,3 +228,4 @@ Member m=(Member)session.getAttribute("login");
 
 
    </body>
+   <%@ include file="/views/common/footer.jsp"%>

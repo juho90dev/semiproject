@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="/views/common/header.jsp"%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,11 +18,12 @@
     <input type="password" required maxlength="15" name="password" class="input_pwd" >
     </span>
     <br><br>
-    <font id="checkPwd" size="3"></font>
+    <font id="checkPwd" size="3"></font><br>
     <h4>새 비밀번호</h4>
     <span class="input_area">
     <input type="password" required name="password_new" id="password_" class="input_password">
     </span>
+    <br><br>
     <h4>비밀번호 확인</h4>
     <span class="input_area">
     <input type="password" required id="password_2" class="input_password2" >

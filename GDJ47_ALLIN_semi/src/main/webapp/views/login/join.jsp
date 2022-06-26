@@ -119,6 +119,11 @@
         </form>
 		
 		
+		
+		<div class="auth">
+            <a href="<%=request.getContextPath()%>">HOME 으로 돌아가기</a>
+         </div>
+		
       </div>
       
       

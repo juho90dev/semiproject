@@ -9,7 +9,7 @@
 <body>
 		<script>
 		alert('로그인 실패\n로그인 페이지 이동합니다.');
-		location.href="<%=request.getContextPath()%>/views/login/login.jsp";
+		location.href="<%=request.getContextPath()%>/LoginMiddleServlet.do";
 		</script>
 </body>
 </html>
