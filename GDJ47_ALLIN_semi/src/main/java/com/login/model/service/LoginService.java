@@ -116,6 +116,15 @@ public class LoginService {
 		
 	}
 
+	public int finalPwd(String userId, String password) {
+		Connection conn=getConnection();
+		int result=dao.finalPwd(conn,userId,password);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 
 
 

@@ -367,6 +367,26 @@ public class LoginDao {
 
 
 
+		public int finalPwd(Connection conn, String userId, String password) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("finalPwd"));
+				pstmt.setString(1,password);
+				pstmt.setString(2, userId);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+
+
+
+
+
+
 
 
 
