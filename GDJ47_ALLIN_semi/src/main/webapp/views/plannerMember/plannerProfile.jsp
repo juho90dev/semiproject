@@ -46,6 +46,9 @@
 
 
 			<hr>
+			<div class="sourceContainer">
+				<p id="iconSource">Icon Attribution : https://www.iconfinder.com/Chanut-is </p>
+			</div>
 		</div>
 	</div>
 </div>
@@ -90,21 +93,32 @@
 						forTitle.innerText = e.plannerTitle;
 						forTitle.classList.add("plannerTitle");
 						const forTheme = document.createElement("p");
-						forTheme.innerText = e.theme;
+						//forTheme.innerText = e.theme;
+						forTheme.innerHTML = "<span style='font-weight:600'>테마 | </span>"+e.theme;
 						forTheme.classList.add("plannerTheme");
 						textZone.appendChild(forTitle);
 						textZone.appendChild(forTheme);
 						
 						const img = document.createElement("div"); //"썸네일"은 추후 구현 예정
+						//0625) 임시 방편 : 썸네일 대신, 테마별 "아이콘"으로 대표 이미지를 표시함
 						img.classList.add("planImg");
+						
+						switch(e.theme){
+						
+						case '맛집' : img.innerHTML = "<img src='<%=request.getContextPath()%>/images/themeIcons/forFood.png' width='80' height='80' style='padding:5px;'/>";break;
+						case '액티비티' : img.innerHTML = "<img src='<%=request.getContextPath()%>/images/themeIcons/forActivity.png' width='80' height='80' style='padding:5px;'/>";break;
+						case '자연' : img.innerHTML = "<img src='<%=request.getContextPath()%>/images/themeIcons/forNature.png' width='80' height='80' style='padding:5px;'/>";break;
+						case '힐링' : img.innerHTML = "<img src='<%=request.getContextPath()%>/images/themeIcons/forHealing.png' width='80' height='80' style='padding:5px;'/>";break;
+						case '유적지' : img.innerHTML = "<img src='<%=request.getContextPath()%>/images/themeIcons/forHistoricSite.png' width='80' height='80' style='padding:5px;'/>";break;
+						case '자유여행' : img.innerHTML = "<img src='<%=request.getContextPath()%>/images/themeIcons/forFreedom.png' width='80' height='80' style='padding:5px;'/>";break;
+						
+						}
 						
 						plannerInfo.appendChild(textZone);
 						plannerInfo.appendChild(img);
-						planner.appendChild(plannerInfo);
-						
+						planner.appendChild(plannerInfo);						
 						plannerZone.appendChild(planner);
-	
-					
+						
 					});
 	
 				},
@@ -141,19 +155,19 @@
 
 .textZone{
 
-    width: 380px;
-    height: 130px;
-    border: 1px solid red;
+	width: 380px;
+    height: 100%;
+/*     border: 1px solid red; */
     float: left;
 
 }
 
 .planImg{
 
-    border: 1px solid green;
+/*     border: 1px solid green; */
     border-radius: 5px;
-    width: 130px;
-    height: 130px;
+    width: 80px;
+    height: 80px;
     float: right;
     margin: 5px;
 
@@ -183,25 +197,46 @@
 
 .planner{
 
-	border : 1px solid blue;
-	width : 550px;
-	height : 150px;
-	margin : 10px;
-	border-radius : 10px;
-	background-color:rgba(255, 255, 255, 0.7);
+	width: 523px;
+    height: 90px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #e9e9e9;
 }
 
 .plannerTitle{
 
-	
-	font-size : 20px;
+    font-size: 23px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: 600;
 
 }
 
 .plannerTheme{
 
+	margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: right;
+    margin-right: 15px;
+    font-size: 15px;
 	
 }
+
+
+p#iconSource{
+
+	text-align: left;
+    font-size: 13px;
+    margin-top: -6px;
+    margin-left: 547px;
+
+}
+
+.sourceContainer{
+	display : flex;
+}
+
 
 .words{
 
