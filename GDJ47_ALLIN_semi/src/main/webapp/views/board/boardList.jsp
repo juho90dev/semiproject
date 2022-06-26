@@ -41,7 +41,7 @@
 					<td></td>
 					<td><%=b.getBoardNum()%></td>
 					<td>
-						<a href="<%=request.getContextPath()%>/boardText.do?no=<%=b.getBoardNum()%>">
+						<a href="<%=request.getContextPath()%>/boardContent.do?no=<%=b.getBoardNum()%>">
 						<%=b.getTitle() %>
 					</td>
 					<td><%=b.getMemberId() %></td>
