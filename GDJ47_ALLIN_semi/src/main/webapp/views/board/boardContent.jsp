@@ -3,7 +3,7 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ page import="java.util.List, com.board.model.vo.Board" %>
 <%
-	Board b =(Board)request.getAttribute("boards");
+	Board b =(Board)request.getAttribute("board");
 %>
 <style>
 	td {
@@ -34,26 +34,24 @@
  <tbody>
   <tr>
    <th align="center">글번호</th>
-   <td><%=b.getBoardNum()%></td>
+   <td><%=b.getBoardNum()%> </td>
   </tr>
   <tr>
    <th align="center">제목</th>
-   <td></td>
+   <td><%=b.getTitle()%></td>
   </tr>
   <tr>
    <th align="center">작성자</th>
-   <td></td>
+   <td><%=b.getMemberId()%></td>
   </tr>
   <tr>
-   <td colspan="2" height="200px"> </td>
+   <td colspan="2" height="200px"><%=b.getContent()%> </td>
   </tr>
  </tbody>
 
 <tr>
 <td colspan="2" align="center">
  <input type="button" value="목록" onclick="location.assign('<%=request.getContextPath()%>/boardList.do') " />
- <input type="button" value="수정" onclick="location.assign('<%=request.getContextPath()%>/updateBoard.do') "/>
- <input type="button" value="삭제" onclick=" "/>
  </td>
  </tr>
 </table>

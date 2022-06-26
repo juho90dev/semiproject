@@ -86,16 +86,13 @@ public class BoardDao {
 	
 	public Board contentBoard(Connection conn, int no){
 		PreparedStatement pstmt = null;
-		Board b  = null;
 		ResultSet rs = null;
+		Board b  = null;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("contentBoard"));
 			pstmt.setInt(1, no);
-
 			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				if(rs.next()) b=getBoard(rs);
-			}
+			if(rs.next()) b=getBoard(rs);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

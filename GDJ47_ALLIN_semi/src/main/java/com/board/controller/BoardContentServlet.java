@@ -33,8 +33,8 @@ public class BoardContentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int no =Integer.parseInt(request.getParameter("no"));
-		request.setAttribute("boards",new BoardService().contentBoard(no));
-		request.getRequestDispatcher("views/board/boardContent.jsp").forward(request, response);
+		request.setAttribute("board",new BoardService().contentBoard(no));
+		request.getRequestDispatcher("/views/board/boardContent.jsp").forward(request, response);
 	}
 
 	/**
