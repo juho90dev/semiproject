@@ -17,10 +17,10 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-   <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
-   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-   
-   <title>ALL IN</title>
+	<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/HeaderStyle.css"/> --%>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	
+	<title>ALL IN</title>
 </head>
 
 <body>
@@ -36,8 +36,10 @@
          </div>
          <%if(login==null) {%>
          <div class="btn">
-               <button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
-                <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button>
+         <!--   <button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
+                <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button> -->
+               <button type="button" class="btn btn-outline-secondary" onclick="javascript:login();">로그인</button>
+                <button type="button" class="btn btn-outline-warning" onclick="javascript:join();">회원가입</button>
                
          </div>
            <%} else{%>
@@ -84,13 +86,13 @@
                                 <li><a href="#" aria-label="subemnu">submenu</a></li>
                                
                             </ul> --></li>
-                  <li><a href="<%=request.getContextPath()%>/boardList.do">게시판</a></li>
                   <li><a href="javascript:openWeather()" >날씨예보</a></li>
                   <li><a href="<%=request.getContextPath()%>/noticeList.do"">공지사항</a></li>
 
                   
 
                    <%if(login!=null&&login.getUserId().equals("admin")) {%>
+                  <li><a href="<%=request.getContextPath()%>/boardList.do">신고게시판</a></li>
                    <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
                    <%}%>
                 
@@ -163,7 +165,13 @@
            window.open("<%=request.getContextPath()%>/views/pay/pay.jsp");
         }
         
+        const login=()=>{
+        	location.replace("<%=request.getContextPath()%>/LoginMiddleServlet.do");
+        }
         
+        const join=()=>{
+        	location.replace("<%=request.getContextPath()%>/JoinEndMiddleServlet.do");
+        }
         
         
         

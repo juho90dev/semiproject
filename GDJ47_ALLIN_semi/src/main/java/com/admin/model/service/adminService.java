@@ -12,12 +12,12 @@ public class adminService {
 	
 	private adminDao dao=new adminDao();
 
-	public List<Member> selectMemberList() {
-		Connection conn=getConnection();
-		List<Member> result=dao.selectMemberList(conn);
-		close(conn);
-		return result;
-	}
+//	public List<Member> selectMemberList() {
+//		Connection conn=getConnection();
+//		List<Member> result=dao.selectMemberList(conn);
+//		close(conn);
+//		return result;
+//	}
 	
 	public int DeleteMember(Member m) {
 		Connection conn=getConnection();
@@ -37,16 +37,16 @@ public class adminService {
 		return result;
 	}
 
-	public List<Member> selectPlannerList() {
+	public List<Member> selectPlannerList(int cPage ,int numPerpage) {
 		Connection conn=getConnection();
-		List<Member> result=dao.selectPlannerList(conn);
+		List<Member> result=dao.selectPlannerList(conn,cPage, numPerpage);
 		close(conn);
 		return result;
 	}
 
-	public List<Member> selectNormalList() {
+	public List<Member> selectNormalList(int cPage ,int numPerpage) {
 		Connection conn=getConnection();
-		List<Member> result=dao.selectNormalList(conn);
+		List<Member> result=dao.selectNormalList(conn,cPage, numPerpage);
 		close(conn);
 		return result;
 	}
@@ -59,5 +59,42 @@ public class adminService {
 		close(conn);
 		return result;
 	}
+
+	public List<Member> selectMemberList(int cPage ,int numPerpage) {
+		Connection conn=getConnection();
+		List<Member> result=dao.selectMemberList(conn,cPage, numPerpage);
+		close(conn);
+		return result;
+	}
+
+	public int selectMemberCount() {
+		Connection conn=getConnection();
+		int result=dao.selectMemberCount(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<Member> searchMemberList(String type, String keyword, int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<Member> result=dao.searchMemberList(conn,type,keyword,cPage,numPerpage);
+		close(conn);
+		return result;
+	}
+
+	public int searchMemberCount(String type, String keyword) {
+		Connection conn=getConnection();
+		int result=dao.searchMemberCount(conn,type,keyword);
+		close(conn);
+		return result;
+	}
+	
+//	public List<Member> selectMemberList() {
+//		Connection conn=getConnection();
+//		List<Member> result=dao.selectMemberList(conn);
+//		close(conn);
+//		return result;
+//
+//	}
+
 	
 }

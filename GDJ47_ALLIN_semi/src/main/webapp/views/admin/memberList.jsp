@@ -4,12 +4,27 @@
 <%@ page import="com.login.model.vo.Member" %>
 <%
 	List<Member> list=(List<Member>)request.getAttribute("list");
+	String searchType=request.getParameter("searchType");
+	String keyword=request.getParameter("searchKeyword");
 
 //header에 member는 있는데 List라는 자료형은 임포트 한 적이 없다... 그래서 list도 import해줘야 한다.
 %>
 
 
 <%@ include file="/views/common/header.jsp" %>
+
+<style type="text/css">
+	section#memberList-container {text-align:center;}	
+	section#memberList-container table#tbl-member {width:100%; border:1px solid gray; border-collapse:collapse;}
+	section#memberList-container table#tbl-member th, table#tbl-member td {border:1px solid gray; padding:10px; }
+ 	div#search-container {margin:0 0 10px 0; padding:3px; }
+    div#search-MEMBER_ID{display:inline-block;}
+    div#search-email{display:none;}
+    div#search-gender{display:none;}
+    div#numPerpage-container{float:right;}
+    form#numperPageFrm{display:inline;} 
+</style>
+
 
  <body>
  <br>
@@ -20,7 +35,50 @@
 		<div id="joinInfoArea">
 				
 				<!-- <h4>아이디</h4>
-				<span class="input_area"><input type="text" maxlength="13" name="userId" value="" readonly></span> -->
+				<span class="input_area"><input type="text" maxlength="13" name="MEMBER_ID" value="" readonly></span> -->
+		<section id="memberList-container">
+         <div id="search-container">
+        	<select id="searchType">
+        		<option value="MEMBER_ID" <%=searchType!=null&&searchType.equals("MEMBER_ID")?"selected":"" %>>아이디</option>
+        		<option value="email"<%=searchType!=null&&searchType.equals("email")?"selected":"" %>>이메일</option>
+        	</select>
+        	<div id="search-MEMBER_ID">
+        		<form action="<%=request.getContextPath()%>/searchMember.do">
+        			<input type="hidden" name="searchType" value="MEMBER_ID" >
+        			<input type="text" name="searchKeyword" size="25" 
+        			placeholder="검색할 아이디를 입력하세요" list="ids">
+        			<datalist id="ids">
+        			</datalist>
+        			<button type="submit">검색</button>
+        		</form>
+        		<script>
+        			$("input[placeholder*=아이디]").keyup(e=>{
+        				$.ajax({
+        					url:"<%=request.getContextPath()%>",
+        					data:{"keyword":e.target.value},
+        					success:data=>{
+        						$("#ids").html("");
+        						/* console.log(data); */
+        						data.forEach(v=>{
+        							const op=$("<option>").attr("value",v).text(v);
+        							$("#ids").append(op);
+        						});
+        					}
+        				});
+        			});
+        		</script>
+        	</div>
+        	<div id="search-email">
+        		<form action="<%=request.getContextPath()%>/searchMember.do">
+        			<input type="hidden" name="searchType" value="email">
+        			<input type="text" name="searchKeyword" size="25" 
+        			placeholder="검색할 이메일을 입력하세요">
+        			<button type="submit">검색</button>
+        		</form>
+        	</div>
+
+        </div>
+<br>
 
 					<table class="table">
 					  <caption>표 제목</caption>
@@ -45,7 +103,7 @@
 					<button id="joinBtn">수정하기</button>
 				</div>-->
 				<tbody>
-				<%if(list.isEmpty()){ %>
+				<%if(list==null||list.isEmpty()){ %>
        			<tr>
        				<td colspan="11"><h3>조회된결과가 없습니다!</h3></td>
        			</tr>
@@ -81,7 +139,25 @@
 				</tbody>
 				</table> 
 		</div>
-
+		
+		<div class="container">
+					<ul class="pagination justify-content-center">
+						<%=request.getAttribute("pageBar") %>
+					</ul>
+		</div>
+		 </section>
+	<script>
+		$(()=>{
+			$("#searchType").change(e=>{
+				/* alert("type이 변경됨"); */
+				const type=$(e.target).val();
+				console.log(type);
+				$("#search-container>div[id!=search-]").hide();
+				$("#search-"+type).css("display","inline-block");
+			});
+			$("#searchType").change();
+		})
+	</script>
 
 
 
@@ -147,7 +223,7 @@
     border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
 	}
 
-
+    div#numPerpage-container{float:right;}
 	
 </style>
 
@@ -157,5 +233,3 @@
    </body>
     
 <%@ include file="/views/common/footer.jsp" %>
-
-

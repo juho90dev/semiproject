@@ -17,7 +17,7 @@ import com.login.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login.do")
+@WebServlet(name="LoginServlet",urlPatterns={"/login.do"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 		//클라이언트가 보낸 userId, password값 가져오기
 		String userId=request.getParameter("userId");
 		String password=request.getParameter("password");
+		System.out.println(password);
 		String grade="";
 		
 		//DB에 login 계정 login테이블에 userId, password가 일치하는 데이터 있는지 확인

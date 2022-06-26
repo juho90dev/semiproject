@@ -34,7 +34,16 @@
 	
 		const deleteLog = ()=>{
 			
-			localStorage.clear(); //localStorage에 저장된 일정 전체 삭제
+			localStorage.clear(); //1. localStorage에 저장된 일정 전체 삭제
+			//TODO 0624) 쿠키 삭제 처리가 잘 되었는지 확인 필요
+			<%
+				Cookie[]cookies = request.getCookies(); //2. 쿠키 전체 삭제
+				if(cookies!=null){
+					for(Cookie c : cookies){
+						c.setMaxAge(0);
+					}
+				}
+			%>
 			opener.location.replace("<%=request.getContextPath()%>"); //사이트 메인화면으로 이동함
 			close(); //창 닫기
 						

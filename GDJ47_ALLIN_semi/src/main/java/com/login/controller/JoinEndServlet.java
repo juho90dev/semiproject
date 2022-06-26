@@ -15,7 +15,7 @@ import com.login.model.vo.Member;
 /**
  * Servlet implementation class JoinEndServlet
  */
-@WebServlet("/joinEnd.do")
+@WebServlet(name="JoinEndServlet",urlPatterns={"/joinEnd.do"})
 public class JoinEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
