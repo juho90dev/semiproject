@@ -107,6 +107,15 @@ public class LoginService {
 		return result;
 	}
 
+	public Member checkPassword(String userId, String email) {
+		
+		Connection conn=getConnection();//db연결
+		Member l=dao.checkPassword(conn, userId, email);
+		close(conn);
+		return l;
+		
+	}
+
 
 
 

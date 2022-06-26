@@ -339,6 +339,34 @@ public class LoginDao {
 
 
 
+		public Member checkPassword(Connection conn, String userId, String email) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Member l=null;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("checkPassword"));
+				pstmt.setString(1, userId);
+				pstmt.setString(2, email);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					l=getLogin(rs);
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return l;
+		}
+
+
+
+
+
+
 
 
 

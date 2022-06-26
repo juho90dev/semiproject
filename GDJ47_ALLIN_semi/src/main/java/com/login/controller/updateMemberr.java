@@ -51,7 +51,7 @@ public class updateMemberr extends HttpServlet {
 			//session에 저장된 로인정보도변경
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember", m);
-			loc="/";
+			loc="/logout.do";
 		}else {
 			msg="정보수정을 실패했습니다. 다시 시도하세요!";
 			loc="/views/mypage/mypagee.jsp";

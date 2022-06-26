@@ -30,6 +30,11 @@
             </div>
          </form>
          
+         <div class="auth">
+         	<a href="<%=request.getContextPath()%>">HOME</a> | <a href="<%=request.getContextPath()%>/LoginMiddleServlet.do">LOGIN </a>
+
+         </div>
+         
         <form name="idFind">
        	<input type="hidden" name="email">
         </form>
