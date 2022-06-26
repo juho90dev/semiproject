@@ -1,4 +1,4 @@
-package com.createreview.controller;
+package com.review.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
