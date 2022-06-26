@@ -36,8 +36,10 @@
          </div>
          <%if(login==null) {%>
          <div class="btn">
-               <button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
-                <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button>
+         <!--   <button type="button" class="btn btn-outline-secondary" onclick="location.href='/GDJ47_ALLIN_semi/views/login/login.jsp'">로그인</button>
+                <button type="button" class="btn btn-outline-warning" onclick="location.href='/GDJ47_ALLIN_semi/views/login/join.jsp'">회원가입</button> -->
+               <button type="button" class="btn btn-outline-secondary" onclick="javascript:login();">로그인</button>
+                <button type="button" class="btn btn-outline-warning" onclick="javascript:join();">회원가입</button>
                
          </div>
            <%} else{%>
@@ -164,7 +166,13 @@
            window.open("<%=request.getContextPath()%>/views/pay/pay.jsp");
         }
         
+        const login=()=>{
+        	location.replace("<%=request.getContextPath()%>/LoginMiddleServlet.do");
+        }
         
+        const join=()=>{
+        	location.replace("<%=request.getContextPath()%>/JoinEndMiddleServlet.do");
+        }
         
         
         
