@@ -31,10 +31,13 @@
             <th>내 용</th>
             <td><%=n.getNoticeContent() %></td>
         </tr>
-        <tr>
+ 		<tr>
             <th colspan="2">
+            <%if(login!=null&&login.getUserId().equals("admin")){ %>
                 <button onclick="deleteNotice(<%=n.getNoticeNo() %>)">삭제</button>
+           <%} %>
             </th>
+        
         </tr>
     </table>
 </section>
@@ -43,7 +46,7 @@
 	const deleteNotice=(noticeNo)=>{
 		console.log(noticeNo);
 		$.ajax({
-			url:"<%=request.getContextPath()%>/deleteNotice.do",
+			url:"<%=request.getContextPath()%>/notice/deleteNotice.do",
 			data:{"noticeNo":noticeNo},
 			success: data=()=>{
 				alert("삭제완료!");
