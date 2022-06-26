@@ -46,6 +46,9 @@
 				
 				success:(data)=>{
 					console.log(data);
+					alert("삭제 성공!");
+					close();
+					opener.location.reload();
 				},
 				error:(r,d)=>{
 					console.log(r);
