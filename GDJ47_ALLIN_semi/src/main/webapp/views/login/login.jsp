@@ -30,7 +30,7 @@
 
             </form>
 
-	<a href="/GDJ47_ALLIN_semi/views/login/idFind.jsp">아이디 찾기</a> | <a href="/GDJ47_ALLIN_semi/views/login/passwordFind.jsp">비밀번호 찾기</a> | <a href="/GDJ47_ALLIN_semi/views/login/join.jsp">회원가입</a>
+	<a href="/GDJ47_ALLIN_semi/views/login/idFind.jsp">아이디 찾기</a> | <a href="/GDJ47_ALLIN_semi/views/login/passwordFind.jsp">비밀번호 찾기</a>
          
          <div class="auth">
             Or login with

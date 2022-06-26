@@ -9,12 +9,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
+import javax.servlet.http.HttpServletRequest;
+
+import com.common.encrypt.PasswordEncrypt;
 
 /**
  * Servlet Filter implementation class EncrptFilter
  */
 @WebFilter(servletNames= {
-		""
+		"JoinEndServlet","LoginServlet","updatePwdServlet","pwdCheckServlet"
 })
 public class EncrptFilter extends HttpFilter implements Filter {
        
@@ -39,9 +42,9 @@ public class EncrptFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-
+		PasswordEncrypt pe=new PasswordEncrypt((HttpServletRequest)request);
 		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		chain.doFilter(pe, response);
 	}
 
 	/**
