@@ -162,7 +162,7 @@
         
         
         const openPay=()=>{
-           window.open("<%=request.getContextPath()%>/views/pay/pay.jsp");
+           location.assign("<%=request.getContextPath()%>/views/pay/pay.jsp");
         }
         
         const login=()=>{

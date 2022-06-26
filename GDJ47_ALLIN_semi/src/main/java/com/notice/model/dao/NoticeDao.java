@@ -89,6 +89,7 @@ public class NoticeDao {
 				.filePath(rs.getString("filepath"))
 				.build();
 	}
+	
 	public int deleteNotice(Connection conn, int noticeNo) {
 		  
 		  PreparedStatement pstmt=null;
