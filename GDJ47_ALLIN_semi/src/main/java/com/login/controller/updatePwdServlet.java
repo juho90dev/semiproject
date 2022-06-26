@@ -14,7 +14,8 @@ import com.login.model.vo.Member;
 /**
  * Servlet implementation class updatePassword
  */
-@WebServlet("/updatePwd.do")
+@WebServlet( name="updatePwdServlet",urlPatterns={"/updatePwd.do"})
+//name="updatePwdServlet",urlPatterns={"/updatePwd.do"}
 public class updatePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
