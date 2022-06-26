@@ -233,4 +233,26 @@ public class PlannerDao {
 	}
 
 
+	public int removePlanners(Connection conn, String p) {
+		
+		int res = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("removePlanner"));
+			pstmt.setString(1, p);
+			res = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return res;
+	}
+
+
 }

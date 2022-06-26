@@ -89,4 +89,22 @@ public class PlannerService {
 		return title;
 	}
 
+	public int removePlanners(String[] planners) { //다수의 플래너 삭제
+		
+		Connection conn = getConnection();
+		int res = 0;
+		
+		for (String p : planners) {
+			
+			res = dao.removePlanners(conn, p);
+
+			if(res>0) {
+				commit(conn);
+			} else rollback(conn);
+			
+		}
+		
+		return res;
+	}
+
 }
