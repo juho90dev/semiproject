@@ -25,6 +25,9 @@
                <div class="inner"></div>
                <button>button</button>
             </div>
+         <div class="auth">
+            <a href="<%=request.getContextPath()%>">HOME으로 이동</a>
+         </div>
  
       </div>
 </body>

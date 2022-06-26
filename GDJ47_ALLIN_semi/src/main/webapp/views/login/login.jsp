@@ -34,7 +34,7 @@
 	<!-- 	<a href="/GDJ47_ALLIN_semi/views/login/idFind.jsp">아이디 찾기</a> | <a href="/GDJ47_ALLIN_semi/views/login/passwordFind.jsp">비밀번호 찾기</a> -->
          
          <div class="auth">
-            <a href="<%=request.getContextPath()%>">GO BACK HOME</a>
+            <a href="<%=request.getContextPath()%>">HOME으로 이동</a>
          </div>
 <!--       
 		<div class="links">

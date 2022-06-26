@@ -33,6 +33,85 @@
                <button id="submit">LOGIN</button>
             </div>
             </form>
+         <div class="auth">
+            <a href="<%=request.getContextPath()%>">HOME으로 이동</a>
+         </div>
             </div>
+            
+            
+            <script>
+        	//비밀번호 확인 작성시 일치/불일치 띄워줌
+        	$(()=>{
+            	$("#password_2").keyup(e=>{
+            		const pwVal=$("#password_").val();
+            		const pwCkVal=$(e.target).val();
+            		if(pwCkVal.trim().length>4){
+            			if(pwCkVal===pwVal){
+            				$("#pwresult").text("비밀번호 일치").css("color","#181182");
+            			}else{
+            				$("#pwresult").text("비밀번호 불일치").css("color","red");
+            			}
+            		}else{
+            			$("#pwresult").text("");
+            		}
+            	});
+        	})
+        	
+        	
+        	
+        	
+        	//비밀번호 확인 불일치시 초기화
+        	$(".input_password2").blur(function(){
+        		
+        		var p1 = document.getElementById('password_').value;
+        	    var p2 = document.getElementById('password_2').value;
+        	    
+        	    if( p2 == '' || p2 == 'undefined') return;
+
+        	      if( p1 != p2 ) {
+        	        $("#password_2").val("");
+        			$("#password_2").focus();
+        			return false; 
+        	      }
+        	});
+        	
+        	
+        	
+
+        	//비밀번호 유효성 검사
+        	
+        		function password_check( password ) {    
+        		var exr=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        	    return (password != '' && password != 'undefined' && exr.test(password)); 
+        	}
+        	
+
+        	$(".input_password").blur(function(){
+        	  var password = $(this).val();
+
+        	  // if value is empty then exit
+        	  if( password == '' || password == 'undefined') return;
+
+        	  // valid check
+        	  if(! password_check( password ) ) {
+        	  	//$("#result-check").text('Not valid email.');
+        	    //$(this).focus();
+        	    //return false;
+        		   alert("최소 8 자, 최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자를 포함해야 합니다.");				
+        			$("#password_").val("");
+        			$("#password_").focus();
+        		   return false; 
+        	  }
+        	});
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+            </script>
+            
+            
 </body>
 </html>
