@@ -88,7 +88,7 @@
                             </ul> --></li>
                   <li><a href="<%=request.getContextPath()%>/boardWrite.do?login.getUserId()">신고게시판</a></li>
                   <li><a href="javascript:openWeather()" >날씨예보</a></li>
-                  <li><a href="">공지사항</a></li>
+                    <li><a href="<%=request.getContextPath()%>/noticeList.do"">공지사항</a></li>
 
                   
 
