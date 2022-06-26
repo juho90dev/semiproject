@@ -26,15 +26,16 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Board> selectBoardList(Connection conn, int cPage, int numPerpage){
+	public List<Board> selectBoardList(Connection conn,String id, int cPage, int numPerpage){
 		PreparedStatement pstmt = null;
 		List<Board> result  = new ArrayList();
 		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("selectBoardList"));
-			pstmt.setInt(1, (cPage-1)*numPerpage+1);
-			pstmt.setInt(2, cPage*numPerpage);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				result.add(getBoard(rs));
@@ -80,6 +81,27 @@ public class BoardDao {
 			close(rs);
 			close(pstmt);
 		}return result;
+	}
+	
+	
+	public Board contentBoard(Connection conn, int no){
+		PreparedStatement pstmt = null;
+		Board b  = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("contentBoard"));
+			pstmt.setInt(1, no);
+
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				if(rs.next()) b=getBoard(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return b;
 	}
 	
 	private Board getBoard(ResultSet rs) throws SQLException{
