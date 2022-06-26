@@ -53,12 +53,11 @@
 				error:(r,d)=>{
 					console.log(r);
 					console.log(d);
+					alert("삭제 실패! 다시 시도해주세요");
 					
 				}
 		
 			}); 
-		
-		//console.log("////////////", targetArr);
 		
 	}
 
