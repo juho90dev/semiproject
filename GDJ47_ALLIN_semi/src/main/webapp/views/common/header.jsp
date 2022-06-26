@@ -94,7 +94,6 @@
 
                    <%if(login!=null&&login.getUserId().equals("admin")) {%>
                    <li id="memberManage"><a href="<%=request.getContextPath()%>/memberList.do">관리자</a></li>
-                   <li id="orderList"><a href="<%=request.getContextPath()%>/paid.do">서비스오더내역</a></li>
                    <%}%>
                 
                </ul>
