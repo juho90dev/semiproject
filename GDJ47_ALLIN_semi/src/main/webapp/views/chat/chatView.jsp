@@ -21,7 +21,7 @@
 		  $("#rooms").append("<div class='dynamicDiv'>"+v+"</div>");
 	  });
   }
-  const alramsocket=new WebSocket("ws://61.78.121.242:8889<%=request.getContextPath()%>/alram");
+  const alramsocket=new WebSocket("wss://61.78.121.242:8844<%=request.getContextPath()%>/alram");
   /* class AlramMessage{
 	constructor(){
 		
