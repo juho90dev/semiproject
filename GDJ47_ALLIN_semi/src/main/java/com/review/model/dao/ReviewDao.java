@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.review.model.vo.Review;
@@ -40,5 +42,44 @@ public class ReviewDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	public List<Review> reviewList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<Review> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("reviewList"));
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Review rv = new Review();
+				rv.setReviewTitle(rs.getString("review_title"));
+				rv.setReviewContent(rs.getString("review_content"));
+				rv.setReviewWriter(rs.getString("review_writer"));
+				rv.setReviewFile(rs.getString("review_flle"));
+				list.add(rv);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+		}
+	
+	
+	public static Review getReview(ResultSet rs) {
+		Review r =null;
+		try {
+			r=new Review();
+			r.setReviewTitle(rs.getString("review_title"));
+			r.setReviewContent(rs.getString("review_content"));
+			r.setReviewWriter(rs.getString("review_writer"));
+			r.setReviewFile(rs.getString("review_file"));
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}  
 
 }

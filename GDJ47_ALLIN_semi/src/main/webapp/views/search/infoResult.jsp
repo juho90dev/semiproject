@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<%@ page import="com.review.model.vo.Review, java.util.List" %>
+<%
+	List<Review> list = (List<Review>)request.getAttribute("review");
+	String pageBar=(String)request.getAttribute("pageBar");
+%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=705b81233756fa3f99e7c61bf323dd7e&libraries=services"></script>
  <div id="container1">
         <div class="title5"><%=request.getAttribute("title") %></div>
@@ -383,9 +388,6 @@ function changeCategoryClass(el) {
 }
 </style>
 			</script>
-            <div class="place-title">장소 한줄소개
-                <div class="place-content">test</div>
-            </div>
             <div id="container3">
                 <div class="place-review">장소 리뷰</div>
             </div>
@@ -411,31 +413,24 @@ function changeCategoryClass(el) {
                 </div>
 
             </div>
+<%--               <%if(!list.isEmpty()){ 
+            for(Review l : list) {%>  --%>
             <div class="img-review">
                 <table>
                     <tr class="img-title">
                         <td rowspan="2" class="t-img"><img src="images/mi.jpg" alt="" class="img1"></td>
-                        <td>화성이야</td>
+                        <td> <%-- <%=l.getReviewTitle()%> --%></td>
                     </tr>
                     <tr class = "img-content">
-                        <td>가지마 가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어</td>
+                        <td><<%-- %=l.getReviewContent() %> --%></td>
                       
                     </tr>
                 </table>
             </div>
-            <div class="img-review">
-                <table>
-                    <tr class="img-title">
-                        <td rowspan="2" class="t-img"><img src="images/mi.jpg" alt="" class="img1"></td>
-                        <td>화성이야</td>
-                    </tr>
-                    <tr class = "img-content">
-                        <td>가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어가지마 가지말라고 왜 가냐고 집에 있어</td>
-                      
-                    </tr>
-                </table>
-            </div>
-            
+<%--                <%}
+            }else {  %> 
+            	<div class="resultList">조회된 결과가 없습니다.</div>
+            	<%} %>  --%>
         </div>
 
 

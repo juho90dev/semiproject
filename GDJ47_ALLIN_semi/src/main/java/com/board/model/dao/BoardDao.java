@@ -48,6 +48,27 @@ public class BoardDao {
 		}return result;
 	}
 	
+	public List<Board> adminBoardList(Connection conn,String id, int cPage, int numPerpage){
+		PreparedStatement pstmt = null;
+		List<Board> result  = new ArrayList();
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("adminBoardList"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getBoard(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
 	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -83,6 +104,21 @@ public class BoardDao {
 		}return result;
 	}
 	
+	public int adminBoardCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("adminBoardCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 	public Board contentBoard(Connection conn, int no){
 		PreparedStatement pstmt = null;

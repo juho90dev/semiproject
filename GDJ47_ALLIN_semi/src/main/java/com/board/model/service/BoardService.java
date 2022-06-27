@@ -24,6 +24,13 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public List<Board> adminBoardList(String id, int cPage, int numPerpage){
+		Connection conn = getConnection();
+		List<Board> result = dao.adminBoardList(conn,id, cPage,numPerpage);
+		close(conn);
+		return result;
+	}
 	public int insertBoard(Board b) {
 		Connection conn = getConnection();
 		int result = dao.insertBoard(conn, b);
@@ -40,6 +47,12 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	public int adminBoardCount() {
+		Connection conn = getConnection();
+		int result = dao.adminBoardCount(conn);
+		close(conn);
+		return result;
+	}
 	
 	public Board contentBoard(int no){
 		Connection conn = getConnection();
@@ -47,5 +60,7 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	
 	
 }

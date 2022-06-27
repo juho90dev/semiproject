@@ -1,12 +1,16 @@
 package com.search.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.review.model.service.ReviewService;
+import com.review.model.vo.Review;
 
 /**
  * Servlet implementation class SearchResult
@@ -46,12 +50,12 @@ public class SearchNextServlet2 extends HttpServlet {
 		 * Integer.parseInt(mapy); request.setAttribute("mapy1", mapy1);
 		 * System.out.println(firstImage);
 		 */
-//		
-//		String path = request.getRequestURL()+"";
-//		
-//		path = path.substring(0, path.lastIndexOf("/"));
 		
+		String path = request.getRequestURL()+"";
 		
+		path = path.substring(0, path.lastIndexOf("/"));
+		List<Review> list = new ReviewService().reviewList();
+		request.setAttribute("list",list);
 		request.getRequestDispatcher("/views/search/infoResult.jsp").forward(request, response);
 		
 		//path+"/infoResult.jsp?firstImage"+firstImage+"&title="+title

@@ -5,7 +5,7 @@
 
     <div id="board">
         <div class="title2"> 장소 리뷰 작성하기 </div>
-        <form action="location.assign('<%=request.getContextPath()%>/inserReview/.do')" method="post">
+        <form action="<%=request.getContextPath()%>/insertReview.do" method="post">
             <div class="form-group">
               <label for="title">제목</label>
         <!-- placeholder 속성 입력한 데이터가 없는 경우 배경으로 나타난다.실제적으로 입력을 100자까지로 지정 -->
