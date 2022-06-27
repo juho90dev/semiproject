@@ -3,10 +3,13 @@
 <%@ include file="/views/common/header.jsp"%>
 <%
 
-	String userId = (String)request.getAttribute("plannerId");
+	
+	String userId = (String)request.getAttribute("plannerId"); //플래너 작성자 ID
+	String ckUserId = login.getUserId(); //접속 유저ID
+	System.out.println("작성자ID : "+userId+" 접속유저ID : "+ckUserId);
 
 %>
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
 <div class="container">
 	<div class="box1">
@@ -28,22 +31,38 @@
 			<br>
 			<h4>MY PLAN</h4>
 			<br>
+			
+				<!-- 접속자와 작성자가 동일한 경우에만, 다음 "플래너 관리하기"버튼이 현상된다 -->
+				<% if(userId.equals(ckUserId)){%>
+					<div class="btnForEdit">
+						<button class="btnForPlanner" id="forEditor" onclick="fn_printCkBox();">플래너 관리하기</button>
+						<!-- "삭제하기" 버튼이 현상될 div -->
+						<div class="containerDelete"></div>
+					</div>
+				<%} %>
+			
 			<!-- 여기에는 플랜루트 -->
 			<!-- "div#plannerZone"에, "class名, planner"들이 카드 형태로 생성돼 누적될 예정입니다 -->
 			<div class="plannerZone">
 			
 				<!-- planner카드 예시 -->
-<!-- 				<div class="planner">
-					<div class="plannerInfo">
-						<div class="textZone words">
-							<h2 class="plannerTitle">플래너 제목</h2>
-							<p class="plannerTheme">액티비티</p>
+
+<!-- 				<div class="plannerContainer">
+					<div class="ckContainer">
+	 					 <input class="deleteTarget" type="checkbox" value="" style="display:''">
+	 				</div> 
+	  				<div class="planner">
+						<div class="plannerInfo">
+								<div class="textZone words">
+									<h2 class="plannerTitle">플래너 제목</h2>
+									<p class="plannerTheme">액티비티</p>
+								</div>
+								<div class="planImg"></div>
 						</div>
-						<div class="planImg"></div>
 					</div>
 				</div> -->
+				 
 			</div>
-
 
 			<hr>
 			<div class="sourceContainer">
@@ -79,6 +98,23 @@
 						console.log("데이터 제목 : ", e.plannerTitle);
 						
 						//plannerZone에, 카드 생성하기
+						
+						//"플래너 삭제 기능"을 위해, 체크박스를 만듦
+						
+						const plannerContainer = document.createElement("div");
+						plannerContainer.classList.add("plannerContainer");
+
+						const ckContainer = document.createElement("div");
+						ckContainer.classList.add("ckContainer");
+						plannerContainer.appendChild(ckContainer);
+												
+						const forCkBox = document.createElement("input");
+						forCkBox.type="checkbox";
+						forCkBox.value = e.plannerNo;
+						forCkBox.classList.add("deleteTarget");
+						forCkBox.style.display= "none"; //첫 생성 시에는 "보이지 않음"
+						ckContainer.appendChild(forCkBox);
+						
 						const planner = document.createElement("div");
 						planner.classList.add("planner");
 						
@@ -116,8 +152,9 @@
 						
 						plannerInfo.appendChild(textZone);
 						plannerInfo.appendChild(img);
-						planner.appendChild(plannerInfo);						
-						plannerZone.appendChild(planner);
+						planner.appendChild(plannerInfo);
+						plannerContainer.appendChild(planner);
+						plannerZone.appendChild(plannerContainer);
 						
 					});
 	
@@ -127,6 +164,7 @@
 					console.log(d);
 					
 					const warn = document.createElement("h3");
+					warn.id = "warnMsg";
 					warn.innerText = "플랜이 없습니다";
 					plannerZone.appendChild(warn);
 				}
@@ -145,13 +183,103 @@
 			})
 			
 		}
+		
+
+		
+
+		const fn_printCkBox = (()=>{ //"플래너 관리하기" 버튼 클릭 시, "체크박스"와 "삭제하기"버튼이 나타남
+
+			let cnt=1;
+			const btnForEdit = document.querySelector(".btnForEdit");
+			const containerDelete = document.querySelector(".containerDelete");
+			
+			
+			return () => {
+				
+					if(++cnt%2==0){ //"삭제하기"버튼 현상하기 + 카드 별로 체크박스 붙이기
+						
+						//1. 삭제하기 버튼
+						const deleteBtn = document.createElement("button");
+						deleteBtn.innerText = "삭제하기";
+						deleteBtn.id = "deleteBtn";
+						deleteBtn.onclick = fn_deletePlanner;
+						deleteBtn.classList.add("btnForPlanner");
+						containerDelete.appendChild(deleteBtn);
+						
+						//2. 체크 박스
+		 				const deleteTargets = document.querySelectorAll(".deleteTarget");
+						console.log("//////////", deleteTargets);
+						deleteTargets.forEach(e=>{
+							e.style.display="";
+						})
+						
+						
+					} else {
+						containerDelete.innerHTML=""; //삭제하기 버튼 감추기
+						const deleteTargets = document.querySelectorAll(".deleteTarget");
+ 						deleteTargets.forEach(e=>{ //체크박스 감추기
+							e.style.display="none";
+						}) 
+					}
+			}
+			
+		})();
 	
 
-	
+		
+		const fn_deletePlanner = ()=>{ //"삭제하기" 버튼 클릭 -> 생성된 체크박스에 대한 액션 실행
+		
+			const plannerZone = document.querySelector(".plannerZone");
+			const forCk = plannerZone.children[0].innerText;
+			console.log(forCk);
+			const isNull = forCk!="플랜이 없습니다"?true:false;
+			
+  			if(isNull){
+  				
+  				
+  				window.open("<%=request.getContextPath()%>/planner/ckRemovePlanner.do","title","width=400,height=100");
+
+				
+				
+			} else {
+				alert("삭제할 수 있는 데이터가 존재하지 않습니다");
+			} 
+		
+			
+		}
 	
 </script>
 
 <style>
+
+#warnMsg{
+
+	font-size:13px;
+
+}
+
+.ckContainer{
+
+	float: left;
+    /* margin-left: -25px; */
+
+}
+
+.btnForPlanner{
+
+    width: 144px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+
+.btnForEdit{
+
+    float: right;
+    margin-bottom: 15px;
+
+}
 
 .textZone{
 
@@ -209,7 +337,8 @@
     font-size: 23px;
     margin-top: 10px;
     margin-left: 10px;
-    font-weight: 600;
+    /* font-weight: 600; */
+    font-family : "Noto Sans KR:wght@300";
 
 }
 

@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+.container{
+	
+	display: inline-block;
+    text-align: center;
+    margin-left: 50px;
+	
+}
+
+.btnContainer{
+	
+	margin:10px;
+} 
+
+button{
+	background-color:black;
+	color:white;
+	width:100px;
+	border-radius:10px;
+}

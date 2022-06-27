@@ -291,7 +291,16 @@ var customContent = '<div class="wrap">' +
 	//-------------------------------------------------------------------
 
 	//장소 카드의 "속성"을 새로 생성해, 해당 장소의 정보를 저장하기--------------------
-	addPlan.setAttribute("day",nowCho);
+	
+	
+	//addPlan.setAttribute("day",nowCho);
+	if(nowCho!=""){
+		addPlan.setAttribute("day",nowCho);
+	} else{
+		addPlan.setAttribute("day", 1);	
+	} 
+	
+	
 	addPlan.setAttribute("id",addPlan.id);
 	addPlan.setAttribute("placeName",placeName);
 	addPlan.setAttribute("latitude",lat);

@@ -89,4 +89,54 @@ public class PlannerService {
 		return title;
 	}
 
+//	public int removePlanners(List<String> planners) { //다수의 플래너 삭제
+//		
+//		Connection conn = getConnection();
+//		int res = 0;
+//		
+//		for (String p : planners) {
+//			
+//			res = dao.removePlanners(conn, p);
+//
+//			if(res>0) {
+//				commit(conn);
+//			} else rollback(conn);
+//			
+//		}
+//		
+//		return res;
+//	}
+
+	public int removePlans(List<String> plans) {
+		
+		
+		Connection conn = getConnection();
+		int res = 0;
+
+		for (String pNo : plans) {
+
+			res = dao.removePlans(conn, pNo); // 1. 자식 테이블에서 삭제
+
+			if (res > 0) {
+
+				res = dao.removePlanners(conn, pNo); // 2. 부모 테이블에서 삭제
+
+				if (res > 0) {
+
+					commit(conn);
+
+				} else {
+					rollback(conn);
+				}
+
+			} else {
+				rollback(conn);
+			}
+
+		}
+		
+		
+		return res;
+	}
+
 }

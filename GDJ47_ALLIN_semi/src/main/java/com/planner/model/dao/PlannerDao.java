@@ -233,4 +233,51 @@ public class PlannerDao {
 	}
 
 
+	//플래너 삭제 관련 -------------------------------------------------------------------
+	//TODO : ON DELETE CASCASDE 설정 성공 時, removePlanners()메소드만 남겨둘 것
+	
+	//플랜 "삭제"
+	public int removePlans(Connection conn, String pNo) { //1. 자식 테이블에서 플랜 삭제
+		
+		int res = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("removePlan"));
+			pstmt.setString(1, pNo);
+			res = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return res;
+	}
+	
+	//플래너 삭제
+	public int removePlanners(Connection conn, String p) { //2. 부모 테이블에서 플래너 삭제
+		
+		int res = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("removePlanner"));
+			pstmt.setString(1, p);
+			res = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return res;
+	}
+
+
 }

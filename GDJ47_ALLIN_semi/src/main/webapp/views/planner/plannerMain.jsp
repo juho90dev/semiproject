@@ -258,7 +258,7 @@
 								var linePath = []; //"선"을 이어주기 위해 배열을 만듦
 
 								if(dayOnePlan!=null&&thisDay==1){
-									console.log("1일차 데이터 있어", dayOnePlan);
+									//console.log("1일차 데이터 있어", dayOnePlan);
 									
 									//1. 리스트 > 장소 카드 관련
 									//> 데이터가 있다면, 새로고침 시에도 해당 장소 데이터가 출력되도록 로직 구현하기
@@ -341,17 +341,29 @@
 
 	            					
 	            					
+	            					
 	            					if(savedPlan!=null&&savedPlan.length!=0){
 	            									
 	            								console.log("배열로 받아온",nowCho,"의 일정",savedPlan);  	
         	            						//1. 작성 기록이 있다면, 카드를 새로 생성해서 출력해주기
         	            						document.getElementById("dropZone").innerHTML=""; //계속 appendChild하면 누적되므로, 먼저 비워주기
-	            						
+	            								
+        	            						
+        	            						//console.log("////////////////////////", daysOption.selected);
+        	            						
 												for(let i=0;i<savedPlan.length;i++){
 																							
 													const div = document.createElement("div");				
 													
-													div.setAttribute("day", nowCho);
+													//TODO 0627) 1일차 데이터 저장 오류...
+													//div.setAttribute("day", nowCho);
+														if(nowCho!=null){
+															div.setAttribute("day",nowCho);
+														} else{
+															div.setAttribute("day", 1);	
+														} 
+														
+													
 													div.setAttribute("id", savedPlan[i].id);
 													div.setAttribute("placeName", savedPlan[i].placeName);
 													div.setAttribute("latitude", savedPlan[i].latitude);
@@ -386,7 +398,7 @@
 					            		
 					            		//장소의 정보를 저장하기 위해 > "생성자 함수"만들기
 					            		
-					            		console.log("///////////////!!!!!!!!!?/////////", nowCho);
+					            		
 					            		
 					            		function Places(day,id,placeName,latitude,longitude,memo){
 					            			
@@ -404,6 +416,7 @@
 					            			
 					            			//생성자 함수로 "장소"객체 생성 후, 배열arr에 저장하기
 					           				arr.push(new Places(
+					           						
 					           									cards[i].getAttribute("day"),
 					           									cards[i].getAttribute("id"),
 					           									cards[i].getAttribute("placeName"),
@@ -458,9 +471,65 @@
 	            				//TODO 0624) 예외처리 필수
 	            				//"당일여행"만 계획한 경우||옵션 값을 변경하지 않고 바로 저장하기를 입력한 경우...
 	            			
+	            				//1. 당일여행만 계획한 경우
+	            				if(<%=days%>==1){
+	            					
+	            					const plans = document.querySelectorAll(".box_drag");
+	            					console.log(plans);
+	            					
+	            					//당일 여행 장소 저장하기
+				            		let arr=[]; //"카드"의 정보(아이디, 장소명, 위도, 경도 -> 객체化)는 arr배열에 저장하기
+				            		
+				            		
+				            		function Places(day,id,placeName,latitude,longitude,memo){
+				            			
+				            			this.day = <%=days%>==1?1:<%=days%>;
+				            			this.id = id;
+				            			this.placeName = placeName;
+				            			this.latitude = latitude;
+				            			this.longitude = longitude;
+				            			this.memo = memo;
+				           
+				            		}
+				            		
+				            		
+				            		for(let i=0;i<plans.length;i++){	
+				            			
+				            			//생성자 함수로 "장소"객체 생성 후, 배열arr에 저장하기
+				           				arr.push(new Places(
+							           						plans[i].getAttribute("day"),
+							           						plans[i].getAttribute("id"),
+							           						plans[i].getAttribute("placeName"),
+							           						plans[i].getAttribute("latitude"),
+							           						plans[i].getAttribute("longitude"),
+							           						plans[i].getAttribute("memo")));
+				            			
+				            		}
+				            		
+				            		
+				            		console.log(arr);
+									//localStorage에 저장하기			            			
+			            			localStorage.setItem(1,JSON.stringify(arr));
+	            					
+	            				}
 	            			
 	            			
-	            				alert("저장하시겠습니까?"); 
+	            			
+	            				//예외처리 1) 일자를 다 채우지 않고 저장하기를 클릭한 경우
+	            				for(let i=1;i<=localStorage.length;i++){
+	            					
+	            					//console.log("???????????",localStorage.getItem(i));
+	            					if(JSON.parse(localStorage.getItem(i)).length==0){
+	            						alert("플랜이 작성되지 않은 일자가 있습니다. 다시 확인해주세요!");
+	            					}
+	            					
+	            				}
+	            				
+	            			
+	            			
+	            			
+ 	            			
+	            				//alert("저장하시겠습니까?"); 
 
 	            				//TODO) 썸네일 및 소개글을 저장할 수 있는 로직 구현하기
 	            				//썸네일 및 소개글은 window.open()에서 새 창에서 구현할 것
@@ -495,6 +564,7 @@
  										
  									  console.log('성공:', data);
  									  alert(data.title+"저장 성공! 메인화면으로 돌아갑니다");
+ 									  localStorage.clear(); //localStorage에 저장된 데이터 일괄 삭제
  									  console.log("아이디 확인"+data.userId)
  									  
  									  location.replace("<%=request.getContextPath()%>");
@@ -504,7 +574,7 @@
  									  console.error('실패:', error);
  									}); */
 
-	            			}
+	            			}  
 	            			
 	            			
 	            			
